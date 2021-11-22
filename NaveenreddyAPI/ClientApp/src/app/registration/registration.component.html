@@ -1,0 +1,76 @@
+<router-outlet></router-outlet>
+<div class="col-md-8">
+  <mdb-card>
+    <mdb-card-header>
+      <h4>Registration</h4>
+    </mdb-card-header>
+    <mdb-card-body>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class=" row">
+          <label for="FormFilledby" class="col-sm-4 col-form-label">Form Filled by</label>
+          <div class="col-sm-8">
+            <div class="md-form ">
+              <div class="md-form">
+                <select formControlName="FormFilledby" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted && f.FormFilledby.errors,'is-valid':submitted}">
+                  <option *ngFor="let c of optionsSelect" [ngValue]="c.value">{{c.label}}</option>
+                </select>
+                <mdb-error *ngIf="f.FormFilledby.invalid && submitted">Select any option</mdb-error>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="FullName" class="col-sm-4 col-form-label">Full Name</label>
+          <div class="col-sm-8">
+            <div class="md-form mt-0">
+              <input id="FullName" class="form-control" [ngClass]="{'invalid': submitted && f.FullName.errors,'valid':submitted}" formControlName="FullName" type="text" mdbInput>
+              <mdb-error *ngIf="f.FullName.invalid && submitted">Full name is required</mdb-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="Email" class="col-sm-4 col-form-label">E-mail</label>
+          <div class="col-sm-8">
+            <div class="md-form mt-0">
+              <input id="Email" class="form-control" formControlName="Email" type="text" mdbInput [ngClass]="{'invalid': submitted && f.Email.errors,'valid':submitted}">
+              <mdb-error *ngIf="submitted && f.Email.invalid">E-mail is required</mdb-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="Password" class="col-sm-4 col-form-label">Password</label>
+          <div class="col-sm-8">
+            <div class="md-form mt-0">
+              <input id="Password" class="form-control" formControlName="Password" type="password" mdbInput [ngClass]="{'invalid': submitted && f.Password.errors,'valid':submitted}">
+              <mdb-error *ngIf="submitted && f.Password.errors?.required">Password is required</mdb-error>
+              <mdb-error *ngIf="submitted && f.Password.errors?.minlength">Password must have >=6 charecters</mdb-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="ConfirmPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+          <div class="col-sm-8">
+            <div class="md-form mt-0">
+              <input id="ConfirmPassword" class="form-control" formControlName="ConfirmPassword" type="password" mdbInput [ngClass]="{'invalid': submitted && f.ConfirmPassword.errors}">
+              <mdb-error *ngIf="submitted && f.ConfirmPassword.errors?.required">Confirm password is required</mdb-error>
+              <mdb-error *ngIf="submitted && f.ConfirmPassword.errors?.confirmedValidator">Password & Confirm password should be same</mdb-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8 offset-4">
+          <button type="submit" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="arrow-right" class="mr-1"></mdb-icon> Proceed</button>
+        </div>
+        <p class="text-center">
+          Already have account <a routerLink="/login">Login</a> |
+          <a routerLink="/forgotpassword"> Forgot passwrod?</a>
+        </p>
+
+      </form>
+    </mdb-card-body>
+  </mdb-card>
+</div>

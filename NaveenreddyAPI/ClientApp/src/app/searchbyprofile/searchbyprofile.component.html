@@ -1,0 +1,22 @@
+<mdb-card>
+    <mdb-card-body>
+        <mdb-card-title>
+            <h4>Profile ID Search</h4>
+            <hr>
+        </mdb-card-title>
+        <form [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <label for="Profileid" class="col-sm-2 col-form-label">Enter the Profile ID</label>
+                <div class="col-sm-4">
+                    <div class="md-form mt-0">
+                        <input id="Profileid" class="form-control" [ngClass]="{'invalid': submitted && f.Profileid.errors}" formControlName="Profileid" type="text" mdbInput>
+                        <mdb-error *ngIf="f.Profileid.invalid && submitted">Profile ID required</mdb-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 offset-3">
+                <button type="submit" mdbBtn color="primary" mdbWavesEffect>Search</button>
+            </div>
+        </form>
+    </mdb-card-body>
+</mdb-card>

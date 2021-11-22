@@ -1,0 +1,22 @@
+<mdb-card>
+    <mdb-card-body>
+        <mdb-card-title>
+            <h4>Profile City Search</h4>
+            <hr>
+        </mdb-card-title>
+        <form [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <label for="Cityname" class="col-sm-2 col-form-label">City of Residence</label>
+                <div class="col-sm-4">
+                    <div class="md-form mt-0">
+                        <input id="Cityname" class="form-control" [ngClass]="{'invalid': submitted && f.Cityname.errors}" formControlName="Cityname" type="text" mdbInput>
+                        <mdb-error *ngIf="f.Cityname.invalid && submitted">This field is required</mdb-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 offset-3">
+                <button type="submit" mdbBtn color="primary" mdbWavesEffect>Search</button>
+            </div>
+        </form>
+    </mdb-card-body>
+</mdb-card>
