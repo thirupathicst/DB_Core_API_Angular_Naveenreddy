@@ -127,7 +127,7 @@ export class BiodataComponent implements OnInit {
       Placeofbirth: this.personal1.controls.PlaceOfBirth.value,
       TimeOfBirth: this.personal1.controls.TimeOfBirth.value,
       Maritalstatus: this.personal1.controls.MaritalStatus.value,
-      Height: this.personal1.controls.Height.value,
+      Height: this.personal1.controls.Height.value.toString(),
       Complexion: this.personal1.controls.Complexion.value,
       Mobileno: this.personal1.controls.Phone.value,
       Yourself: this.personal1.controls.Yourself.value,

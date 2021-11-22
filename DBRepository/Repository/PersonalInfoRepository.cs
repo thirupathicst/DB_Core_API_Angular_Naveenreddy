@@ -49,6 +49,7 @@ namespace DBRepository.Repository
             info.Yourself = personalInfo.Yourself;
             info.Maritalstatus = personalInfo.Maritalstatus;
             info.Placeofbirth= personalInfo.Placeofbirth;
+            info.Age = new DateTime((DateTime.Now - info.Dateofbirth).Ticks).Year - 1;
 
             await UpdateAsync(info);
             return personalInfo;
