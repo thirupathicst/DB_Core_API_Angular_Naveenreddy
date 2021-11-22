@@ -70,8 +70,9 @@ export class RegistrationComponent implements OnInit {
       confirmpassword: this.registerForm.controls.ConfirmPassword.value
     }
 
-    this.apiService.createRegistration(this.registration).subscribe(x => {
-      localStorage.setItem('isPersonId', x.PersonId);
+    this.apiService.createRegistration(this.registration).subscribe(resp => {
+      console.log(resp);
+      localStorage.setItem('isPersonId', resp.personId);
       this.router.navigate(['/biodata']);
     }, err => { console.log(err) });
   }

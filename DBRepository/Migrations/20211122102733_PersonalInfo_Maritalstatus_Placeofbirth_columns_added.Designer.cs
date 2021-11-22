@@ -4,14 +4,16 @@ using DBRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(NaveenReddyDbContext))]
-    partial class NaveenReddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211122102733_PersonalInfo_Maritalstatus_Placeofbirth_columns_added")]
+    partial class PersonalInfo_Maritalstatus_Placeofbirth_columns_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

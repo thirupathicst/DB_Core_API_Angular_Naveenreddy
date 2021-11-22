@@ -18,5 +18,7 @@ namespace BusinesEntites
         public string Yourself { get; set; }
         public string Generatedby { get; set; }
         public string Profileid { get; set; }
+        public string Maritalstatus { get; set; }
+        public string Placeofbirth { get; set; }
     }
 }

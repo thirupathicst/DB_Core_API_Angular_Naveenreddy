@@ -26,10 +26,10 @@ export class BiodataComponent implements OnInit {
   submitted6 = false;
 
   divIndex: number = 1;
-  optionsSelect= AppConstants.Countries;
-  optionsStates=AppConstants.States;
-  optionsLanguages=AppConstants.Languages;
-  optionsRaasi=AppConstants.Raasi;
+  optionsSelect = AppConstants.Countries;
+  optionsStates = AppConstants.States;
+  optionsLanguages = AppConstants.Languages;
+  optionsRaasi = AppConstants.Raasi;
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
   constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
@@ -121,23 +121,22 @@ export class BiodataComponent implements OnInit {
       return;
     }
 
-    this.divIndex = 2;
-
     this.registration = {
       Name: this.personal1.controls.Name.value,
       Gender: this.personal1.controls.Gender.value,
-      email: this.personal1.controls.PlaceOfBirth.value,
+      Placeofbirth: this.personal1.controls.PlaceOfBirth.value,
       TimeOfBirth: this.personal1.controls.TimeOfBirth.value,
-      confirmpassword: this.personal1.controls.MaritalStatus.value,
+      Maritalstatus: this.personal1.controls.MaritalStatus.value,
       Height: this.personal1.controls.Height.value,
       Complexion: this.personal1.controls.Complexion.value,
       Mobileno: this.personal1.controls.Phone.value,
       Yourself: this.personal1.controls.Yourself.value,
       Dateofbirth: this.personal1.controls.Dateofbirth.value,
+      PersonId: localStorage.getItem('isPersonId')
     }
-
+    console.log(this.registration);
     this.apiService.createPersonalInfo(this.registration).subscribe(x => {
-      //this.router.navigate(['/biodata']);
+      this.divIndex = 2;
       console.log(x);
     }, err => {
       console.log(err);

@@ -24,8 +24,13 @@ namespace DBRepository
         public string Yourself { get; set; }
         [StringLength(10)]
         public string Generatedby { get; set; }
+        [StringLength(20)]
+        public string Maritalstatus { get; set; }
+        [StringLength(100)]
+        public string Placeofbirth { get; set; }
         [StringLength(10)]
         public string Profileid { get; set; }
+
     }
 
     public class EducationDetails

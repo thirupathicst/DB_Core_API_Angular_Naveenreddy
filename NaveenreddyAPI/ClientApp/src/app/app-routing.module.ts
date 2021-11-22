@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '', component: SideLayoutComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'biodata', component: BiodataComponent },
+      { path: 'biodata', component: BiodataComponent},
       { path: 'forgotpassword', component: ForgotpasswordComponent },
       { path: 'quicksearch', component: QuicksearchComponent },
       { path: 'changepassword', component: ChangepasswordComponent },

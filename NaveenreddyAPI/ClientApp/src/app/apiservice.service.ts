@@ -12,16 +12,16 @@ export class APIServiceService {
     this.bseAPI = document.getElementsByTagName('base')[0].href + 'api';
   }
 
-  updateRegistration(Registration: Object): Observable<any> {
+  public updateRegistration(Registration: Object): Observable<any> {
     return this.http.put(`${this.bseAPI}/Registration`, Registration);
   }
 
-  createRegistration(Registration: Object): Observable<any> {
+  public createRegistration(Registration: Object): Observable<any> {
     return this.http.post(`${this.bseAPI}/Registration`, Registration);
   }
 
-  createPersonalInfo(PersonalInfo: Object): Observable<any> {
-    return this.http.post(`${this.bseAPI}/Registration`, PersonalInfo);
+  public createPersonalInfo(PersonalInfo: Object): Observable<any> {
+    return this.http.put(`${this.bseAPI}/Registration`, PersonalInfo);
   }
 
   createLogin(Login: Object): Observable<any> {

@@ -21,6 +21,7 @@ namespace DBRepository.Repository
             PersonalInfo info = new PersonalInfo();
             info.Emailid = registration.Email;
             info.Name = registration.Fullname;
+            info.Generatedby = registration.Filledby;
 
             await CreateAsync(info);
 
@@ -43,8 +44,11 @@ namespace DBRepository.Repository
             info.Height = personalInfo.Height;
             info.Gender = personalInfo.Gender;
             info.Dateofbirth = personalInfo.Dateofbirth;
+            info.Timeofbirth = personalInfo.Timeofbirth;
             info.Complexion = personalInfo.Complexion;
             info.Yourself = personalInfo.Yourself;
+            info.Maritalstatus = personalInfo.Maritalstatus;
+            info.Placeofbirth= personalInfo.Placeofbirth;
 
             await UpdateAsync(info);
             return personalInfo;
