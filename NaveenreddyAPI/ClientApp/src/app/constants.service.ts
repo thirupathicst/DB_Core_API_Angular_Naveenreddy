@@ -480,4 +480,17 @@ export abstract class AppConstants {
     { value: '4', label: 'Relative/Guardian' },
     { value: '5', label: 'Friend' },
     { value: '6', label: 'Other' }];
+  static readonly Religous = [
+    { value: 'Hindu', label: 'Hindu' },
+    { value: 'Muslim', label: 'Muslim' },
+    { value: 'Christian', label: 'Christian' },
+    { value: 'Buddhist', label: 'Buddhist' },
+    { value: 'Sikh', label: 'Sikh' },
+    { value: 'Atheist', label: 'Atheist' },
+    { value: 'Jain', label: 'Jain' },
+    { value: 'Catholic', label: 'Catholic' },
+    { value: 'Jew', label: 'Jew' },
+    { value: 'Parsi', label: 'Parsi' },
+    { value: 'Protestant', label: 'Protestant' },
+    { value: 'Other', label: 'Other' }];
 }

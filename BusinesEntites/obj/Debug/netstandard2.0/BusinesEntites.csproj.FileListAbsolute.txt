@@ -15,3 +15,4 @@ D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\Busines
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.csproj.CoreCompileInputs.cache
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.dll
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.pdb
+D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.csprojAssemblyReference.cache

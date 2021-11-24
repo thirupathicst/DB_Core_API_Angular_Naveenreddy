@@ -119,13 +119,18 @@ namespace DBRepository
         public string Mothername { get; set; }
         [StringLength(50)]
         public string Brotheroccupation { get; set; }
-        [StringLength(50)]
         public short Noofbrothers { get; set; }
+        public short Noofbrothersunmarrried { get; set; }
+        public short Noofbrothersmarrried { get; set; }
+
         [StringLength(50)]
         public string Fatheroccupation { get; set; }
         [StringLength(50)]
         public string Motheroccupation { get; set; }
         public short Noofsisters { get; set; }
+        public short Noofsistersmarrried { get; set; }
+        public short Noofsistersunmarrried { get; set; }
+
         [StringLength(50)]
         public string Sisteroccupation { get; set; }
         public int PersonId { get; set; }

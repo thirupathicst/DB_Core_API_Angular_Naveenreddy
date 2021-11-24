@@ -25,13 +25,14 @@ export class BiodataComponent implements OnInit {
   submitted5 = false;
   submitted6 = false;
 
-  divIndex: number = 1;
+  divIndex: number = 6;
   optionsSelect = AppConstants.Countries;
   optionsStates = AppConstants.States;
   optionsLanguages = AppConstants.Languages;
   optionsRaasi = AppConstants.Raasi;
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
+  optionsReligous = AppConstants.Religous;
   constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
@@ -62,12 +63,10 @@ export class BiodataComponent implements OnInit {
       NativePlace: ['', Validators.required],
       SettledPlace: ['', Validators.required],
       ContactAddress: ['', Validators.required],
-
       Region: ['', Validators.required],
     })
 
     this.family5 = this.formBuilder.group({
-
       FatherName: ['', Validators.required],
       FathersOccupation: ['', Validators.required],
       MotherName: ['', Validators.required],
@@ -75,14 +74,16 @@ export class BiodataComponent implements OnInit {
       NoOfBrothers: ['', Validators.required],
       NoOfBrotherMarried: ['', Validators.required],
       NoOfBrotherUnmarried: ['', Validators.required],
+      BrotherOccupation: ['', Validators.required],
+      NoOfSister: ['', Validators.required],
       NoOfSisterMarried: ['', Validators.required],
       NoOfSisterUnmarried: ['', Validators.required],
+      SisterOccupation: ['', Validators.required],
       AboutYourFamily: ['', Validators.required],
-
     })
 
     this.partner6 = this.formBuilder.group({
-      Region: ['', Validators.required],
+      Religion: ['', Validators.required],
       Caste: ['', Validators.required],
       SubCaste: ['', Validators.required],
       Star: ['', Validators.required],
@@ -149,7 +150,20 @@ export class BiodataComponent implements OnInit {
       return;
     }
 
-    this.divIndex = 3;
+    var education = {
+      Heightqualification: this.education2.controls.EducationCategory.value,
+      Graducation: this.education2.controls.EducationDetails.value,
+      School: this.education2.controls.SchoolName.value,
+      College: this.education2.controls.College.value,
+      PersonId: localStorage.getItem('isPersonId'),
+    }
+
+    this.apiService.createEducation(education).subscribe(x => {
+      this.divIndex = 3;
+      console.log(x);
+    }, err => {
+      console.log(err);
+    });
   }
 
   onProfessionSubmit() {
@@ -158,16 +172,50 @@ export class BiodataComponent implements OnInit {
     if (this.profession3.invalid) {
       return;
     }
-    this.divIndex = 4;
+
+    var profession = {
+      Yearofstart: this.profession3.controls.WorkingSince.value,
+      Joblocation: this.profession3.controls.PlaceofJob.value,
+      Income: this.profession3.controls.AnnualIncome.value,
+      Companydetails: this.profession3.controls.OccupationDetails.value,
+      Jobtype: this.profession3.controls.Jobtype.value,
+      PersonId: localStorage.getItem('isPersonId'),
+    }
+
+    this.apiService.createProfessional(profession).subscribe(x => {
+      this.divIndex = 4;
+      console.log(x);
+    }, err => {
+      console.log(err);
+    });
   }
 
   onContactSubmit() {
     this.submitted4 = true;
 
-    if (this.profession3.invalid) {
+    if (this.contact4.invalid) {
       return;
     }
-    this.divIndex = 5;
+
+    var address = {
+      ContactAddress: this.contact4.controls.CitizenOf.value,
+      Visa: this.contact4.controls.VisaStatus.value,
+      Pincode: 0,
+      District: this.contact4.controls.CityLivingIn.value,
+      State: this.contact4.controls.StateLivingIn.value,
+      Country: this.contact4.controls.CountryLivingIn.value,
+      Settled: this.contact4.controls.SettledPlace.value,
+      Native: this.contact4.controls.NativePlace.value,
+      PermanentAddress: '',
+      PersonId: localStorage.getItem('isPersonId'),
+    }
+
+    this.apiService.createAddress(address).subscribe(x => {
+      this.divIndex = 5;
+      console.log(x);
+    }, err => {
+      console.log(err);
+    });
   }
 
   onFamilySubmit() {
@@ -176,7 +224,29 @@ export class BiodataComponent implements OnInit {
     if (this.family5.invalid) {
       return;
     }
-    this.divIndex = 6;
+    var family = {
+      Fathername: this.family5.controls.FatherName.value,
+      Mothername: this.family5.controls.MotherName.value,
+      Noofbrothers: this.family5.controls.NoOfBrothers.value,
+      Noofbrothersunmarrried: this.family5.controls.NoOfBrotherUnmarried.value,
+      Noofbrothersmarrried: this.family5.controls.NoOfBrotherMarried.value,
+      Brotheroccupation: this.family5.controls.BrotherOccupation.value,
+      Fatheroccupation: this.family5.controls.FathersOccupation.value,
+      Motheroccupation: this.family5.controls.MothersOccupation.value,
+      Noofsisters: this.family5.controls.NoOfSister.value,
+      Noofsistersmarrried: this.family5.controls.NoOfSisterMarried.value,
+      Noofsistersunmarrried: this.family5.controls.NoOfSisterUnmarried.value,
+      Sisteroccupation: this.family5.controls.SisterOccupation.value,
+      PersonId: localStorage.getItem('isPersonId'),
+    }
+
+    console.log(family);
+    this.apiService.createFamily(family).subscribe(x => {
+      this.divIndex = 6;
+      console.log(x);
+    }, err => {
+      console.log(err);
+    });
   }
 
   onPartnerSubmit() {
@@ -185,5 +255,27 @@ export class BiodataComponent implements OnInit {
     if (this.partner6.invalid) {
       return;
     }
+
+    var partner = {
+      Religion: this.partner6.controls.Religion.value,
+      Caste: this.partner6.controls.Caste.value,
+      Subcaste: this.partner6.controls.SubCaste.value,
+      Star: this.partner6.controls.Star.value,
+      Raasi: this.partner6.controls.Raasi.value,
+      Gothram: this.partner6.controls.Gothram.value,
+      MotherTongue: this.partner6.controls.MotherTongue.value,
+      PersonId: localStorage.getItem('isPersonId'),
+    }
+
+    this.apiService.createReligious(partner).subscribe(x => {
+
+      console.log(x);
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  clickBack(e) {
+    this.divIndex = e - 1;
   }
 }

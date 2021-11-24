@@ -4,14 +4,16 @@ using DBRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(NaveenReddyDbContext))]
-    partial class NaveenReddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211123065038_Address_Table_Columns_added")]
+    partial class Address_Table_Columns_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,8 +120,7 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Fatheroccupation")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mothername")
                         .HasMaxLength(100)
@@ -282,41 +283,6 @@ namespace DBRepository.Migrations
                     b.ToTable("Tbl_PersonalInfo");
                 });
 
-            modelBuilder.Entity("DBRepository.ProfessionalDetails", b =>
-                {
-                    b.Property<int>("ProfessionalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Companydetails")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Income")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Joblocation")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Jobtype")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<short>("Yearofstart")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("ProfessionalId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Tbl_ProfessionalDetails");
-                });
-
             modelBuilder.Entity("DBRepository.ReligiousDetails", b =>
                 {
                     b.Property<int>("ReligiousId")
@@ -409,17 +375,6 @@ namespace DBRepository.Migrations
                         .IsRequired();
 
                     b.Navigation("LoginDetails");
-                });
-
-            modelBuilder.Entity("DBRepository.ProfessionalDetails", b =>
-                {
-                    b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PersonalInfo");
                 });
 
             modelBuilder.Entity("DBRepository.ReligiousDetails", b =>

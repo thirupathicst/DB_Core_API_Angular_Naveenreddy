@@ -23,5 +23,6 @@ namespace DBRepository
         public DbSet<FamilyDetails> Tbl_FamilyDetails { get; set; }
         public DbSet<LoginDetails> Tbl_LoginDetails { get; set; }
         public DbSet<LoginHistory> Tbl_LoginHistory { get; set; }
+        public DbSet<ProfessionalDetails> Tbl_ProfessionalDetails { get; set; }
     }
 }
