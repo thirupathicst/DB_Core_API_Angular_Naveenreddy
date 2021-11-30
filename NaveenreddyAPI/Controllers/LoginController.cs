@@ -26,14 +26,14 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Post(B_Login login)
         {
             var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
-            var brow = Request.Headers["User-Agent"].ToString();
+            var userAgent = Request.Headers["User-Agent"].ToString();
             B_LoginHistory history = new B_LoginHistory
             {
-                Browsername = Request.Headers["User-Agent"].ToString(),
+                Browsername =userAgent,
                 IPaddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
                 Logindatetime = DateTime.Now
             };
-            await _repository.AddLogin(login, history);
+            await _repository.AddLogin(login,history);
             return Ok();
         }
 

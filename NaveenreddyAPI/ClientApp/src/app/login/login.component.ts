@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
 
     this.apiService.createLogin(this.login).subscribe(x => {
       alert(this.login);
+      console.log(x);
     }, err => {
       if (err.status == 500) {
         console.log(err);
