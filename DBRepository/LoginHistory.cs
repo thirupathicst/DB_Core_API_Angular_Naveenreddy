@@ -14,7 +14,7 @@ namespace DBRepository
         public DateTime Logindatetime { get; set; }
         [StringLength(10)]
         public string IPaddress{get;set;}
-        [StringLength(20)]
+        [StringLength(250)]
         public string Browsername { get; set; }
         public DateTime? Logoutdatetime { get; set; }
         public int LoginId { get; set; }
