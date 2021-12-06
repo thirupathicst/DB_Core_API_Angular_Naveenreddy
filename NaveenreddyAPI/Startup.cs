@@ -1,5 +1,6 @@
 using DBRepository.Repository;
 using DBRepository.Repository.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NaveenreddyAPI.Utilities;
 
 namespace NaveenreddyAPI
 {
@@ -41,7 +43,10 @@ namespace NaveenreddyAPI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication",null);
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,7 +61,7 @@ namespace NaveenreddyAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseSwagger();
             app.UseSwaggerUI();
 
@@ -66,8 +71,11 @@ namespace NaveenreddyAPI
             {
                 app.UseSpaStaticFiles();
             }
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseRouting();
+
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -75,7 +83,6 @@ namespace NaveenreddyAPI
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -91,3 +98,4 @@ namespace NaveenreddyAPI
         }
     }
 }
+

@@ -38,20 +38,25 @@ namespace DBRepository.Repository
             return logindetails;
         }
 
-        public async Task<B_Login> AddLogin(B_Login logindetails, B_LoginHistory history)
+        public B_UserStatus AddLogin(B_Login logindetails, B_LoginHistory history,out int PersonId)
         {
             try
             {
-                var data = await SelectAll();
+                var data = SelectAll().Result;
                 LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid && x.Password == logindetails.Password).FirstOrDefault();
                 if (login != null)
                 {
                     logindetails.Password = string.Empty;
+                    history.LoginId = login.LoginId;
+                    repository.AddLoginHistory(history);
+                    PersonId = login.PersonId;
+                    return B_UserStatus.Active;
                 }
-
-                history.LoginId = login.LoginId;
-                await repository.AddLoginHistory(history);
-                return logindetails;
+                else
+                {
+                    PersonId = 0;
+                    return B_UserStatus.NoUser;
+                }
             }
             catch (Exception ex)
             {

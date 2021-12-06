@@ -10,6 +10,6 @@ namespace DBRepository.Repository.Interfaces
     public interface ILoginRepository:IRepository<LoginDetails>
     {
         Task<B_Login> AddLogin(B_Login logindetails);
-        Task<B_Login> AddLogin(B_Login logindetails, B_LoginHistory history);
+        B_UserStatus AddLogin(B_Login logindetails, B_LoginHistory history, out int PersonId);
     }
 }
