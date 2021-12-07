@@ -20,6 +20,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { PartnerinformationComponent } from './partnerinformation/partnerinformation.component';
 import { SearchbynameComponent } from './searchbyname/searchbyname.component';
 import { SearchbyprofileComponent } from './searchbyprofile/searchbyprofile.component';
+import { ImageuploadComponent } from './imageupload/imageupload.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SearchbyprofileComponent } from './searchbyprofile/searchbyprofile.comp
     ChangepasswordComponent,
     PartnerinformationComponent,
     SearchbynameComponent,
-    SearchbyprofileComponent
+    SearchbyprofileComponent,
+    ImageuploadComponent
   ],
   imports: [
     BrowserModule,

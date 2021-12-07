@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BiodataComponent } from './biodata/biodata.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { LoginComponent } from './login/login.component';
 import { PartnerinformationComponent } from './partnerinformation/partnerinformation.component';
 import { QuicksearchComponent } from './quicksearch/quicksearch.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'searchbycity', component: SearchbycityComponent },
       { path: 'searchbyname', component: SearchbynameComponent },
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
+      { path: 'imageupload', component: ImageuploadComponent },
     ]
   }
 ];

@@ -11,6 +11,7 @@ namespace NaveenreddyAPI.DB
 {
     public class Repository<T> : IRepository<T>where T :class,new()
     {
+       
         protected readonly NaveenReddyDbContext dbContext;
 
         public Repository(NaveenReddyDbContext context)

@@ -43,7 +43,11 @@ namespace DBRepository.Repository
 
         public async Task<B_Family> UpdateFamilyDetails(B_Family familydetails)
         {
+
             FamilyDetails family =await SelectById(familydetails.PersonId);
+            if(family==null)
+            {
+            }
             family.Brotheroccupation = familydetails.Brotheroccupation;
             family.Noofbrothersmarrried = familydetails.Noofbrothersmarrried;
             family.Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried;
