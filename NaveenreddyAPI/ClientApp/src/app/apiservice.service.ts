@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -66,5 +66,19 @@ export class APIServiceService {
 
   public updateReligious(Religious: Object): Observable<any> {
     return this.http.put(`${this.bseAPI}/Religious`, Religious);
+  }
+
+  public uploadImages(Image: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', Image);
+    //formData.set('Content-Type', 'multipart/form-data');
+    return this.http.post(`${this.bseAPI}/ImageUpload`, formData);
+
+  }
+
+  private getHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'multipart/form-data');
+    return headers;
   }
 }

@@ -11,6 +11,6 @@ namespace NaveenreddyAPI.Repository.Interfaces
         Task<T> SelectById(int Id);
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity);
-       Task<T> DeleteAsync(T entity);
+        Task<T> DeleteAsync(T entity);
     }
 }
