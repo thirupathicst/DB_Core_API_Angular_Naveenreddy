@@ -32,12 +32,12 @@ namespace NaveenreddyAPI.Controllers
         {
             B_Images image = new B_Images();
             string fName = file.FileName;
-            image.PhysicalPath = Path.Combine(env.WebRootPath, "Images/" + Guid.NewGuid() + Path.GetExtension(file.FileName));
+            image.PhysicalPath = Path.Combine(env.WebRootPath, "Images\\" + Guid.NewGuid() + Path.GetExtension(file.FileName));
             using (var stream = new FileStream(image.PhysicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
-            image.ShortPath = $"~/{env.WebRootPath}/Images/{Guid.NewGuid()}.{Path.GetExtension(file.FileName)}";
+            image.ShortPath = $"~\\wwwroot\\Images\\{Guid.NewGuid()}.{Path.GetExtension(file.FileName)}";
             await _repository.AddImage(image);
             return Ok(image);
         }

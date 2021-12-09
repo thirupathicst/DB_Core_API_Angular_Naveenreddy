@@ -1,0 +1,52 @@
+
+<div class="col-8">
+  <!-- Material form subscription -->
+  <mdb-card>
+
+    <mdb-card-header class="info-color white-text text-center py-4">
+      <h5>
+        <strong>Success Story</strong>
+      </h5>
+    </mdb-card-header>
+
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5">
+
+      <!-- Form -->
+      <form class="text-center" style="color: #757575;" [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
+
+        <!-- Name -->
+        <div class="md-form">
+          <input type="text" formControlName="Name" id="Name" name="Name" mdbInput class="form-control" [ngClass]="{'invalid': submitted && f.Name.errors}" />
+          <label for="Name">Name</label>
+          <mdb-error *ngIf="submitted && f.Name.invalid">Name is required</mdb-error>
+        </div>
+
+        <!-- E-mai -->
+        <div class="md-form">
+          <textarea formControlName="Description" id="Description" name="Description" class="md-textarea form-control" mdbInput [ngClass]="{'invalid': submitted && f.Description.errors}" rows="4"></textarea>
+          <label for="Description" >Description</label>
+          <mdb-error *ngIf="submitted && f.Description.invalid">Description is required</mdb-error>
+        </div>
+
+        <!-- E-mai -->
+        
+        <div class="md-form">
+          <label for="MarriageDate">Marriage date</label>
+          <input type="date" formControlName="MarriageDate" placeholder="" id="MarriageDate" name="MarriageDate" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.MarriageDate.errors}" />
+          <mdb-error *ngIf="submitted && f.MarriageDate.invalid">Marriage date is required</mdb-error>
+        </div>
+
+        <!-- Sign in button -->
+        <button mdbBtn color="info" outline="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect type="submit">
+          Add story
+        </button>
+
+      </form>
+      <!-- Form -->
+
+    </mdb-card-body>
+
+  </mdb-card>
+  <!-- Material form subscription -->
+</div>

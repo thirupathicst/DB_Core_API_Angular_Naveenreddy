@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { constants } from 'buffer';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
 
@@ -25,7 +24,7 @@ export class BiodataComponent implements OnInit {
   submitted5 = false;
   submitted6 = false;
 
-  divIndex: number = 6;
+  divIndex: number = 1;
   optionsSelect = AppConstants.Countries;
   optionsStates = AppConstants.States;
   optionsLanguages = AppConstants.Languages;

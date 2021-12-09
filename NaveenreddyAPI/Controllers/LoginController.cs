@@ -27,6 +27,7 @@ namespace NaveenreddyAPI.Controllers
         [HttpPost]
         public IActionResult Post(Login login)
         {
+            B_UserInfo status;
             B_Login _login = new B_Login()
             {
                 Emailid = login.Emailid,
@@ -36,27 +37,30 @@ namespace NaveenreddyAPI.Controllers
             var userAgent = Request.Headers["User-Agent"].ToString();
             B_LoginHistory history = new B_LoginHistory
             {
-                Browsername =userAgent,
+                Browsername = userAgent,
                 IPaddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
                 Logindatetime = DateTime.Now
             };
-            B_UserStatus status= _repository.AddLogin(_login, history, out int PersonId);
-            if (B_UserStatus.Invalid ==status)
+            status = _repository.AddLogin(_login, history);
+            if (B_UserStatus.Invalid == status.Status)
             {
-                return Ok("Invalid credentails or user not exsist");
+                status.Message = "Invalid credentails or user not exsist";
+                return Ok(status);
             }
-            else if(B_UserStatus.Inactive == status)
+            else if (B_UserStatus.Inactive == status.Status)
             {
-                return Ok("Inactive user contact admin"); 
+                status.Message = "Inactive user contact admin";
+                return Ok(status);
             }
-            else if(B_UserStatus.Active == status)
+            else if (B_UserStatus.Active == status.Status)
             {
-                return Ok(PersonId);
+                return Ok(status.PersonId);
             }
             else
             {
                 //return Ok(login);
-                return Ok("Currently not accepting user details");
+                status.Message = "Currently not accepting user details";
+                return Ok(status);
             }
         }
 

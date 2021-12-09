@@ -1,4 +1,10 @@
-<!-- <span>{{ title }} app is running!</span> -->
-
-
+ <!--<span>{{ title }} app is running!</span>-->
 <router-outlet></router-outlet>
+
+<!--<app-loader></app-loader>-->
+<div class="progress-loader" [hidden]="!loading">
+  <div class="loading-spinner">
+    <img src="https://flevix.com/wp-content/uploads/2019/07/Curve-Loading.gif">
+    <span class="loading-message">Please wait...</span>
+  </div>
+</div>

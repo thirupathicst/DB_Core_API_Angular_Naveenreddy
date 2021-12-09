@@ -18,5 +18,8 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 }

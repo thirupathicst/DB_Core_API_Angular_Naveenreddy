@@ -10,10 +10,9 @@ namespace DBRepository.Repository
 {
     public class ImageRepository : Repository<Images>, IImageRepository
     {
-        private readonly IImageRepository repository;
-        public ImageRepository(NaveenReddyDbContext repositoryContext, IImageRepository imageRepository) : base(repositoryContext)
+        public ImageRepository(NaveenReddyDbContext repositoryContext) : base(repositoryContext)
         {
-            repository = imageRepository;
+            
         }
 
         public async Task<B_Images> AddImage(B_Images images)
@@ -24,7 +23,7 @@ namespace DBRepository.Repository
                 ShortPath = images.ShortPath,
                 Type = 1
             };
-            await repository.CreateAsync(_image);
+            await CreateAsync(_image);
             return images;
         }
 
@@ -36,7 +35,7 @@ namespace DBRepository.Repository
                 _image.PhysicalPath = images.PhysicalPath;
                 _image.ShortPath = images.ShortPath;
                 _image.Type = 1;
-                await repository.UpdateAsync(_image);
+                await UpdateAsync(_image);
                 return images;
             }
             else
