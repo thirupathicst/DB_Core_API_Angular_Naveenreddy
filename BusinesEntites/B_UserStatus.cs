@@ -31,4 +31,12 @@ namespace BusinesEntites
         /// </summary>
         Active
     }
+
+    public class B_UserInfo
+    {
+        public B_UserStatus Status {set;get; } 
+        public string Message { get; set; }
+        public int PersonId { get; set; }
+        public int Profilestage { set; get; }
+    }
 }

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class APIServiceService {
+  public isLoading = new BehaviorSubject(false);
   bseAPI: string;
+
   constructor(private http: HttpClient) {
     this.bseAPI = document.getElementsByTagName('base')[0].href + 'api';
   }
@@ -71,9 +73,11 @@ export class APIServiceService {
   public uploadImages(Image: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', Image);
-    //formData.set('Content-Type', 'multipart/form-data');
     return this.http.post(`${this.bseAPI}/ImageUpload`, formData);
+  }
 
+  public addStory(Story: object): Observable<any> {
+    return this.http.post(`${this.bseAPI}/Story`, Story);
   }
 
   private getHeaders(): HttpHeaders {

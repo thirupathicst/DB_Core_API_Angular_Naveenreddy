@@ -37,6 +37,8 @@ namespace NaveenreddyAPI
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<ILoginHistoryRepository, LoginHistoryRepository>();
             services.AddScoped<IFamilyRepository, FamilyRepository>();
+            services.AddScoped<IStoryRepository, StoryRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -12,9 +12,11 @@ namespace DBRepository.Repository
     public class LoginRepository : Repository<LoginDetails>, ILoginRepository
     {
         private readonly ILoginHistoryRepository repository;
-        public LoginRepository(NaveenReddyDbContext repositoryContext, ILoginHistoryRepository _repository) : base(repositoryContext)
+        private readonly IPersonalInfoRepository personalRepository;
+        public LoginRepository(NaveenReddyDbContext repositoryContext, ILoginHistoryRepository _repository, IPersonalInfoRepository _personalRepository) : base(repositoryContext)
         {
             repository = _repository;
+            personalRepository = _personalRepository;
         }
 
         public async Task<B_Login> AddLogin(B_Login logindetails)
@@ -38,10 +40,11 @@ namespace DBRepository.Repository
             return logindetails;
         }
 
-        public B_UserStatus AddLogin(B_Login logindetails, B_LoginHistory history,out int PersonId)
+        public B_UserInfo AddLogin(B_Login logindetails, B_LoginHistory history)
         {
             try
             {
+                B_UserInfo info = new B_UserInfo();
                 var data = SelectAll().Result;
                 LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid && x.Password == logindetails.Password).FirstOrDefault();
                 if (login != null)
@@ -49,14 +52,16 @@ namespace DBRepository.Repository
                     logindetails.Password = string.Empty;
                     history.LoginId = login.LoginId;
                     repository.AddLoginHistory(history);
-                    PersonId = login.PersonId;
-                    return B_UserStatus.Active;
+                    info.Status = B_UserStatus.Active;
+                    info.PersonId = login.LoginId;
+                    var person = personalRepository.SelectById(login.PersonId).Result;
+                    info.Profilestage = person.ProfileStage;
                 }
                 else
                 {
-                    PersonId = 0;
-                    return B_UserStatus.NoUser;
+                    info.Status = B_UserStatus.NoUser;
                 }
+                return info;
             }
             catch (Exception ex)
             {

@@ -13,7 +13,7 @@ namespace DBRepository
         public int? Age { get; set; }
         [StringLength(10)]
         public string Gender { get; set; }
-        public DateTime Dateofbirth { get; set; }
+        public DateTime? Dateofbirth { get; set; }
         public string Timeofbirth { get; set; }
         public string Height { get; set; }
         public string Complexion { get; set; }
@@ -30,7 +30,11 @@ namespace DBRepository
         public string Placeofbirth { get; set; }
         [StringLength(10)]
         public string Profileid { get; set; }
+        public int ProfileStage { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 
     public class EducationDetails
@@ -48,6 +52,9 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 
     public class AddressDetails
@@ -72,6 +79,9 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 
 
@@ -90,6 +100,9 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 
     public class ProfessionalDetails
@@ -107,6 +120,9 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 
     public class FamilyDetails
@@ -136,5 +152,8 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 }

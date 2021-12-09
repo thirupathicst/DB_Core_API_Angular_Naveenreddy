@@ -22,6 +22,7 @@ namespace NaveenreddyAPI.Controllers
             _repository = repository;
         }
 
+        [HttpPost]
         public async Task<IActionResult> Post(B_Story story)
         {
             return Ok(await _repository.AddStory(story));

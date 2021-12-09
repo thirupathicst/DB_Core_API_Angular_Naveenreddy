@@ -10,10 +10,9 @@ namespace DBRepository.Repository
 {
     public class StoryRepository:Repository<Story>, IStoryRepository
     {
-        private readonly StoryRepository repository;
-        public StoryRepository(NaveenReddyDbContext repositoryContext, StoryRepository _repository) : base(repositoryContext)
+        public StoryRepository(NaveenReddyDbContext repositoryContext) : base(repositoryContext)
         {
-            repository = _repository;
+            
         }
 
         public async Task<B_Story> AddStory(B_Story story)
@@ -25,7 +24,7 @@ namespace DBRepository.Repository
                 MarriageDate = story.MarriageDate,
                 PersonId = story.PersonId
             };
-            await repository.CreateAsync(_story);
+            await CreateAsync(_story);
             return story;
         }
 
@@ -38,7 +37,7 @@ namespace DBRepository.Repository
                 _story.Name = story.Name;
                 _story.MarriageDate = story.MarriageDate;
                 _story.PersonId = story.PersonId;
-                await repository.CreateAsync(_story);
+                await UpdateAsync(_story);
                 return story;
             }
             else

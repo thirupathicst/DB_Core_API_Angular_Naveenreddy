@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddstoryComponent } from './addstory/addstory.component';
 import { BiodataComponent } from './biodata/biodata.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'searchbyname', component: SearchbynameComponent },
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
       { path: 'imageupload', component: ImageuploadComponent },
+      { path: 'story', component: AddstoryComponent },
     ]
   }
 ];

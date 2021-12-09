@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,9 @@ import { PartnerinformationComponent } from './partnerinformation/partnerinforma
 import { SearchbynameComponent } from './searchbyname/searchbyname.component';
 import { SearchbyprofileComponent } from './searchbyprofile/searchbyprofile.component';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
+import { AddstoryComponent } from './addstory/addstory.component';
+import { LoaderInterceptor } from './loader-interceptor.service';
+import { APIServiceService } from './apiservice.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
     PartnerinformationComponent,
     SearchbynameComponent,
     SearchbyprofileComponent,
-    ImageuploadComponent
+    ImageuploadComponent,
+    AddstoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,10 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    APIServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
