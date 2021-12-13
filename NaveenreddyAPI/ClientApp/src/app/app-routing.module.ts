@@ -6,6 +6,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { LoginComponent } from './login/login.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PartnerinformationComponent } from './partnerinformation/partnerinformation.component';
 import { QuicksearchComponent } from './quicksearch/quicksearch.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
     path: '', component: SideLayoutComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'biodata', component: BiodataComponent},
+      { path: 'biodata/:Id', component: BiodataComponent },
+      { path: 'biodata', component: BiodataComponent },
       { path: 'forgotpassword', component: ForgotpasswordComponent },
       { path: 'quicksearch', component: QuicksearchComponent },
       { path: 'changepassword', component: ChangepasswordComponent },
@@ -29,8 +31,10 @@ const routes: Routes = [
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
       { path: 'imageupload', component: ImageuploadComponent },
       { path: 'story', component: AddstoryComponent },
+      //{ path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
     ]
-  }
+  },
+  { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

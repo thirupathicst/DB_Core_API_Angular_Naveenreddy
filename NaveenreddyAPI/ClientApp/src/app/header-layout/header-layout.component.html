@@ -25,20 +25,18 @@
           My Profile<span class="caret"></span>
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Edit Profile</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Invitations</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Matched Profiles</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);">Edit Profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);">Invitations</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);">Matched Profiles</a>
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/changepassword">Change password</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);" (click)="logout()">Logout</a>
         </div>
       </li>
-
     </ul>
     <!-- Links -->
     <!-- Search form -->
-    <form class="form-inline" mdbWavesEffect>
-      <a class="nav-link waves-light" mdbWavesEffect routerLink="/changepassword">Change password</a>
-    </form>
+   
   </links>
   <!-- Collapsible content -->
 

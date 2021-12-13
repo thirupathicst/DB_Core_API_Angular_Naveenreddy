@@ -37,7 +37,7 @@ namespace DBRepository.Repository
             };
 
             await CreateAsync(family);
-
+            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, info.PersonId);
             return familydetails;
         }
 

@@ -27,6 +27,7 @@ namespace DBRepository.Repository
             education.PersonId = info.PersonId;
 
              await CreateAsync(education);
+            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, info.PersonId);
             return educationdetails;
         }
 

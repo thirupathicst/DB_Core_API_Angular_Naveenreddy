@@ -23,6 +23,7 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [Produces(typeof(B_Address))]
         public async Task<IActionResult> Post(B_Address address)
         {
             return Ok(await _repository.AddAddress(address));

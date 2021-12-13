@@ -12,11 +12,11 @@ namespace DBRepository.Repository
     public class LoginRepository : Repository<LoginDetails>, ILoginRepository
     {
         private readonly ILoginHistoryRepository repository;
-        private readonly IPersonalInfoRepository personalRepository;
-        public LoginRepository(NaveenReddyDbContext repositoryContext, ILoginHistoryRepository _repository, IPersonalInfoRepository _personalRepository) : base(repositoryContext)
+        //private readonly IPersonalInfoRepository personalRepository;
+        public LoginRepository(NaveenReddyDbContext repositoryContext, ILoginHistoryRepository _repository) : base(repositoryContext)
         {
             repository = _repository;
-            personalRepository = _personalRepository;
+            //personalRepository = _personalRepository;
         }
 
         public async Task<B_Login> AddLogin(B_Login logindetails)
@@ -46,16 +46,29 @@ namespace DBRepository.Repository
             {
                 B_UserInfo info = new B_UserInfo();
                 var data = SelectAll().Result;
-                LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid && x.Password == logindetails.Password).FirstOrDefault();
+                LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid).FirstOrDefault();
                 if (login != null)
                 {
-                    logindetails.Password = string.Empty;
-                    history.LoginId = login.LoginId;
-                    repository.AddLoginHistory(history);
-                    info.Status = B_UserStatus.Active;
-                    info.PersonId = login.LoginId;
-                    var person = personalRepository.SelectById(login.PersonId).Result;
-                    info.Profilestage = person.ProfileStage;
+                    if(!login.ActiveStatus)
+                    {
+                        info.Status = B_UserStatus.Inactive;
+                    }
+                    else if (login.Password.Equals(logindetails.Password)&& login.ActiveStatus)
+                    {
+                        logindetails.Password = string.Empty;
+                        history.LoginId = login.LoginId;
+                        repository.AddLoginHistory(history).Wait();
+                      
+                        info.PersonId = login.PersonId;
+                        var person = new PersonalInfoRepository(this.dbContext, null).SelectById(login.PersonId).Result;
+                        //var person = personalRepository.SelectById(login.PersonId).Result;
+                        info.Profilestage = person.ProfileStage;
+                        info.Status = B_UserStatus.Active;
+                    }
+                    else 
+                    {
+                        info.Status = B_UserStatus.Invalid;
+                    }
                 }
                 else
                 {

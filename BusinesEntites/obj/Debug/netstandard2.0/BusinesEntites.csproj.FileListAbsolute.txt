@@ -10,9 +10,9 @@ C:\Users\dP-PL\source\repos\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntit
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\bin\Debug\netstandard2.0\BusinesEntites.deps.json
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\bin\Debug\netstandard2.0\BusinesEntites.dll
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\bin\Debug\netstandard2.0\BusinesEntites.pdb
+D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.csprojAssemblyReference.cache
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.AssemblyInfoInputs.cache
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.AssemblyInfo.cs
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.csproj.CoreCompileInputs.cache
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.dll
 D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.pdb
-D:\thirupathi\VS2019\NaveenReddy\BusinesEntites\obj\Debug\netstandard2.0\BusinesEntites.csprojAssemblyReference.cache

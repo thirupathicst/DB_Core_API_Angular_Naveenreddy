@@ -24,6 +24,7 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { AddstoryComponent } from './addstory/addstory.component';
 import { LoaderInterceptor } from './loader-interceptor.service';
 import { APIServiceService } from './apiservice.service';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { APIServiceService } from './apiservice.service';
     SearchbyprofileComponent,
     ImageuploadComponent,
     AddstoryComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,

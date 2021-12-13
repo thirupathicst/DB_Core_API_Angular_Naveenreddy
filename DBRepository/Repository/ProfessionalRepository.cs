@@ -28,6 +28,7 @@ namespace DBRepository.Repository
             professionaldetails.PersonId = info.PersonId;
 
             await CreateAsync(professionaldetails);
+            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, info.PersonId);
             return professional;
         }
 

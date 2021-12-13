@@ -26,15 +26,15 @@ namespace DBRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("ContactAddress")
+                    b.Property<string>("Contactaddress")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                        .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("District")
@@ -45,7 +45,7 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("PermanentAddress")
+                    b.Property<string>("Permanentaddress")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -63,7 +63,7 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Visa")
@@ -87,8 +87,8 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Graducation")
@@ -106,7 +106,7 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("EducationId");
@@ -127,8 +127,8 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Fathername")
@@ -172,7 +172,7 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("FamilyId");
@@ -189,20 +189,20 @@ namespace DBRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PhysicalPath")
+                    b.Property<string>("Physicalpath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShortPath")
+                    b.Property<string>("Shortpath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ImageId");
@@ -257,6 +257,7 @@ namespace DBRepository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Logindatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Logoutdatetime")
@@ -282,8 +283,8 @@ namespace DBRepository.Migrations
                     b.Property<string>("Complexion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Dateofbirth")
@@ -329,7 +330,7 @@ namespace DBRepository.Migrations
                     b.Property<string>("Timeofbirth")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Yourself")
@@ -352,8 +353,8 @@ namespace DBRepository.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Income")
@@ -370,7 +371,7 @@ namespace DBRepository.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.Property<short>("Yearofstart")
@@ -393,15 +394,15 @@ namespace DBRepository.Migrations
                     b.Property<string>("Caste")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Gothram")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("MotherTongue")
+                    b.Property<string>("Mothertongue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
@@ -419,7 +420,7 @@ namespace DBRepository.Migrations
                     b.Property<string>("Subcaste")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ReligiousId");
@@ -436,15 +437,15 @@ namespace DBRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Createddatetime")
+                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateTime>("MarriageDate")
+                    b.Property<DateTime>("Marriagedate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -454,7 +455,7 @@ namespace DBRepository.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedDateTime")
+                    b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("StoryId");

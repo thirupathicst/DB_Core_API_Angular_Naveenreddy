@@ -14,12 +14,11 @@ namespace DBRepository
         public string Name { get; set; }
         [StringLength(200)]
         public string Description { get; set; }
-        public DateTime MarriageDate { get; set; }
+        public DateTime Marriagedate { get; set; }
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 }
