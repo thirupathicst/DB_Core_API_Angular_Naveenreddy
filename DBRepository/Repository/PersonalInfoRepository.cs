@@ -50,11 +50,19 @@ namespace DBRepository.Repository
             info.Maritalstatus = personalInfo.Maritalstatus;
             info.Placeofbirth= personalInfo.Placeofbirth;
             info.Age = new DateTime((DateTime.Now - info.Dateofbirth).Value.Ticks).Year - 1;
-
+            info.ProfileStage = 1;
             await UpdateAsync(info);
             return personalInfo;
         }
 
+        public async Task<bool> UpdateProfileStage(int ProfileStage,int PersonId)
+        {
+            PersonalInfo info = await SelectById(PersonId);
+            info.ProfileStage = ProfileStage;
+            info.Updateddatetime = DateTime.Now;
+            await UpdateAsync(info);
+            return true;
+        }
 
     }
 }

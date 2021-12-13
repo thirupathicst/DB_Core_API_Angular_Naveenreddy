@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
 
@@ -32,9 +33,17 @@ export class BiodataComponent implements OnInit {
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
   optionsReligous = AppConstants.Religous;
-  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      if (this.activatedRoute.snapshot.paramMap.get('Id') == null) {
+        this.divIndex = 1;
+      }
+      else {
+        this.divIndex = parseInt(params.get('Id')) + 1;
+      }
+    })
 
     this.education2 = this.formBuilder.group({
       EducationCategory: ['', Validators.required],
@@ -208,7 +217,7 @@ export class BiodataComponent implements OnInit {
       PermanentAddress: '',
       PersonId: localStorage.getItem('isPersonId'),
     }
-
+    console.log(address);
     this.apiService.createAddress(address).subscribe(x => {
       this.divIndex = 5;
       console.log(x);
@@ -267,7 +276,6 @@ export class BiodataComponent implements OnInit {
     }
 
     this.apiService.createReligious(partner).subscribe(x => {
-
       console.log(x);
     }, err => {
       console.log(err);

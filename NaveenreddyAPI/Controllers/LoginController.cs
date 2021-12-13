@@ -54,7 +54,7 @@ namespace NaveenreddyAPI.Controllers
             }
             else if (B_UserStatus.Active == status.Status)
             {
-                return Ok(status.PersonId);
+                return Ok(status);
             }
             else
             {

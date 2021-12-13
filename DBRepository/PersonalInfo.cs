@@ -32,9 +32,8 @@ namespace DBRepository
         public string Profileid { get; set; }
         public int ProfileStage { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 
     public class EducationDetails
@@ -52,9 +51,8 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 
     public class AddressDetails
@@ -62,9 +60,9 @@ namespace DBRepository
         [Key]
         public int AddressId { get; set; }
         [StringLength(250)]
-        public string PermanentAddress { get; set; }
+        public string Permanentaddress { get; set; }
         [StringLength(250)]
-        public string ContactAddress { get; set; }
+        public string Contactaddress { get; set; }
         public string Visa { get; set; }
         public int Pincode { get; set; }
         [StringLength(50)]
@@ -79,9 +77,8 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 
 
@@ -96,13 +93,12 @@ namespace DBRepository
         public string Raasi { get; set; }
         [StringLength(50)]
         public string Gothram { get; set; }
-        public string MotherTongue { get; set; }
+        public string Mothertongue { get; set; }
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 
     public class ProfessionalDetails
@@ -120,9 +116,8 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 
     public class FamilyDetails
@@ -152,8 +147,7 @@ namespace DBRepository
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 }

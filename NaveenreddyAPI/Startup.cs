@@ -29,16 +29,16 @@ namespace NaveenreddyAPI
             //services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddDbContext<DBRepository.NaveenReddyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlCon")));
-            services.AddScoped<IPersonalInfoRepository, PersonalInfoRepository>();
-            services.AddScoped<IEducationRepository, EducationRepository>();
-            services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddScoped<IProfessionalRepository, ProfessionalRepository>();
-            services.AddScoped<IReligiousRepository, ReligiousRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
-            services.AddScoped<ILoginHistoryRepository, LoginHistoryRepository>();
-            services.AddScoped<IFamilyRepository, FamilyRepository>();
-            services.AddScoped<IStoryRepository, StoryRepository>();
-            services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddTransient<IPersonalInfoRepository, PersonalInfoRepository>();
+            services.AddTransient<IEducationRepository, EducationRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IProfessionalRepository, ProfessionalRepository>();
+            services.AddTransient<IReligiousRepository, ReligiousRepository>();
+            services.AddTransient<ILoginRepository, LoginRepository>();
+            services.AddTransient<ILoginHistoryRepository, LoginHistoryRepository>();
+            services.AddTransient<IFamilyRepository, FamilyRepository>();
+            services.AddTransient<IStoryRepository, StoryRepository>();
+            services.AddTransient<IImageRepository, ImageRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

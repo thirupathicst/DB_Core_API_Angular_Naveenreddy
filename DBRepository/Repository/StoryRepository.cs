@@ -21,7 +21,7 @@ namespace DBRepository.Repository
             {
                 Description = story.Description,
                 Name = story.Name,
-                MarriageDate = story.MarriageDate,
+                Marriagedate = story.MarriageDate,
                 PersonId = story.PersonId
             };
             await CreateAsync(_story);
@@ -35,7 +35,7 @@ namespace DBRepository.Repository
             {
                 _story.Description = story.Description;
                 _story.Name = story.Name;
-                _story.MarriageDate = story.MarriageDate;
+                _story.Marriagedate = story.MarriageDate;
                 _story.PersonId = story.PersonId;
                 await UpdateAsync(_story);
                 return story;

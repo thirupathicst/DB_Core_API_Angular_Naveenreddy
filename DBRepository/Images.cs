@@ -10,11 +10,10 @@ namespace DBRepository
     {
         [Key]
         public int ImageId { get; set; }
-        public string PhysicalPath { get; set; }
-        public string ShortPath { get; set; }
+        public string Physicalpath { get; set; }
+        public string Shortpath { get; set; }
         public int Type { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime? UpdatedDateTime { get; set; }
+        public DateTime Createddatetime { get; set; }
+        public DateTime? Updateddatetime { get; set; }
     }
 }

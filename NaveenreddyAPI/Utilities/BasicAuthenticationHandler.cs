@@ -36,8 +36,8 @@ namespace NaveenreddyAPI.Utilities
                 var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter)).Split(':');
                 _login.Emailid = credentials.FirstOrDefault();
                 _login.Password = credentials.LastOrDefault();
-                B_UserStatus status = _userService.AddLogin(_login, new B_LoginHistory(), out int person);
-                if (status == B_UserStatus.Active)
+                B_UserInfo status = _userService.AddLogin(_login, new B_LoginHistory());
+                if (status.Status == B_UserStatus.Active)
                 {
                     var claims = new[] {
                         new Claim(ClaimTypes.Email, _login.Emailid)

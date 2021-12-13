@@ -27,7 +27,8 @@ export class APIServiceService {
   }
 
   public createLogin(Login: Object): Observable<any> {
-    return this.http.post(`${this.bseAPI}/Login`, Login, { responseType: 'text' });
+    return this.http.post(`${this.bseAPI}/Login`, Login);
+    //return this.http.post(`${this.bseAPI}/Login`, Login, { responseType: 'text' });
   }
 
   public createEducation(Education: Object): Observable<any> {

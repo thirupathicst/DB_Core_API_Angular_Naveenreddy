@@ -20,7 +20,7 @@ namespace DBRepository.Repository
         {
             PersonalInfo info = await _personalInfo.SelectById(address.PersonId);
             AddressDetails addressdetails = new AddressDetails();
-            addressdetails.ContactAddress = address.ContactAddress;
+            addressdetails.Contactaddress = address.ContactAddress;
             addressdetails.Pincode = address.Pincode;
             addressdetails.Visa = address.Visa;
             addressdetails.District = address.District;
@@ -29,9 +29,10 @@ namespace DBRepository.Repository
             addressdetails.Settled = address.Settled;
             addressdetails.PersonId = info.PersonId;
             addressdetails.Country = address.Country;
-            addressdetails.PermanentAddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Permanentaddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
 
             await CreateAsync(addressdetails);
+            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(4, info.PersonId);
             return address;
         }
 
@@ -40,14 +41,14 @@ namespace DBRepository.Repository
             // PersonalInfo info = await SelectById(address.PersonId);
             AddressDetails addressdetails = await SelectById(address.PersonId);
             addressdetails.Pincode = address.Pincode;
-            addressdetails.ContactAddress = address.ContactAddress;
+            addressdetails.Contactaddress = address.ContactAddress;
             addressdetails.Visa = address.Visa;
             addressdetails.District = address.District;
             addressdetails.State = address.State;
             addressdetails.Native = address.Native;
             addressdetails.Settled = address.Settled;
             addressdetails.Country = address.Country;
-            addressdetails.PermanentAddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Permanentaddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
 
             await UpdateAsync(addressdetails);
             return address;

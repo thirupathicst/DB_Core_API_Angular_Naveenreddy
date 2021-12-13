@@ -12,7 +12,7 @@ export class AppComponent {
   loading: boolean;
   constructor(private loaderService: APIServiceService) {
     this.loaderService.isLoading.subscribe((v) => {
-      console.log(v);
+      //console.log(v);
       this.loading = v;
     });
   }

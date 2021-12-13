@@ -19,8 +19,8 @@ namespace DBRepository.Repository
         {
             Images _image = new Images()
             {
-                PhysicalPath = images.PhysicalPath,
-                ShortPath = images.ShortPath,
+                Physicalpath = images.PhysicalPath,
+                Shortpath = images.ShortPath,
                 Type = 1
             };
             await CreateAsync(_image);
@@ -32,8 +32,8 @@ namespace DBRepository.Repository
            var _image= await SelectById(images.ImageId);
             if (_image!=null)
             {
-                _image.PhysicalPath = images.PhysicalPath;
-                _image.ShortPath = images.ShortPath;
+                _image.Physicalpath = images.PhysicalPath;
+                _image.Shortpath = images.ShortPath;
                 _image.Type = 1;
                 await UpdateAsync(_image);
                 return images;

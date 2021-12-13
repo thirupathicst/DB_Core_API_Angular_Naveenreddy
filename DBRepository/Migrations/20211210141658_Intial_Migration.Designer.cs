@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(NaveenReddyDbContext))]
-    [Migration("20211122102733_PersonalInfo_Maritalstatus_Placeofbirth_columns_added")]
-    partial class PersonalInfo_Maritalstatus_Placeofbirth_columns_added
+    [Migration("20211210141658_Intial_Migration")]
+    partial class Intial_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,12 +28,15 @@ namespace DBRepository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("ContactAddress")
+                    b.Property<string>("Contactaddress")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("District")
                         .HasMaxLength(50)
@@ -43,7 +46,7 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("PermanentAddress")
+                    b.Property<string>("Permanentaddress")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -60,6 +63,9 @@ namespace DBRepository.Migrations
                     b.Property<string>("State")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Visa")
                         .HasColumnType("nvarchar(max)");
@@ -82,6 +88,9 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Graducation")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -96,6 +105,9 @@ namespace DBRepository.Migrations
                     b.Property<string>("School")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("EducationId");
 
@@ -115,6 +127,9 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Fathername")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -132,10 +147,21 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<short>("Noofbrothers")
-                        .HasMaxLength(50)
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Noofbrothersmarrried")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Noofbrothersunmarrried")
                         .HasColumnType("smallint");
 
                     b.Property<short>("Noofsisters")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Noofsistersmarrried")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Noofsistersunmarrried")
                         .HasColumnType("smallint");
 
                     b.Property<int>("PersonId")
@@ -145,11 +171,41 @@ namespace DBRepository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("FamilyId");
 
                     b.HasIndex("PersonId");
 
                     b.ToTable("Tbl_FamilyDetails");
+                });
+
+            modelBuilder.Entity("DBRepository.Images", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Physicalpath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Shortpath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ImageId");
+
+                    b.ToTable("Tbl_Images");
                 });
 
             modelBuilder.Entity("DBRepository.LoginDetails", b =>
@@ -188,8 +244,8 @@ namespace DBRepository.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Browsername")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("IPaddress")
                         .HasMaxLength(10)
@@ -224,7 +280,10 @@ namespace DBRepository.Migrations
                     b.Property<string>("Complexion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Dateofbirth")
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Dateofbirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Emailid")
@@ -257,12 +316,18 @@ namespace DBRepository.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("ProfileStage")
+                        .HasColumnType("int");
+
                     b.Property<string>("Profileid")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Timeofbirth")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Yourself")
                         .HasMaxLength(500)
@@ -271,6 +336,47 @@ namespace DBRepository.Migrations
                     b.HasKey("PersonId");
 
                     b.ToTable("Tbl_PersonalInfo");
+                });
+
+            modelBuilder.Entity("DBRepository.ProfessionalDetails", b =>
+                {
+                    b.Property<int>("ProfessionalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Companydetails")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Income")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Joblocation")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Jobtype")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("Yearofstart")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("ProfessionalId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Tbl_ProfessionalDetails");
                 });
 
             modelBuilder.Entity("DBRepository.ReligiousDetails", b =>
@@ -283,11 +389,14 @@ namespace DBRepository.Migrations
                     b.Property<string>("Caste")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Gothram")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("MotherTongue")
+                    b.Property<string>("Mothertongue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
@@ -305,11 +414,48 @@ namespace DBRepository.Migrations
                     b.Property<string>("Subcaste")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ReligiousId");
 
                     b.HasIndex("PersonId");
 
                     b.ToTable("Tbl_ReligiousDetails");
+                });
+
+            modelBuilder.Entity("DBRepository.Story", b =>
+                {
+                    b.Property<int>("StoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Createddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("Marriagedate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updateddatetime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("StoryId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Tbl_Story");
                 });
 
             modelBuilder.Entity("DBRepository.AddressDetails", b =>
@@ -367,7 +513,29 @@ namespace DBRepository.Migrations
                     b.Navigation("LoginDetails");
                 });
 
+            modelBuilder.Entity("DBRepository.ProfessionalDetails", b =>
+                {
+                    b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalInfo");
+                });
+
             modelBuilder.Entity("DBRepository.ReligiousDetails", b =>
+                {
+                    b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalInfo");
+                });
+
+            modelBuilder.Entity("DBRepository.Story", b =>
                 {
                     b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
                         .WithMany()

@@ -22,14 +22,15 @@ namespace DBRepository.Repository
             ReligiousDetails religiousdetails = new ReligiousDetails();
             religiousdetails.Caste = religious.Caste;
             religiousdetails.Gothram = religious.Gothram;
-            religiousdetails.MotherTongue = religious.MotherTongue;
-            religious.Raasi = religious.Raasi;
+            religiousdetails.Mothertongue = religious.MotherTongue;
+            religiousdetails.Raasi = religious.Raasi;
             religiousdetails.Religion = religious.Religion;
             religiousdetails.Star = religious.Star;
             religiousdetails.Subcaste = religious.Subcaste;
             religiousdetails.PersonId = info.PersonId;
 
             await CreateAsync(religiousdetails);
+            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, info.PersonId);
             return religious;
         }
 
@@ -39,7 +40,7 @@ namespace DBRepository.Repository
             ReligiousDetails religiousdetails = new ReligiousDetails();
             religiousdetails.Caste = religious.Caste;
             religiousdetails.Gothram = religious.Gothram;
-            religiousdetails.MotherTongue = religious.MotherTongue;
+            religiousdetails.Mothertongue = religious.MotherTongue;
             religious.Raasi = religious.Raasi;
             religiousdetails.Religion = religious.Religion;
             religiousdetails.Star = religious.Star;
