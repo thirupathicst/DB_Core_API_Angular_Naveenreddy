@@ -24,12 +24,14 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_Religious), 200)]
         public async Task<IActionResult> Post(B_Religious religious)
         {
             return Ok(await _repository.AddReligious(religious));
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(B_Religious), 200)]
         public async Task<IActionResult> Put(B_Religious religious)
         {
             return Ok(await _repository.UpdateReligious(religious));

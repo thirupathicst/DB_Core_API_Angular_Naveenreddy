@@ -25,9 +25,8 @@
 
           <!--Text-->
           <mdb-card-text>
-            
-            <input type="file" accept="image/*" formControlName="upload2" name="upload2" class="form-control" (change)="imagePreview($event,0)" mdbInput />
-            <span *ngIf="submitted && f.upload2.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
+            <input type="file" accept="image/*" name="upload1" formControlName="upload1" class="form-control" (change)="imagePreview($event,0)" mdbInput />
+            <span *ngIf="submitted && f.upload1.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
           </mdb-card-text>
         </mdb-card-body>
       </mdb-card>
@@ -58,8 +57,8 @@
 
           <!--Text-->
           <mdb-card-text>
-            <input type="file" accept="image/*" name="upload1" formControlName="upload1" class="form-control" (change)="imagePreview($event,1)" mdbInput />
-            <span *ngIf="submitted && f.upload1.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
+            <input type="file" accept="image/*" formControlName="upload2" name="upload2" class="form-control" (change)="imagePreview($event,1)" mdbInput />
+            <span *ngIf="submitted && f.upload2.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
           </mdb-card-text>
 
           
@@ -72,5 +71,5 @@
   
   
   <br />
-  <button type="submit" mdbBtn color="primary" class="my-4">Upload</button>
+  <button type="submit" mdbBtn color="primary" class="my-4 waves-effect" mdbWavesEffect><mdb-icon fas icon="cloud-upload-alt" class="mr-1"></mdb-icon> Upload</button>
 </form>

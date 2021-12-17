@@ -21,7 +21,7 @@ namespace DBRepository.Repository
             {
                 Physicalpath = images.PhysicalPath,
                 Shortpath = images.ShortPath,
-                Type = 1
+                PersonId = images.PersonId
             };
             await CreateAsync(_image);
             return images;
@@ -29,12 +29,11 @@ namespace DBRepository.Repository
 
         public async Task<B_Images> UpdateImage(B_Images images)
         {
-           var _image= await SelectById(images.ImageId);
+           var _image= await SelectById(images.PersonId);
             if (_image!=null)
             {
                 _image.Physicalpath = images.PhysicalPath;
                 _image.Shortpath = images.ShortPath;
-                _image.Type = 1;
                 await UpdateAsync(_image);
                 return images;
             }

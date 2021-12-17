@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export class APIServiceService {
   public isLoading = new BehaviorSubject(false);
-  bseAPI: string;
+  private bseAPI: string;
 
   constructor(private http: HttpClient) {
     this.bseAPI = document.getElementsByTagName('base')[0].href + 'api';
@@ -27,8 +27,12 @@ export class APIServiceService {
   }
 
   public createLogin(Login: Object): Observable<any> {
-    return this.http.post(`${this.bseAPI}/Login`, Login);
+    return this.http.post(`${this.bseAPI}/Account/Login`, Login);
     //return this.http.post(`${this.bseAPI}/Login`, Login, { responseType: 'text' });
+  }
+
+  public changePassword(ChangePassword: Object): Observable<any> {
+    return this.http.post(`${this.bseAPI}/Account/ChangePassword`, ChangePassword);
   }
 
   public createEducation(Education: Object): Observable<any> {
@@ -71,9 +75,11 @@ export class APIServiceService {
     return this.http.put(`${this.bseAPI}/Religious`, Religious);
   }
 
-  public uploadImages(Image: File): Observable<any> {
+  public uploadImages(Image: File[]): Observable<any> {
     const formData: FormData = new FormData();
-    formData.append('file', Image);
+    Image.forEach(item => {
+      formData.append('file', item);
+    });
     return this.http.post(`${this.bseAPI}/ImageUpload`, formData);
   }
 

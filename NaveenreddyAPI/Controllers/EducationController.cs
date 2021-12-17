@@ -30,12 +30,14 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_Education), 200)]
         public async Task<IActionResult> Post(B_Education educationdetails)
         {
             return Ok(await _repository.AddEducationDetails(educationdetails));
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(B_Education), 200)]
         public async Task<IActionResult> Put(B_Education educationdetails)
         {
             return Ok(await _repository.UpdateEducationDetails(educationdetails));

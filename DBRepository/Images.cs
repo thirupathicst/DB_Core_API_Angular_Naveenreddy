@@ -12,7 +12,9 @@ namespace DBRepository
         public int ImageId { get; set; }
         public string Physicalpath { get; set; }
         public string Shortpath { get; set; }
-        public int Type { get; set; }
+        public int PersonId { get; set; }
+        [ForeignKey("PersonId")]
+        public PersonalInfo PersonalInfo { get; set; }
         public DateTime Createddatetime { get; set; }
         public DateTime? Updateddatetime { get; set; }
     }

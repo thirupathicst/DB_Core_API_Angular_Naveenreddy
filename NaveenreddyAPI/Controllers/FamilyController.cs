@@ -23,6 +23,7 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_Family),200)]
         public async Task<IActionResult> Post(B_Family family)
         {
             return Ok(await _repository.AddFamilyDetails(family));

@@ -34,7 +34,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Createddatetime")
-                        .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("District")
@@ -88,7 +87,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Graducation")
@@ -128,7 +126,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Fathername")
@@ -190,8 +187,10 @@ namespace DBRepository.Migrations
                         .UseIdentityColumn();
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Physicalpath")
                         .HasColumnType("nvarchar(max)");
@@ -199,13 +198,12 @@ namespace DBRepository.Migrations
                     b.Property<string>("Shortpath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ImageId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Tbl_Images");
                 });
@@ -257,7 +255,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Logindatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Logoutdatetime")
@@ -284,7 +281,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Dateofbirth")
@@ -354,7 +350,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Income")
@@ -395,7 +390,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Gothram")
@@ -438,7 +432,6 @@ namespace DBRepository.Migrations
                         .UseIdentityColumn();
 
                     b.Property<DateTime>("Createddatetime")
-                     .HasDefaultValue(DateTime.Now)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -488,6 +481,17 @@ namespace DBRepository.Migrations
                 });
 
             modelBuilder.Entity("DBRepository.FamilyDetails", b =>
+                {
+                    b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalInfo");
+                });
+
+            modelBuilder.Entity("DBRepository.Images", b =>
                 {
                     b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
                         .WithMany()

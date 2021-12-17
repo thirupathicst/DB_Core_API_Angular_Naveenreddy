@@ -6,7 +6,7 @@ namespace BusinesEntites
 {
     public class B_Images
     {
-        public int ImageId { get; set; }
+        public int PersonId { get; set; }
         public string PhysicalPath { get; set; }
         public string ShortPath { get; set; }
     }

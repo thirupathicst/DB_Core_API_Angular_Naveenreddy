@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using DBRepository.Repository.Interfaces;
 using BusinesEntites;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AddressController : ControllerBase
     {
         private readonly ILogger<AddressController> _logger;
@@ -23,13 +25,14 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
-        [Produces(typeof(B_Address))]
+        [ProducesResponseType(typeof(B_Address), 200)]
         public async Task<IActionResult> Post(B_Address address)
         {
             return Ok(await _repository.AddAddress(address));
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(B_Address), 200)]
         public async Task<IActionResult> Put(B_Address address)
         {
             return Ok(await _repository.UpdateAddress(address));

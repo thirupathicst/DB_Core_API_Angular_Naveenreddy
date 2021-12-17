@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpResponse,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
-
+import {  HttpResponse,  HttpRequest,  HttpHandler,  HttpEvent,  HttpInterceptor} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APIServiceService } from './apiservice.service';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private loaderService: APIServiceService) { }
+  constructor(private loaderService: APIServiceService, private auth: AuthService, private router: Router) { }
 
   removeRequest(req: HttpRequest<any>) {
     const i = this.requests.indexOf(req);
@@ -25,7 +20,12 @@ export class LoaderInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    //Add Authorization
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${this.auth.getUserToken()}`
+      }
+    });
     this.requests.push(req);
 
     console.log("No of requests--->" + this.requests.length);
@@ -42,6 +42,9 @@ export class LoaderInterceptor implements HttpInterceptor {
           },
           err => {
             //alert('error' + err);
+            if (err.status == 401) {
+              this.router.navigate(['/login']);
+            }
             this.removeRequest(req);
             observer.error(err);
           },
@@ -57,3 +60,4 @@ export class LoaderInterceptor implements HttpInterceptor {
     });
   }
 }
+

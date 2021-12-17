@@ -13,7 +13,7 @@ namespace DBRepository.Repository
 
     public class NoDetailsFoundException : MyCustomException
     {
-        public NoDetailsFoundException() : base("No details found with reuested id")
+        public NoDetailsFoundException() : base("No details found with requested id")
         {
 
         }

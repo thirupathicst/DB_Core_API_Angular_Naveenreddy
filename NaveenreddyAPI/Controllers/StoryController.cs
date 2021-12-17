@@ -23,9 +23,17 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_Story), 200)]
         public async Task<IActionResult> Post(B_Story story)
         {
             return Ok(await _repository.AddStory(story));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(B_Story), 200)]
+        public async Task<IActionResult> Put(B_Story story)
+        {
+            return Ok(await _repository.UpdateStory(story));
         }
     }
 }

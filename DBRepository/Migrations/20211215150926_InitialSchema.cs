@@ -3,27 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DBRepository.Migrations
 {
-    public partial class Intial_Migration : Migration
+    public partial class InitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Tbl_Images",
-                columns: table => new
-                {
-                    ImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Physicalpath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Shortpath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Createddatetime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Updateddatetime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tbl_Images", x => x.ImageId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Tbl_PersonalInfo",
                 columns: table => new
@@ -135,6 +118,29 @@ namespace DBRepository.Migrations
                     table.PrimaryKey("PK_Tbl_FamilyDetails", x => x.FamilyId);
                     table.ForeignKey(
                         name: "FK_Tbl_FamilyDetails_Tbl_PersonalInfo_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Tbl_PersonalInfo",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tbl_Images",
+                columns: table => new
+                {
+                    ImageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Physicalpath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Shortpath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    Createddatetime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updateddatetime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tbl_Images", x => x.ImageId);
+                    table.ForeignKey(
+                        name: "FK_Tbl_Images_Tbl_PersonalInfo_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Tbl_PersonalInfo",
                         principalColumn: "PersonId",
@@ -277,6 +283,11 @@ namespace DBRepository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tbl_FamilyDetails_PersonId",
                 table: "Tbl_FamilyDetails",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tbl_Images_PersonId",
+                table: "Tbl_Images",
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(

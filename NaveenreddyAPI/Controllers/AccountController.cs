@@ -14,18 +14,21 @@ namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    [Authorize]
+    public class AccountController : ControllerBase
     {
-        private readonly ILogger<LoginController> _logger;
+        private readonly ILogger<AccountController> _logger;
         private readonly ILoginRepository _repository;
-        public LoginController(ILogger<LoginController> logger, ILoginRepository repository)
+        public AccountController(ILogger<AccountController> logger, ILoginRepository repository)
         {
             _logger = logger;
             _repository = repository;
         }
 
         [HttpPost]
-        public IActionResult Post(Login login)
+        [AllowAnonymous]
+        [Route("Login")]
+        public IActionResult Login(Login login)
         {
             B_UserInfo status;
             B_Login _login = new B_Login()
@@ -54,6 +57,7 @@ namespace NaveenreddyAPI.Controllers
             }
             else if (B_UserStatus.Active == status.Status)
             {
+              status.Message=TokenManager.GenerateToken(login.Emailid);
                 return Ok(status);
             }
             else
@@ -64,6 +68,20 @@ namespace NaveenreddyAPI.Controllers
             }
         }
 
-
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(B_ChangePassword password)
+        {
+            if (password.NewPassword.Equals(password.ConfirmPassword))
+            {
+                await _repository.ChangePassword(password);
+                return Ok();
+            }
+            else
+            {
+                ModelState.AddModelError("NewPassword", "NewPassword and ConfirmPassword should be same");
+                return BadRequest(password);
+            }
+        }
     }
 }

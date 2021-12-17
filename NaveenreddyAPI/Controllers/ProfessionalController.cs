@@ -23,12 +23,14 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_Professional), 200)]
         public async Task<IActionResult> Post(B_Professional professional)
         {
             return Ok(await _repository.AddProfessional(professional));
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(B_Professional), 200)]
         public async Task<IActionResult> Put(B_Professional professional)
         {
             return Ok(await _repository.UpdateProfessional(professional));

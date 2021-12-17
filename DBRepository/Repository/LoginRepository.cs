@@ -83,18 +83,24 @@ namespace DBRepository.Repository
 
         }
 
-        // public async Task<B_Login> UserCheck(B_Login logindetails)
-        // {
-        //     var data = await SelectAll();
-        //     LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid && x.Password == logindetails.Password).FirstOrDefault();
-        //     if (login != null)
-        //     {
-        //         logindetails.Password = string.Empty;
-        //         return logindetails;
-        //     }
-        //     else
-        //         return new B_Login();
-        // }
+        public async Task<B_ChangePassword> ChangePassword(B_ChangePassword changepassword)
+        {
+            var data = await SelectAll();
+            LoginDetails login = data.Where(x => x.PersonId == changepassword.PersonId && x.Password == changepassword.OldPassword).FirstOrDefault();
+            if (login != null)
+            {
+                if(login.Password.Equals(changepassword.NewPassword))
+                {
+                    throw new MyCustomException("New password can't be same with old");
+                }
+                else if(changepassword.NewPassword.Equals(changepassword.ConfirmPassword))
+                {
+                    login.Password = changepassword.NewPassword;
+                    await this.UpdateAsync(login);
+                }
+            }
+            return changepassword;
+        }
 
     }
 }

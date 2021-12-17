@@ -2,16 +2,16 @@
 <br/>
 <div class="container-fluid">
     <div class="row">
-        <div class=" col-3 ">
-            <div class="list-group ">
-                <a href="# " class="list-group-item active waves-light" mdbWavesEffect>Quick search</a>
-                <a href="# " class="list-group-item list-group-item-action waves-light " mdbWavesEffect>Upload image</a>
-                <a href="# " class="list-group-item list-group-item-action waves-light " mdbWavesEffect>Search by name</a>
-                <a href="# " class="list-group-item list-group-item-action waves-light " mdbWavesEffect>Search by city</a>
-                <a href="# " class="list-group-item list-group-item-action disabled waves-light " mdbWavesEffect>Search by profileId</a>
+        <div class="col-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action waves-light" mdbWavesEffect><mdb-icon fas icon="search" class="mr-1"></mdb-icon>Quick search</a>
+                <a class="list-group-item list-group-item-action waves-light" [routerLinkActive]="'active'" routerLink="/imageupload" mdbWavesEffect><mdb-icon fas icon="file-upload" class="mr-1"></mdb-icon>Upload image</a>
+                <a href="#" class="list-group-item list-group-item-action waves-light" mdbWavesEffect><mdb-icon fas icon="users" class="mr-1"></mdb-icon>Search by name</a>
+                <a href="#" class="list-group-item list-group-item-action waves-light" mdbWavesEffect><mdb-icon fas icon="city" class="mr-1"></mdb-icon>Search by city</a>
+                <a href="#" class="list-group-item list-group-item-action disabled waves-light" mdbWavesEffect><mdb-icon fas icon="user-alt" class="mr-1"></mdb-icon>Search by profileId</a>
             </div>
         </div>
-        <div class="col-9 ">
+        <div class="col-9">
           <router-outlet></router-outlet>
         </div>
     </div>

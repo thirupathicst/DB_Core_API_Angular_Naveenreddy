@@ -33,12 +33,14 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Post(B_Registration registration)
         {
             return Ok(await _repository.AddRegistration(registration));
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Put(B_PersonalInfo personalinfo)
         {
             return Ok(await _repository.AddBioData(personalinfo));

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DBRepository.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace NaveenreddyAPI.Utilities
             {
                 await _next(httpContext);
             }
+
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
@@ -35,12 +37,25 @@ namespace NaveenreddyAPI.Utilities
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            await context.Response.WriteAsync(new ErrorDetails()
+
+            if (ex is MyCustomException)
             {
-                StatusCode = context.Response.StatusCode,
-                Message = ex.Message
-            }.ToString());
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                await context.Response.WriteAsync(new ErrorDetails()
+                {
+                    StatusCode = context.Response.StatusCode,
+                    Message = ex.Message
+                }.ToString());
+            }
+            else
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                await context.Response.WriteAsync(new ErrorDetails()
+                {
+                    StatusCode = context.Response.StatusCode,
+                    Message = ex.Message
+                }.ToString());
+            }
         }
     }
 }

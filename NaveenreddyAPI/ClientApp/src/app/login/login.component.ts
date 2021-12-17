@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
   login: any;
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
@@ -47,7 +48,9 @@ export class LoginComponent implements OnInit {
 
     this.apiService.createLogin(this.login).subscribe(x => {
       if (x.status == 4) {
-        localStorage.setItem('isPersonId', x.personId);
+        this.auth.setUserAuthentication(x);
+        //localStorage.setItem('isPersonId', x.personId);
+        //sessionStorage.setItem('token', x.message);
         if (x.profilestage < 6) {
           this.router.navigate(['/biodata/' + x.profilestage]);
         }
@@ -57,14 +60,9 @@ export class LoginComponent implements OnInit {
       }
       console.log(x);
     }, err => {
-      if (err.status == 500) {
-        console.log(err);
-      }
-      else if (err.status == 400) {
+      if (err.status == 400) {
         console.log(err.error);
       }
     })
-    //console.log(JSON.stringify(this.validatingForm.value, null, 2));
-    //this.validatingForm.controls.f.markAsTouched();
   }
 }

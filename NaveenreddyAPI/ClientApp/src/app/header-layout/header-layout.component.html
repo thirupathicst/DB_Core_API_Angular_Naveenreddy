@@ -9,19 +9,19 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/registration">Register<span class="sr-only">(current)</span></a>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/registration"><mdb-icon fas icon="user"></mdb-icon>Register<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Search</a>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link waves-light" routerLink="/quicksearch" mdbWavesEffect><mdb-icon fas icon="search"></mdb-icon>Search</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Contact Us</a>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link waves-light"  mdbWavesEffect routerLink="/contact"><mdb-icon fas icon="envelope"></mdb-icon>Contact Us</a>
       </li>
 
       <!-- Dropdown -->
       <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <a dropdownToggle mdbWavesEffect class="nav-link dropdown-toggle waves-light">
           My Profile<span class="caret"></span>
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
@@ -29,7 +29,7 @@
           <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);">Invitations</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);">Matched Profiles</a>
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/changepassword">Change password</a>
+          <a class="dropdown-item waves-light" [routerLinkActive]="'active'" mdbWavesEffect routerLink="/changepassword">Change password</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="javascript: void(0);" (click)="logout()">Logout</a>
         </div>
       </li>

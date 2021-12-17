@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(NaveenReddyDbContext))]
-    [Migration("20211210141658_Intial_Migration")]
-    partial class Intial_Migration
+    [Migration("20211215150926_InitialSchema")]
+    partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,19 +191,21 @@ namespace DBRepository.Migrations
                     b.Property<DateTime>("Createddatetime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Physicalpath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Shortpath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("Updateddatetime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ImageId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Tbl_Images");
                 });
@@ -481,6 +483,17 @@ namespace DBRepository.Migrations
                 });
 
             modelBuilder.Entity("DBRepository.FamilyDetails", b =>
+                {
+                    b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalInfo");
+                });
+
+            modelBuilder.Entity("DBRepository.Images", b =>
                 {
                     b.HasOne("DBRepository.PersonalInfo", "PersonalInfo")
                         .WithMany()

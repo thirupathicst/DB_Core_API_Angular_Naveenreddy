@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
 
@@ -33,7 +33,7 @@ export class BiodataComponent implements OnInit {
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
   optionsReligous = AppConstants.Religous;
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -277,6 +277,7 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createReligious(partner).subscribe(x => {
       console.log(x);
+      this.router.navigate(['/imageupload']);
     }, err => {
       console.log(err);
     });

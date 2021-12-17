@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddstoryComponent } from './addstory/addstory.component';
+import { AuthguardService } from './authguard.service';
 import { BiodataComponent } from './biodata/biodata.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { ContactusComponent } from './contactus/contactus.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { LoginComponent } from './login/login.component';
@@ -21,17 +23,17 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
       { path: 'biodata/:Id', component: BiodataComponent },
-      { path: 'biodata', component: BiodataComponent },
+      { path: 'biodata', component: BiodataComponent, canActivate: [AuthguardService] },
       { path: 'forgotpassword', component: ForgotpasswordComponent },
       { path: 'quicksearch', component: QuicksearchComponent },
-      { path: 'changepassword', component: ChangepasswordComponent },
+      { path: 'changepassword', component: ChangepasswordComponent, canActivate: [AuthguardService] },
       { path: 'partnerinfo', component: PartnerinformationComponent },
       { path: 'searchbycity', component: SearchbycityComponent },
       { path: 'searchbyname', component: SearchbynameComponent },
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
       { path: 'imageupload', component: ImageuploadComponent },
       { path: 'story', component: AddstoryComponent },
-      //{ path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
+      { path: 'contact', component: ContactusComponent }
     ]
   },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
