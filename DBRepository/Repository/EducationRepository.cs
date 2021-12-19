@@ -25,6 +25,7 @@ namespace DBRepository.Repository
             education.Heightqualification = educationdetails.Heightqualification;
             education.School = educationdetails.School;
             education.PersonId = info.PersonId;
+            education.Createddatetime = DateTime.Now;
 
              await CreateAsync(education);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, info.PersonId);
@@ -39,8 +40,9 @@ namespace DBRepository.Repository
             education.Graducation = educationdetails.Graducation;
             education.Heightqualification = educationdetails.Heightqualification;
             education.School = educationdetails.School;
+            education.Updateddatetime = DateTime.Now;
 
-             await UpdateAsync(education);
+            await UpdateAsync(education);
 
             return educationdetails;
         }

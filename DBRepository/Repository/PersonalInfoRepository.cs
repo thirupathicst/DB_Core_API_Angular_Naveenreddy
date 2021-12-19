@@ -22,6 +22,7 @@ namespace DBRepository.Repository
             info.Emailid = registration.Email;
             info.Name = registration.Fullname;
             info.Generatedby = registration.Filledby;
+            info.Createddatetime = DateTime.Now;
 
             await CreateAsync(info);
 
@@ -51,6 +52,7 @@ namespace DBRepository.Repository
             info.Placeofbirth= personalInfo.Placeofbirth;
             info.Age = new DateTime((DateTime.Now - info.Dateofbirth).Value.Ticks).Year - 1;
             info.ProfileStage = 1;
+
             await UpdateAsync(info);
             return personalInfo;
         }

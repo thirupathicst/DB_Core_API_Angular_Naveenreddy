@@ -6,11 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using DBRepository.Repository.Interfaces;
 using BusinesEntites;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StoryController : ControllerBase
     {
         private readonly ILogger<StoryController> _logger;

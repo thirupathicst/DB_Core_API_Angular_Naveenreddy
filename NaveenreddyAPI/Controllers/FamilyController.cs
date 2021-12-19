@@ -1,5 +1,6 @@
 ﻿using BusinesEntites;
 using DBRepository.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FamilyController : ControllerBase
     {
         private readonly ILogger<FamilyController> _logger;

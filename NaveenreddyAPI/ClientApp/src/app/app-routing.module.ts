@@ -22,7 +22,7 @@ const routes: Routes = [
     path: '', component: SideLayoutComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'biodata/:Id', component: BiodataComponent },
+      { path: 'biodata/:Id', component: BiodataComponent, canActivate: [AuthguardService] },
       { path: 'biodata', component: BiodataComponent, canActivate: [AuthguardService] },
       { path: 'forgotpassword', component: ForgotpasswordComponent },
       { path: 'quicksearch', component: QuicksearchComponent },
@@ -31,7 +31,7 @@ const routes: Routes = [
       { path: 'searchbycity', component: SearchbycityComponent },
       { path: 'searchbyname', component: SearchbynameComponent },
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
-      { path: 'imageupload', component: ImageuploadComponent },
+      { path: 'imageupload', component: ImageuploadComponent, canActivate: [AuthguardService]},
       { path: 'story', component: AddstoryComponent },
       { path: 'contact', component: ContactusComponent }
     ]

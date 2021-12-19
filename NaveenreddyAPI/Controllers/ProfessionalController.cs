@@ -7,11 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using DBRepository.Repository.Interfaces;
 using BusinesEntites;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProfessionalController : ControllerBase
     {
         private readonly ILogger<ProfessionalController> _logger;

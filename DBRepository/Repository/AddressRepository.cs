@@ -29,7 +29,8 @@ namespace DBRepository.Repository
             addressdetails.Settled = address.Settled;
             addressdetails.PersonId = info.PersonId;
             addressdetails.Country = address.Country;
-            addressdetails.Permanentaddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Permanentaddress = $"{address.PermanentAddress}${address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Createddatetime = DateTime.Now;
 
             await CreateAsync(addressdetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(4, info.PersonId);
@@ -48,7 +49,8 @@ namespace DBRepository.Repository
             addressdetails.Native = address.Native;
             addressdetails.Settled = address.Settled;
             addressdetails.Country = address.Country;
-            addressdetails.Permanentaddress = $"{address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Permanentaddress = $"{address.PermanentAddress}${address.Country}${address.State}${ address.District}${address.Native}";
+            addressdetails.Updateddatetime = DateTime.Now;
 
             await UpdateAsync(addressdetails);
             return address;

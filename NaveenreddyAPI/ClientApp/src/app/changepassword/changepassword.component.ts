@@ -1,6 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { APIServiceService } from '../apiservice.service';
+declare let toastr: any;
 
 @Component({
   selector: 'app-changepassword',
@@ -10,7 +11,6 @@ import { APIServiceService } from '../apiservice.service';
 export class ChangepasswordComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
-  serverError: string;
   constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
@@ -44,8 +44,10 @@ export class ChangepasswordComponent implements OnInit {
       console.log(resp);
     }, err => {
         //this.toastr.error(`Validation !, ${err.error.Message}.`)
-      this.serverError = err.error.Message;
-        console.log(err);
+        if (err.status == 400) {
+          toastr.error(err.error.Message, 'Turtle Bay Resort', { timeOut: 5000 });
+          console.log(err);
+        }
     })
   }
 

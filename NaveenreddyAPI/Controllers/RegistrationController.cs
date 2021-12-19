@@ -16,6 +16,7 @@ namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RegistrationController : ControllerBase
     {
         private readonly ILogger<RegistrationController> _logger;
@@ -33,6 +34,7 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Post(B_Registration registration)
         {

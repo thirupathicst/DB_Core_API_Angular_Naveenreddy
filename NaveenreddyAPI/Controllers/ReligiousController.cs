@@ -8,11 +8,13 @@ using DBRepository.Repository.Interfaces;
 using BusinesEntites;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NaveenreddyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReligiousController : ControllerBase
     {
         private readonly ILogger<ReligiousController> _logger;

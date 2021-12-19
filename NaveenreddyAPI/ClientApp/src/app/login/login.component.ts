@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AuthService } from '../auth.service';
-
+declare let toastr: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
+    
     this.validatingForm = this.formBuilder.group({
       userName: ['', Validators.required],
       password: ['', Validators.required],
@@ -58,10 +59,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/quicksearch']);
         }
       }
-      console.log(x);
     }, err => {
-      if (err.status == 400) {
-        console.log(err.error);
+        if (err.status == 400) {
+          toastr.error(err.error.message);
       }
     })
   }

@@ -21,7 +21,8 @@ namespace DBRepository.Repository
             {
                 Physicalpath = images.PhysicalPath,
                 Shortpath = images.ShortPath,
-                PersonId = images.PersonId
+                PersonId = images.PersonId,
+                Createddatetime=DateTime.Now
             };
             await CreateAsync(_image);
             return images;
@@ -34,6 +35,7 @@ namespace DBRepository.Repository
             {
                 _image.Physicalpath = images.PhysicalPath;
                 _image.Shortpath = images.ShortPath;
+                _image.Updateddatetime = DateTime.Now;
                 await UpdateAsync(_image);
                 return images;
             }

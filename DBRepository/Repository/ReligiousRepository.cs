@@ -28,6 +28,7 @@ namespace DBRepository.Repository
             religiousdetails.Star = religious.Star;
             religiousdetails.Subcaste = religious.Subcaste;
             religiousdetails.PersonId = info.PersonId;
+            religiousdetails.Createddatetime = DateTime.Now;
 
             await CreateAsync(religiousdetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, info.PersonId);
@@ -46,6 +47,7 @@ namespace DBRepository.Repository
             religiousdetails.Star = religious.Star;
             religiousdetails.Subcaste = religious.Subcaste;
             religiousdetails.PersonId = info.PersonId;
+            religiousdetails.Updateddatetime = DateTime.Now;
 
             await UpdateAsync(religiousdetails);
             return religious;

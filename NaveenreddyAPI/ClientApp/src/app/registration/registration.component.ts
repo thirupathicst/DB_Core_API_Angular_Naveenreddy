@@ -63,13 +63,12 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.registration = {
-      filledby: this.registerForm.controls.FormFilledby.value,
+      filledby: this.optionsSelect.filter(x => x.value == this.registerForm.controls.FormFilledby.value)[0].label,
       fullname: this.registerForm.controls.FullName.value,
       email: this.registerForm.controls.Email.value,
       password: this.registerForm.controls.Password.value,
       confirmpassword: this.registerForm.controls.ConfirmPassword.value
     }
-
     this.apiService.createRegistration(this.registration).subscribe(resp => {
       console.log(resp);
       localStorage.setItem('isPersonId', resp.personId);

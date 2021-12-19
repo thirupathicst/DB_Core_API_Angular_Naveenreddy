@@ -26,6 +26,7 @@ namespace DBRepository.Repository
             professionaldetails.Jobtype = professional.Jobtype;
             professionaldetails.Yearofstart = professional.Yearofstart;
             professionaldetails.PersonId = info.PersonId;
+            professionaldetails.Createddatetime = DateTime.Now;
 
             await CreateAsync(professionaldetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, info.PersonId);
@@ -42,6 +43,7 @@ namespace DBRepository.Repository
             professionaldetails.Jobtype = professional.Jobtype;
             professionaldetails.Yearofstart = professional.Yearofstart;
             professionaldetails.PersonId = info.PersonId;
+            professionaldetails.Updateddatetime = DateTime.Now;
 
             await UpdateAsync(professionaldetails);
             return professional;

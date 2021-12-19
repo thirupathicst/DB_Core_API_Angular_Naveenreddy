@@ -87,7 +87,6 @@ export class BiodataComponent implements OnInit {
       NoOfSisterMarried: ['', Validators.required],
       NoOfSisterUnmarried: ['', Validators.required],
       SisterOccupation: ['', Validators.required],
-      AboutYourFamily: ['', Validators.required],
     })
 
     this.partner6 = this.formBuilder.group({
@@ -206,7 +205,7 @@ export class BiodataComponent implements OnInit {
     }
 
     var address = {
-      ContactAddress: this.contact4.controls.CitizenOf.value,
+      ContactAddress: this.contact4.controls.ContactAddress.value,
       Visa: this.contact4.controls.VisaStatus.value,
       Pincode: 0,
       District: this.contact4.controls.CityLivingIn.value,
@@ -214,7 +213,7 @@ export class BiodataComponent implements OnInit {
       Country: this.contact4.controls.CountryLivingIn.value,
       Settled: this.contact4.controls.SettledPlace.value,
       Native: this.contact4.controls.NativePlace.value,
-      PermanentAddress: '',
+      PermanentAddress: this.contact4.controls.CitizenOf.value,
       PersonId: localStorage.getItem('isPersonId'),
     }
     console.log(address);
@@ -248,7 +247,6 @@ export class BiodataComponent implements OnInit {
       PersonId: localStorage.getItem('isPersonId'),
     }
 
-    console.log(family);
     this.apiService.createFamily(family).subscribe(x => {
       this.divIndex = 6;
       console.log(x);

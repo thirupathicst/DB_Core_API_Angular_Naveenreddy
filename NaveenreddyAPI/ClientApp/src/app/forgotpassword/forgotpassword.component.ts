@@ -13,8 +13,8 @@ export class ForgotpasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
-      profileId: ['', Validators.required],
-      emailId: ['', Validators.required],
+      profileId: ['', [Validators.required, Validators.pattern("^[0-9]{10}$")]],
+      emailId: ['', [Validators.required, Validators.email]],
     })
   }
 

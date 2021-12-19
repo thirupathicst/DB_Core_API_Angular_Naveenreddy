@@ -22,18 +22,19 @@ namespace DBRepository.Repository
             FamilyDetails family = new FamilyDetails
             {
                 Brotheroccupation = familydetails.Brotheroccupation,
-                Noofbrothersmarrried=familydetails.Noofbrothersmarrried,
-                Noofbrothersunmarrried=familydetails.Noofbrothersunmarrried,
+                Noofbrothersmarrried = familydetails.Noofbrothersmarrried,
+                Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried,
                 Fathername = familydetails.Fathername,
                 Fatheroccupation = familydetails.Fatheroccupation,
                 Mothername = familydetails.Mothername,
                 Motheroccupation = familydetails.Motheroccupation,
                 Noofbrothers = familydetails.Noofbrothers,
                 Noofsisters = familydetails.Noofsisters,
-                Noofsistersmarrried=familydetails.Noofsistersmarrried,
-                Noofsistersunmarrried=familydetails.Noofsistersunmarrried,
+                Noofsistersmarrried = familydetails.Noofsistersmarrried,
+                Noofsistersunmarrried = familydetails.Noofsistersunmarrried,
                 Sisteroccupation = familydetails.Sisteroccupation,
-                PersonId = info.PersonId
+                PersonId = info.PersonId,
+                Createddatetime = DateTime.Now
             };
 
             await CreateAsync(family);
@@ -60,6 +61,7 @@ namespace DBRepository.Repository
             family.Noofsistersmarrried = familydetails.Noofsistersmarrried;
             family.Noofsistersunmarrried = familydetails.Noofsistersunmarrried;
             family.Sisteroccupation = familydetails.Sisteroccupation;
+            family.Updateddatetime = DateTime.Now;
 
             await UpdateAsync(family);
 

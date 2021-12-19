@@ -48,12 +48,12 @@ namespace NaveenreddyAPI.Controllers
             if (B_UserStatus.Invalid == status.Status)
             {
                 status.Message = "Invalid credentails or user not exsist";
-                return Ok(status);
+                return BadRequest(status);
             }
             else if (B_UserStatus.Inactive == status.Status)
             {
                 status.Message = "Inactive user contact admin";
-                return Ok(status);
+                return BadRequest(status);
             }
             else if (B_UserStatus.Active == status.Status)
             {
@@ -64,7 +64,7 @@ namespace NaveenreddyAPI.Controllers
             {
                 //return Ok(login);
                 status.Message = "Currently not accepting user details";
-                return Ok(status);
+                return BadRequest(status);
             }
         }
 

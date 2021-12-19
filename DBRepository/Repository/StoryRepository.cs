@@ -22,7 +22,8 @@ namespace DBRepository.Repository
                 Description = story.Description,
                 Name = story.Name,
                 Marriagedate = story.MarriageDate,
-                PersonId = story.PersonId
+                PersonId = story.PersonId,
+                Createddatetime=DateTime.Now
             };
             await CreateAsync(_story);
             return story;
@@ -37,6 +38,8 @@ namespace DBRepository.Repository
                 _story.Name = story.Name;
                 _story.Marriagedate = story.MarriageDate;
                 _story.PersonId = story.PersonId;
+                _story.Updateddatetime = DateTime.Now;
+
                 await UpdateAsync(_story);
                 return story;
             }
