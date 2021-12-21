@@ -9,6 +9,7 @@ using DBRepository.Repository.Interfaces;
 using BusinesEntites;
 using NaveenreddyAPI.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace NaveenreddyAPI.Controllers
 {
@@ -19,10 +20,12 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly ILoginRepository _repository;
-        public AccountController(ILogger<AccountController> logger, ILoginRepository repository)
+        private readonly IMemoryCache _cache;
+        public AccountController(ILogger<AccountController> logger, ILoginRepository repository,IMemoryCache memoryCache)
         {
             _logger = logger;
             _repository = repository;
+            _cache = memoryCache;
         }
 
         [HttpPost]
@@ -83,5 +86,37 @@ namespace NaveenreddyAPI.Controllers
                 return BadRequest(password);
             }
         }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(B_ForgotPassword forgotPassword)
+        {
+            await _repository.ForgotPassword(forgotPassword);
+            if(_cache.Get(forgotPassword.EmailId)!=null)
+            {
+                _cache.Remove(forgotPassword.EmailId);
+            }
+            _cache.Set(forgotPassword.EmailId,new Random().Next(0,1000000).ToString("D6"),TimeSpan.FromMinutes(5));
+            _logger.LogInformation(_cache.Get(forgotPassword.EmailId).ToString());
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("OTPVerification")]
+        [AllowAnonymous]
+        public IActionResult OTPVerification(int OTP,string EmailId)
+        {
+            string em=_cache.Get(EmailId).ToString();
+            if(OTP==int.Parse(em))
+            {
+                _cache.Remove(EmailId);
+                return Ok();
+            }
+            else{
+                return BadRequest("Invalid OTP");
+            }
+        }
+
     }
 }

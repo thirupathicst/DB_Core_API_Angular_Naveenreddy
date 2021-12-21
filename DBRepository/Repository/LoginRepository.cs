@@ -102,5 +102,18 @@ namespace DBRepository.Repository
             return changepassword;
         }
 
+        public async Task<B_ForgotPassword> ForgotPassword(B_ForgotPassword forgotPassword )
+        {
+             var data = await SelectAll();
+            LoginDetails login = data.Where(x => x.Emailid == forgotPassword.EmailId && x.ActiveStatus == true).FirstOrDefault();
+            if (login != null)
+            {
+                return forgotPassword;
+            }
+            else{
+                throw new MyCustomException("These Emailid & Mobile number not registerd");
+            }
+        }
+
     }
 }

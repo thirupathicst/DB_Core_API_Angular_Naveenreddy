@@ -35,6 +35,14 @@ export class APIServiceService {
     return this.http.post(`${this.bseAPI}/Account/ChangePassword`, ChangePassword);
   }
 
+  public forgotPassword(ForgotPassword: Object): Observable<any> {
+    return this.http.post(`${this.bseAPI}/Account/ForgotPassword`, ForgotPassword);
+  }
+
+  public otpVerification(emailId: string,otp:number): Observable<any> {
+    return this.http.get(`${this.bseAPI}/Account/OTPVerification?OTP=${otp}&EmailId=${emailId}`);
+  }
+
   public createEducation(Education: Object): Observable<any> {
     return this.http.post(`${this.bseAPI}/Education`, Education);
   }

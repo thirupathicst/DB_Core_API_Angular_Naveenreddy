@@ -30,6 +30,7 @@ namespace NaveenreddyAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMemoryCache();
             //services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(swager =>
             {
@@ -69,6 +70,7 @@ namespace NaveenreddyAPI
             services.AddTransient<IFamilyRepository, FamilyRepository>();
             services.AddTransient<IStoryRepository, StoryRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddScoped<AdminRepository>();
 
             services.AddAuthentication(x =>
             {

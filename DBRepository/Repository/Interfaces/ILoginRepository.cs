@@ -12,5 +12,6 @@ namespace DBRepository.Repository.Interfaces
         Task<B_Login> AddLogin(B_Login logindetails);
         B_UserInfo AddLogin(B_Login logindetails, B_LoginHistory history);
         Task<B_ChangePassword> ChangePassword(B_ChangePassword changepassword);
+        Task<B_ForgotPassword> ForgotPassword(B_ForgotPassword forgotPassword );
     }
 }

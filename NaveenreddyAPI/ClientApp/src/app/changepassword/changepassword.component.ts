@@ -45,7 +45,7 @@ export class ChangepasswordComponent implements OnInit {
     }, err => {
         //this.toastr.error(`Validation !, ${err.error.Message}.`)
         if (err.status == 400) {
-          toastr.error(err.error.Message, 'Turtle Bay Resort', { timeOut: 5000 });
+          toastr.error(err.error.Message);
           console.log(err);
         }
     })
