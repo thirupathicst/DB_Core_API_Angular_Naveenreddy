@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,6 +37,7 @@ namespace BusinesEntites
     {
         public B_UserStatus Status {set;get; } 
         public string Message { get; set; }
+        [JsonIgnore]
         public int PersonId { get; set; }
         public int Profilestage { set; get; }
     }

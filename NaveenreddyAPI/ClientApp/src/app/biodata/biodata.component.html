@@ -1,641 +1,621 @@
 <div class="col-md-12 p-b-0 p-t-0">
 
-  <!-- Stepers Wrapper -->
-  <ul class="stepper stepper-horizontal p-0">
+    <!-- Stepers Wrapper -->
+    <ul class="stepper stepper-horizontal p-0">
 
-    <!-- First Step completed -->
-    <li [ngClass]="{'active': divIndex==1}">
-      <a>
-        <span class="circle">1</span>
-        <span [ngClass]="{'label': divIndex==1,'text-success':divIndex>=2}">Personal</span>
-      </a>
-    </li>
+        <!-- First Step completed -->
+        <li [ngClass]="{'active': divIndex==1}">
+            <a>
+                <span class="circle">1</span>
+                <span [ngClass]="{'label': divIndex==1,'text-success':divIndex>=2}">Personal</span>
+            </a>
+        </li>
 
-    <!-- Second Step -->
-    <li [ngClass]="{'active': divIndex==2}">
-      <a>
-        <span class="circle">2</span>
-        <span [ngClass]="{'label': divIndex==2,'text-success':divIndex>=3}">Education</span>
-      </a>
-    </li>
+        <!-- Second Step -->
+        <li [ngClass]="{'active': divIndex==2}">
+            <a>
+                <span class="circle">2</span>
+                <span [ngClass]="{'label': divIndex==2,'text-success':divIndex>=3}">Education</span>
+            </a>
+        </li>
 
-    <!-- Third Step -->
-    <li [ngClass]="{'active': divIndex==3}">
-      <a>
-        <span class="circle">3</span>
-        <span [ngClass]="{'label': divIndex==3,'text-success':divIndex>=4}">Profession</span>
-      </a>
-    </li>
+        <!-- Third Step -->
+        <li [ngClass]="{'active': divIndex==3}">
+            <a>
+                <span class="circle">3</span>
+                <span [ngClass]="{'label': divIndex==3,'text-success':divIndex>=4}">Profession</span>
+            </a>
+        </li>
 
-    <li [ngClass]="{'active': divIndex==4}">
-      <a>
-        <span class="circle">4</span>
-        <span [ngClass]="{'label': divIndex==4,'text-success':divIndex>=5}">Contact</span>
-      </a>
-    </li>
+        <li [ngClass]="{'active': divIndex==4}">
+            <a>
+                <span class="circle">4</span>
+                <span [ngClass]="{'label': divIndex==4,'text-success':divIndex>=5}">Contact</span>
+            </a>
+        </li>
 
-    <li [ngClass]="{'active': divIndex==5}">
-      <a>
-        <span class="circle">5</span>
-        <span [ngClass]="{'label': divIndex==5,'text-success':divIndex>=6}">Family</span>
-      </a>
-    </li>
+        <li [ngClass]="{'active': divIndex==5}">
+            <a>
+                <span class="circle">5</span>
+                <span [ngClass]="{'label': divIndex==5,'text-success':divIndex>=6}">Family</span>
+            </a>
+        </li>
 
-    <li [ngClass]="{'active': divIndex==6}">
-      <a>
-        <span class="circle">6</span>
-        <span class="label">Partner</span>
-      </a>
-    </li>
+        <li [ngClass]="{'active': divIndex==6}">
+            <a>
+                <span class="circle">6</span>
+                <span class="label">Partner</span>
+            </a>
+        </li>
 
-  </ul>
-  <!-- /.Stepers Wrapper -->
+    </ul>
+    <!-- /.Stepers Wrapper -->
 
 </div>
 
 
 <!-- Personal Form -->
 <div *ngIf="divIndex==1">
-  <form [formGroup]="personal1" (ngSubmit)="onSubmit()">
-    <mdb-card>
-      <mdb-card-body>
-        <!--<mdb-card-title>
+    <form [formGroup]="personal1" (ngSubmit)="onSubmit()">
+        <mdb-card>
+            <mdb-card-body>
+                <!--<mdb-card-title>
           <h4>Bio data</h4>
         </mdb-card-title>-->
 
-        <div class="form-row">
-          <div class="col-6">
-            <div class="md-form md-outline">
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
 
-              <input id="Name" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Name.errors,'valid': submitted}" formControlName="Name">
-              <label for="Name">Name</label>
-              <mdb-error *ngIf="submitted && f.Name.errors?.required">Fullname is required</mdb-error>
-            </div>
-          </div>
+                            <input id="Name" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Name.errors,'valid': submitted}" formControlName="Name">
+                            <label for="Name">Name</label>
+                            <mdb-error *ngIf="submitted && f.Name.errors?.required">Fullname is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="Gender" class="browser-default custom-select" placeholder="select" [ngClass]="{'is-invalid': submitted && f.Gender.errors,'is-valid': submitted}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="Gender" class="browser-default custom-select" placeholder="select" [ngClass]="{'is-invalid': submitted && f.Gender.errors,'is-valid': submitted}">
                 <option value="">Select Gender</option>
                 <option value="F">Female</option>
                 <option value="M">Male</option>
                 <option value="O">Not Preference</option>
               </select>
-              <mdb-error *ngIf="submitted && f.Gender.errors?.required">Gender is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted && f.Gender.errors?.required">Gender is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="PlaceOfBirth" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.PlaceOfBirth.errors,'valid': submitted}" formControlName="PlaceOfBirth">
-              <label for="PlaceOfBirth">Place Of Birth</label>
-              <mdb-error *ngIf="submitted && f.PlaceOfBirth.errors?.required">Place of birth is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="PlaceOfBirth" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.PlaceOfBirth.errors,'valid': submitted}" formControlName="PlaceOfBirth">
+                            <label for="PlaceOfBirth">Place Of Birth</label>
+                            <mdb-error *ngIf="submitted && f.PlaceOfBirth.errors?.required">Place of birth is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <label for="TimeOfBirth">Time Of Birth</label>
-              <input id="TimeOfBirth" type="time" class="form-control" placeholder="" mdbInput [ngClass]="{'invalid': submitted && f.TimeOfBirth.errors,'valid': submitted}" formControlName="TimeOfBirth">
-              <mdb-error *ngIf="submitted && f.TimeOfBirth.errors?.required">Time of birth is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <label for="TimeOfBirth">Time Of Birth</label>
+                            <input id="TimeOfBirth" type="time" class="form-control" placeholder="" mdbInput [ngClass]="{'invalid': submitted && f.TimeOfBirth.errors,'valid': submitted}" formControlName="TimeOfBirth">
+                            <mdb-error *ngIf="submitted && f.TimeOfBirth.errors?.required">Time of birth is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select mdbInput [ngClass]="{'is-invalid': submitted && f.MaritalStatus.errors,'is-valid': submitted}" formControlName="MaritalStatus" id="MaritalStatus" class="browser-default custom-select">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select mdbInput [ngClass]="{'is-invalid': submitted && f.MaritalStatus.errors,'is-valid': submitted}" formControlName="MaritalStatus" id="MaritalStatus" class="browser-default custom-select">
                 <option value="">Select Marital Status</option>
                 <option value="Never Married">Never Married</option>
                 <option value="Second marriage">Second marriage</option>
               </select>
-              <mdb-error *ngIf="submitted && f.MaritalStatus.errors?.required">Marital status is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted && f.MaritalStatus.errors?.required">Marital status is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="Height" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Height.errors,'valid': submitted}" formControlName="Height">
-              <label for="Height">Height</label>
-              <mdb-error *ngIf="submitted && f.Height.errors?.required">Height is required</mdb-error>
-              <mdb-error *ngIf="submitted && f.Height.errors?.min">Age must be >18</mdb-error>
-              <mdb-error *ngIf="submitted && f.Height.errors?.max">Age must be >70</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="Height" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Height.errors,'valid': submitted}" formControlName="Height">
+                            <label for="Height">Height</label>
+                            <mdb-error *ngIf="submitted && f.Height.errors?.required">Height is required</mdb-error>
+                            <mdb-error *ngIf="submitted && f.Height.errors?.min">Height must be >4</mdb-error>
+                            <mdb-error *ngIf="submitted && f.Height.errors?.max">Height must be
+                                < 10 </mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <br>
-            <div class="form-control" [ngClass]="{'is-invalid': submitted && f.Complexion.errors,'is-valid': submitted}">
-              <!-- <input id="Complexion" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Complexion.errors,'valid': submitted}" formControlName="Complexion"> -->
-              <label for="Complexion">Complexion  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;</label>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input id="Veryfair" type="radio" value="Veryfair" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
-                <label for="Veryfair" class="custom-control-label">Very Fair</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input id="Fair" type="radio" value="Fair" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
-                <label for="Fair" class="custom-control-label">Fair</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input id="Medium" type="radio" value="Medium" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
-                <label for="Medium" class="custom-control-label">Medium</label>
-              </div>
-              <mdb-error *ngIf="submitted && f.Complexion.errors?.required">Complexion is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <br>
+                        <div class="form-control" [ngClass]="{'is-invalid': submitted && f.Complexion.errors,'is-valid': submitted}">
+                            <!-- <input id="Complexion" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Complexion.errors,'valid': submitted}" formControlName="Complexion"> -->
+                            <label for="Complexion">Complexion  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;</label>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input id="Veryfair" type="radio" value="Veryfair" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
+                                <label for="Veryfair" class="custom-control-label">Very Fair</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input id="Fair" type="radio" value="Fair" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
+                                <label for="Fair" class="custom-control-label">Fair</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input id="Medium" type="radio" value="Medium" name="Complexion" formControlName="Complexion" mdbInput class="custom-control-input">
+                                <label for="Medium" class="custom-control-label">Medium</label>
+                            </div>
+                            <mdb-error *ngIf="submitted && f.Complexion.errors?.required">Complexion is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <label for="Dateofbirth">Date of birth</label>
-              <input id="Dateofbirth" type="date" placeholder="" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Dateofbirth.errors,'valid': submitted}" formControlName="Dateofbirth">
-              <mdb-error *ngIf="submitted && f.Dateofbirth.errors?.required">Date of birth is required</mdb-error>
-              <!--<mdb-error *ngIf="submitted && f.Age.errors?.min">Age must be >18</mdb-error>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <label for="Dateofbirth">Date of birth</label>
+                            <input id="Dateofbirth" type="date" placeholder="" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Dateofbirth.errors,'valid': submitted}" formControlName="Dateofbirth">
+                            <mdb-error *ngIf="submitted && f.Dateofbirth.errors?.required">Date of birth is required</mdb-error>
+                            <!--<mdb-error *ngIf="submitted && f.Age.errors?.min">Age must be >18</mdb-error>
               <mdb-error *ngIf="submitted && f.Age.errors?.max">Age must be >70</mdb-error>-->
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <textarea id="Yourself" class="md-textarea form-control" mdbInput [ngClass]="{'invalid': submitted && f.Yourself.errors,'valid': submitted}" formControlName="Yourself"></textarea>
-              <label for="Yourself">Yourself</label>
-              <mdb-error *ngIf="submitted && f.Yourself.errors?.required">Your self is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <textarea id="Yourself" class="md-textarea form-control" mdbInput [ngClass]="{'invalid': submitted && f.Yourself.errors,'valid': submitted}" formControlName="Yourself"></textarea>
+                            <label for="Yourself">Yourself</label>
+                            <mdb-error *ngIf="submitted && f.Yourself.errors?.required">Your self is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="Phone" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Phone.errors,'valid': submitted}" formControlName="Phone">
-              <label for="Phone">Phone</label>
-              <mdb-error *ngIf="submitted && f.Phone.errors?.required">Phone is required</mdb-error>
-              <mdb-error *ngIf="submitted &&f.Phone.errors?.pattern">Phone must have 10 digits.</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="Phone" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted && f.Phone.errors,'valid': submitted}" formControlName="Phone">
+                            <label for="Phone">Phone</label>
+                            <mdb-error *ngIf="submitted && f.Phone.errors?.required">Phone is required</mdb-error>
+                            <mdb-error *ngIf="submitted &&f.Phone.errors?.pattern">Phone must have 10 digits.</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6 offset-md-4">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6 offset-md-4">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>
 
 <!-- Education Form -->
 <div *ngIf="divIndex==2">
-  <form [formGroup]="education2" (ngSubmit)="onEducationSubmit()">
-    <mdb-card>
-      <mdb-card-body>
+    <form [formGroup]="education2" (ngSubmit)="onEducationSubmit()">
+        <mdb-card>
+            <mdb-card-body>
 
-        <div class="form-row">
-          <div class=" col-6">
-            <div class="md-form md-outline">
-              <select id="EducationCategory" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted2 && f2.EducationCategory.errors,'is-valid': submitted2}" formControlName="EducationCategory">
+                <div class="form-row">
+                    <div class=" col-6">
+                        <div class="md-form md-outline">
+                            <select id="EducationCategory" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted2 && f2.EducationCategory.errors,'is-valid': submitted2}" formControlName="EducationCategory">
                 <option value="">Select Education</option>
-                <option value="Upto intermediate">Upto intermediate</option>
-                <option selected="selected" value="Graduation">Graduation</option>
-                <option value="PostGraduation">PostGraduation</option>
-                <option value="Engineers">Engineers</option>
-                <option value="MCA">MCA</option>
-                <option value="Medical">Medical</option>
-                <option value="Abroads">Abroads</option>
-                <option value="Other">Other</option>
+                <option *ngFor="let c of optionsEducation" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted2 && f2.EducationCategory.invalid">Education category is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted2 && f2.EducationCategory.invalid">Education category is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="EducationDetails" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.EducationDetails.errors,'valid': submitted2}" formControlName="EducationDetails">
-              <label for="EducationDetails">Education Details</label>
-              <mdb-error *ngIf="submitted2 && f2.EducationDetails.invalid">Education details is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="EducationDetails" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.EducationDetails.errors,'valid': submitted2}" formControlName="EducationDetails">
+                            <label for="EducationDetails">Education Details</label>
+                            <mdb-error *ngIf="submitted2 && f2.EducationDetails.invalid">Education details is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="SchoolName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.SchoolName.errors,'valid': submitted2}" formControlName="SchoolName">
-              <label for="SchoolName">School Name</label>
-              <mdb-error *ngIf="submitted2 && f2.SchoolName.invalid">School name is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="SchoolName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.SchoolName.errors,'valid': submitted2}" formControlName="SchoolName">
+                            <label for="SchoolName">School Name</label>
+                            <mdb-error *ngIf="submitted2 && f2.SchoolName.invalid">School name is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="College" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.College.errors,'valid': submitted2}" formControlName="College">
-              <label for="College">College/University Name</label>
-              <mdb-error *ngIf="submitted2 && f2.College.invalid">College/University is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="College" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted2 && f2.College.errors,'valid': submitted2}" formControlName="College">
+                            <label for="College">College/University Name</label>
+                            <mdb-error *ngIf="submitted2 && f2.College.invalid">College/University is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-md-2 offset-md-4">
-            <button class="default" mdbBtn color="light" (click)="clickBack(2)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
-          </div>
+                    <div class="col-md-2 offset-md-4">
+                        <button class="default" mdbBtn color="light" (click)="clickBack(2)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
+                    </div>
 
-          <div class="col-6">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>
 
 <!-- Profession Form -->
 <div *ngIf="divIndex==3">
-  <form [formGroup]="profession3" (ngSubmit)="onProfessionSubmit()">
-    <mdb-card>
-      <mdb-card-body>
+    <form [formGroup]="profession3" (ngSubmit)="onProfessionSubmit()">
+        <mdb-card>
+            <mdb-card-body>
 
-        <div class="form-row">
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select id="Occupation" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted3 && f3.Occupation.errors,'is-valid': f3.Occupation.valid}" formControlName="Occupation">
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select id="Occupation" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted3 && f3.Occupation.errors,'is-valid': f3.Occupation.valid}" formControlName="Occupation">
                 <option value="">Select Occupation</option>
                 <option *ngFor="let c of optionsOccupation" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted3 && f3.Occupation.invalid">Occupation is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted3 && f3.Occupation.invalid">Occupation is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="OccupationDetails" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.OccupationDetails.errors,'valid': !f3.OccupationDetails.invalid}" formControlName="OccupationDetails">
-              <label for="OccupationDetails">Occupation Details</label>
-              <mdb-error *ngIf="submitted3 && f3.OccupationDetails.invalid">Occupation details is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="OccupationDetails" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.OccupationDetails.errors,'valid': !f3.OccupationDetails.invalid}" formControlName="OccupationDetails">
+                            <label for="OccupationDetails">Occupation Details</label>
+                            <mdb-error *ngIf="submitted3 && f3.OccupationDetails.invalid">Occupation details is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="CompanyName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.CompanyName.errors,'valid': !f3.CompanyName.invalid}" formControlName="CompanyName">
-              <label for="CompanyName">Company Name</label>
-              <mdb-error *ngIf="submitted3 && f3.CompanyName.invalid">CompanyName is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="CompanyName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.CompanyName.errors,'valid': !f3.CompanyName.invalid}" formControlName="CompanyName">
+                            <label for="CompanyName">Company Name</label>
+                            <mdb-error *ngIf="submitted3 && f3.CompanyName.invalid">CompanyName is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="PlaceofJob" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.PlaceofJob.errors,'valid':!f3.PlaceofJob.invalid}" formControlName="PlaceofJob">
-              <label for="PlaceofJob">Place of Job</label>
-              <mdb-error *ngIf="submitted3 && f3.PlaceofJob.invalid">Place of job is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="PlaceofJob" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.PlaceofJob.errors,'valid':!f3.PlaceofJob.invalid}" formControlName="PlaceofJob">
+                            <label for="PlaceofJob">Place of Job</label>
+                            <mdb-error *ngIf="submitted3 && f3.PlaceofJob.invalid">Place of job is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="WorkingSince" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.WorkingSince.errors,'valid': f3.WorkingSince.valid}" formControlName="WorkingSince">
-              <label for="WorkingSince">Working Since</label>
-              <mdb-error *ngIf="submitted3 && f3.WorkingSince.errors?.required">Working since is required</mdb-error>
-              <mdb-error *ngIf="submitted3 && f3.WorkingSince.errors?.pattern">Input is not valid ex:2010</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="WorkingSince" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.WorkingSince.errors,'valid': f3.WorkingSince.valid}" formControlName="WorkingSince">
+                            <label for="WorkingSince">Working Since</label>
+                            <mdb-error *ngIf="submitted3 && f3.WorkingSince.errors?.required">Working since is required</mdb-error>
+                            <mdb-error *ngIf="submitted3 && f3.WorkingSince.errors?.pattern">Input is not valid ex:2010</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="AnnualIncome" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.AnnualIncome.errors,'valid': !f3.AnnualIncome.invalid}" formControlName="AnnualIncome">
-              <label for="AnnualIncome">Annual Income</label>
-              <small class="form-helper"><b>Note: </b>I will say later-18, Not Applicable-16, Not Intrested-17 </small>
-              <mdb-error *ngIf="submitted3 && f3.AnnualIncome.invalid">Annual income is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="AnnualIncome" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted3 && f3.AnnualIncome.errors,'valid': !f3.AnnualIncome.invalid}" formControlName="AnnualIncome">
+                            <label for="AnnualIncome">Annual Income</label>
+                            <small class="form-helper"><b>Note: </b>I will say later-18, Not Applicable-16, Not Intrested-17 </small>
+                            <mdb-error *ngIf="submitted3 && f3.AnnualIncome.invalid">Annual income is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select id="Jobtype" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted3 && f3.Jobtype.errors,'is-valid': f3.Jobtype.valid}" formControlName="Jobtype">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select id="Jobtype" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted3 && f3.Jobtype.errors,'is-valid': f3.Jobtype.valid}" formControlName="Jobtype">
                 <option value="">Select job type</option>
-                <option value="Government">Government</option>
-                <option value="Private">Private</option>
-                <option value="Contract">Contract</option>
-                <option value="Business">Business</option>
-                <option value="Other">Other</option>
+                <option *ngFor="let c of optionsJobType" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted3 && f3.Jobtype.invalid">Occupation is required</mdb-error>
-            </div>
-          </div>
-          <div class="col-6">&nbsp; </div>
-          <div class="col-md-2 offset-md-4">
-            <button class="default" mdbBtn color="light" (click)="clickBack(3)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
-          </div>
+                            <mdb-error *ngIf="submitted3 && f3.Jobtype.invalid">Occupation is required</mdb-error>
+                        </div>
+                    </div>
+                    <div class="col-6">&nbsp; </div>
+                    <div class="col-md-2 offset-md-4">
+                        <button class="default" mdbBtn color="light" (click)="clickBack(3)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
+                    </div>
 
-          <div class="col-6">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>
 
 <!-- Contact Form -->
 <div *ngIf="divIndex==4">
-  <form [formGroup]="contact4" (ngSubmit)="onContactSubmit()">
-    <mdb-card>
-      <mdb-card-body>
+    <form [formGroup]="contact4" (ngSubmit)="onContactSubmit()">
+        <mdb-card>
+            <mdb-card-body>
 
-        <div class="form-row">
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="CitizenOf" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.CitizenOf.errors,'is-valid': submitted4}">
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="CitizenOf" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.CitizenOf.errors,'is-valid': submitted4}">
                 <option value="">Select citizen</option>
                 <option *ngFor="let c of optionsSelect" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted4 && f4.CitizenOf.invalid">Citizen of is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted4 && f4.CitizenOf.invalid">Citizen of is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="CountryLivingIn" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.CountryLivingIn.errors,'is-valid': submitted4}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="CountryLivingIn" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.CountryLivingIn.errors,'is-valid': submitted4}">
                 <option value="">Select country living</option>
                 <option *ngFor="let c of optionsSelect" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted4 && f4.CountryLivingIn.invalid">Country living is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted4 && f4.CountryLivingIn.invalid">Country living is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select id="VisaStatus" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.VisaStatus.errors,'is-valid':submitted4}" formControlName="VisaStatus">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select id="VisaStatus" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.VisaStatus.errors,'is-valid':submitted4}" formControlName="VisaStatus">
                 <option value="">Select Visa Status</option>
-                <option value="Citizen">Citizen</option>
-                <option value="Employee">H1/Work Visa</option>
-                <option value="Immigration">Immigration</option>
-                <option value="Student">Student</option>
-                <option value="Temporary Visa">Temporary Visa</option>
-                <option value="Other">Other</option>
+                <option *ngFor="let c of optionsVisaType" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted4 && f4.VisaStatus.invalid">Visa status is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted4 && f4.VisaStatus.invalid">Visa status is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="StateLivingIn" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.StateLivingIn.errors,'is-valid': submitted4}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="StateLivingIn" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.StateLivingIn.errors,'is-valid': submitted4}">
                 <option value="">Select state living</option>
                 <option *ngFor="let c of optionsStates" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted4 && f4.StateLivingIn.invalid">State living is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted4 && f4.StateLivingIn.invalid">State living is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="CityLivingIn" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.CityLivingIn.errors,'valid': submitted4}" formControlName="CityLivingIn">
-              <label for="CityLivingIn">City LivingIn</label>
-              <mdb-error *ngIf="submitted4 && f4.CityLivingIn.invalid">City living is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="CityLivingIn" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.CityLivingIn.errors,'valid': submitted4}" formControlName="CityLivingIn">
+                            <label for="CityLivingIn">City LivingIn</label>
+                            <mdb-error *ngIf="submitted4 && f4.CityLivingIn.invalid">City living is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NativePlace" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.NativePlace.errors,'valid': submitted4}" formControlName="NativePlace">
-              <label for="NativePlace">Native Place</label>
-              <mdb-error *ngIf="submitted4 && f4.NativePlace.invalid">Native place is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NativePlace" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.NativePlace.errors,'valid': submitted4}" formControlName="NativePlace">
+                            <label for="NativePlace">Native Place</label>
+                            <mdb-error *ngIf="submitted4 && f4.NativePlace.invalid">Native place is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="SettledPlace" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.SettledPlace.errors,'valid':submitted4,'valid': submitted4}" formControlName="SettledPlace">
-              <label for="SettledPlace">Settled Place</label>
-              <mdb-error *ngIf="submitted4 && f4.SettledPlace.invalid">Settled place is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="SettledPlace" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.SettledPlace.errors,'valid':submitted4,'valid': submitted4}" formControlName="SettledPlace">
+                            <label for="SettledPlace">Settled Place</label>
+                            <mdb-error *ngIf="submitted4 && f4.SettledPlace.invalid">Settled place is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select id="Region" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.Region.errors,'is-valid':submitted4}" formControlName="Region">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select id="Region" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted4 && f4.Region.errors,'is-valid':submitted4}" formControlName="Region">
                 <option value="">Select Region</option>
-                <option value="Andhra">Andhra</option>
-                <option value="Rayalaseema">Rayalaseema</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Other">Other</option>
+                <option *ngFor="let c of optionsRegion" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted4 && f4.Region.invalid">Region is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted4 && f4.Region.invalid">Region is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <textarea id="ContactAddress" class="md-textarea form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.ContactAddress.errors,'valid': submitted4}" formControlName="ContactAddress" rows="3"></textarea>
-              <label for="ContactAddress">Contact Address</label>
-              <mdb-error *ngIf="submitted4 && f4.ContactAddress.invalid">Contact address is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <textarea id="ContactAddress" class="md-textarea form-control" mdbInput [ngClass]="{'invalid': submitted4 && f4.ContactAddress.errors,'valid': submitted4}" formControlName="ContactAddress" rows="3"></textarea>
+                            <label for="ContactAddress">Contact Address</label>
+                            <mdb-error *ngIf="submitted4 && f4.ContactAddress.invalid">Contact address is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">&nbsp;</div>
-          <div class="col-md-2 offset-md-4">
-            <button class="default" mdbBtn color="light" (click)="clickBack(4)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
-          </div>
+                    <div class="col-6">&nbsp;</div>
+                    <div class="col-md-2 offset-md-4">
+                        <button class="default" mdbBtn color="light" (click)="clickBack(4)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
+                    </div>
 
-          <div class="col-6">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>
 
 <!-- Family Form -->
 <div *ngIf="divIndex==5">
-  <form [formGroup]="family5" (ngSubmit)="onFamilySubmit()">
-    <mdb-card>
-      <mdb-card-body>
-        <div class="form-row">
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="FatherName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.FatherName.errors,'valid': !f5.FatherName.invalid}" formControlName="FatherName">
-              <label for="FatherName">Father Name</label>
-              <mdb-error *ngIf="submitted5 && f5.FatherName.invalid">Father name is required</mdb-error>
-            </div>
-          </div>
+    <form [formGroup]="family5" (ngSubmit)="onFamilySubmit()">
+        <mdb-card>
+            <mdb-card-body>
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="FatherName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.FatherName.errors,'valid': !f5.FatherName.invalid}" formControlName="FatherName">
+                            <label for="FatherName">Father Name</label>
+                            <mdb-error *ngIf="submitted5 && f5.FatherName.invalid">Father name is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="FathersOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.FathersOccupation.errors,'valid': !f5.FathersOccupation.invalid}" formControlName="FathersOccupation">
-              <label for="FathersOccupation">Father's Occupation</label>
-              <mdb-error *ngIf="submitted5 && f5.FathersOccupation.invalid">Father's occupation is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="FathersOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.FathersOccupation.errors,'valid': !f5.FathersOccupation.invalid}" formControlName="FathersOccupation">
+                            <label for="FathersOccupation">Father's Occupation</label>
+                            <mdb-error *ngIf="submitted5 && f5.FathersOccupation.invalid">Father's occupation is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="MotherName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.MotherName.errors,'valid': !f5.MotherName.invalid}" formControlName="MotherName">
-              <label for="MotherName">Mother Name</label>
-              <mdb-error *ngIf="submitted5 && f5.MotherName.invalid">Mother name is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="MotherName" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.MotherName.errors,'valid': !f5.MotherName.invalid}" formControlName="MotherName">
+                            <label for="MotherName">Mother Name</label>
+                            <mdb-error *ngIf="submitted5 && f5.MotherName.invalid">Mother name is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="MothersOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.MothersOccupation.errors,'valid': !f5.MothersOccupation.invalid}" formControlName="MothersOccupation">
-              <label for="MothersOccupation">Mother's Occupation</label>
-              <mdb-error *ngIf="submitted5 && f5.MothersOccupation.invalid">Mother's occupation is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="MothersOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.MothersOccupation.errors,'valid': !f5.MothersOccupation.invalid}" formControlName="MothersOccupation">
+                            <label for="MothersOccupation">Mother's Occupation</label>
+                            <mdb-error *ngIf="submitted5 && f5.MothersOccupation.invalid">Mother's occupation is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfBrothers" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrothers.errors,'valid': !f5.NoOfBrothers.invalid}" formControlName="NoOfBrothers">
-              <label for="NoOfBrothers">No Of Brothers</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfBrothers.invalid">No of brothers is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfBrothers" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrothers.errors,'valid': !f5.NoOfBrothers.invalid}" formControlName="NoOfBrothers">
+                            <label for="NoOfBrothers">No Of Brothers</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfBrothers.invalid">No of brothers is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfBrotherMarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrotherMarried.errors,'valid': !f5.NoOfBrotherMarried.invalid}" formControlName="NoOfBrotherMarried">
-              <label for="NoOfBrotherMarried">No Of Brother Married</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfBrotherMarried.invalid">No of brother married is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfBrotherMarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrotherMarried.errors,'valid': !f5.NoOfBrotherMarried.invalid}" formControlName="NoOfBrotherMarried">
+                            <label for="NoOfBrotherMarried">No Of Brother Married</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfBrotherMarried.invalid">No of brother married is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfBrotherUnmarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrotherUnmarried.errors,'valid': !f5.NoOfBrotherUnmarried.invalid}" formControlName="NoOfBrotherUnmarried">
-              <label for="NoOfBrotherUnmarried">No Of Brother Unmarried</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfBrotherUnmarried.invalid">No of brother unmarried is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfBrotherUnmarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfBrotherUnmarried.errors,'valid': !f5.NoOfBrotherUnmarried.invalid}" formControlName="NoOfBrotherUnmarried">
+                            <label for="NoOfBrotherUnmarried">No Of Brother Unmarried</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfBrotherUnmarried.invalid">No of brother unmarried is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="BrotherOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.BrotherOccupation.errors,'valid': !f5.BrotherOccupation.invalid}" formControlName="BrotherOccupation">
-              <label for="BrotherOccupation">Brother's Occupation</label>
-              <mdb-error *ngIf="submitted5 && f5.BrotherOccupation.invalid">Brother's occupation is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="BrotherOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.BrotherOccupation.errors,'valid': !f5.BrotherOccupation.invalid}" formControlName="BrotherOccupation">
+                            <label for="BrotherOccupation">Brother's Occupation</label>
+                            <mdb-error *ngIf="submitted5 && f5.BrotherOccupation.invalid">Brother's occupation is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfSister" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSister.errors,'valid': !f5.NoOfSister.invalid}" formControlName="NoOfSister">
-              <label for="NoOfSister">No Of Sister's</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfSister.invalid">No of sister's is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfSister" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSister.errors,'valid': !f5.NoOfSister.invalid}" formControlName="NoOfSister">
+                            <label for="NoOfSister">No Of Sister's</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfSister.invalid">No of sister's is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfSisterMarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSisterMarried.errors,'valid': !f5.NoOfSisterMarried.invalid}" formControlName="NoOfSisterMarried">
-              <label for="NoOfSisterMarried">No Of Sister's Married</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfSisterMarried.invalid">No of sister's married is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfSisterMarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSisterMarried.errors,'valid': !f5.NoOfSisterMarried.invalid}" formControlName="NoOfSisterMarried">
+                            <label for="NoOfSisterMarried">No Of Sister's Married</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfSisterMarried.invalid">No of sister's married is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="NoOfSisterUnmarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSisterUnmarried.errors,'valid': !f5.NoOfSisterUnmarried.invalid}" formControlName="NoOfSisterUnmarried">
-              <label for="NoOfSisterUnmarried">No Of Sister's Unmarried</label>
-              <mdb-error *ngIf="submitted5 && f5.NoOfSisterUnmarried.invalid">No of sister's unmarried is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="NoOfSisterUnmarried" type="number" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.NoOfSisterUnmarried.errors,'valid': !f5.NoOfSisterUnmarried.invalid}" formControlName="NoOfSisterUnmarried">
+                            <label for="NoOfSisterUnmarried">No Of Sister's Unmarried</label>
+                            <mdb-error *ngIf="submitted5 && f5.NoOfSisterUnmarried.invalid">No of sister's unmarried is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="SisterOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.SisterOccupation.errors,'valid': !f5.SisterOccupation.invalid}" formControlName="SisterOccupation">
-              <label for="SisterOccupation">Sister's Occupation</label>
-              <mdb-error *ngIf="submitted5 && f5.SisterOccupation.invalid">Sister's occupation is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="SisterOccupation" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted5 && f5.SisterOccupation.errors,'valid': !f5.SisterOccupation.invalid}" formControlName="SisterOccupation">
+                            <label for="SisterOccupation">Sister's Occupation</label>
+                            <mdb-error *ngIf="submitted5 && f5.SisterOccupation.invalid">Sister's occupation is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">&nbsp;</div>
+                    <div class="col-md-2 offset-md-4">
+                        <button class="default" mdbBtn color="light" (click)="clickBack(5)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
+                    </div>
 
-          <div class="col-md-2 offset-md-4">
-            <button class="default" mdbBtn color="light" (click)="clickBack(5)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
-          </div>
-
-          <div class="col-6">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>
 
 <!-- Partner Form -->
 <div *ngIf="divIndex==6">
-  <form [formGroup]="partner6" (ngSubmit)="onPartnerSubmit()">
-    <mdb-card>
-      <mdb-card-body>
+    <form [formGroup]="partner6" (ngSubmit)="onPartnerSubmit()">
+        <mdb-card>
+            <mdb-card-body>
 
-        <div class="form-row">
+                <div class="form-row">
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="Religion" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Religion.errors,'is-valid': submitted6}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="Religion" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Religion.errors,'is-valid': submitted6}">
                 <option value="">Select religion</option>
                 <option *ngFor="let c of optionsReligous" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted6 && f6.Religion.invalid">Religion is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted6 && f6.Religion.invalid">Religion is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="Caste" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Caste.errors,'is-valid': submitted6}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="Caste" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Caste.errors,'is-valid': submitted6}">
                 <option value="">Select caste</option>
                 <option *ngFor="let c of optionsCaste" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted6 && f6.Caste.invalid">Caste is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted6 && f6.Caste.invalid">Caste is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="SubCaste" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.SubCaste.errors,'valid': submitted6}" formControlName="SubCaste">
-              <label for="SubCaste">Sub Caste</label>
-              <mdb-error *ngIf="submitted6 && f6.SubCaste.invalid">SubCaste is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="SubCaste" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.SubCaste.errors,'valid': submitted6}" formControlName="SubCaste">
+                            <label for="SubCaste">Sub Caste</label>
+                            <mdb-error *ngIf="submitted6 && f6.SubCaste.invalid">SubCaste is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="Star" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.Star.errors,'valid': submitted6}" formControlName="Star">
-              <label for="Star">Star</label>
-              <mdb-error *ngIf="submitted6 && f6.Star.invalid">Star is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="Star" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.Star.errors,'valid': submitted6}" formControlName="Star">
+                            <label for="Star">Star</label>
+                            <mdb-error *ngIf="submitted6 && f6.Star.invalid">Star is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="Raasi" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Raasi.errors,'is-valid': submitted6}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="Raasi" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.Raasi.errors,'is-valid': submitted6}">
                 <option value="">Select Raasi</option>
                 <option *ngFor="let c of optionsRaasi" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted6 && f6.Raasi.invalid">Raasi is required</mdb-error>
-            </div>
-          </div>
+                            <mdb-error *ngIf="submitted6 && f6.Raasi.invalid">Raasi is required</mdb-error>
+                        </div>
+                    </div>
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <input id="Gothram" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.Gothram.errors,'valid': submitted6}" formControlName="Gothram">
-              <label for="Gothram">Gothram</label>
-              <mdb-error *ngIf="submitted6 && f6.Gothram.invalid">Gothram is required</mdb-error>
-            </div>
-          </div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <input id="Gothram" type="text" class="form-control" mdbInput [ngClass]="{'invalid': submitted6 && f6.Gothram.errors,'valid': submitted6}" formControlName="Gothram">
+                            <label for="Gothram">Gothram</label>
+                            <mdb-error *ngIf="submitted6 && f6.Gothram.invalid">Gothram is required</mdb-error>
+                        </div>
+                    </div>
 
 
-          <div class="col-6">
-            <div class="md-form md-outline">
-              <select formControlName="MotherTongue" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.MotherTongue.errors,'is-valid':submitted6}">
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <select formControlName="MotherTongue" class="browser-default custom-select" [ngClass]="{'is-invalid': submitted6 && f6.MotherTongue.errors,'is-valid':submitted6}">
                 <option value="">Select MotherTongue</option>
                 <option *ngFor="let c of optionsLanguages" [ngValue]="c.value">{{c.label}}</option>
               </select>
-              <mdb-error *ngIf="submitted6 && f6.MotherTongue.invalid">Mother tongue is required</mdb-error>
-            </div>
-          </div>
-          <div class="col-6">&nbsp;</div>
-          <div class="col-md-2 offset-md-4">
-            <button class="default" mdbBtn color="light" (click)="clickBack(6)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
-          </div>
+                            <mdb-error *ngIf="submitted6 && f6.MotherTongue.invalid">Mother tongue is required</mdb-error>
+                        </div>
+                    </div>
+                    <div class="col-6">&nbsp;</div>
+                    <div class="col-md-2 offset-md-4">
+                        <button class="default" mdbBtn color="light" (click)="clickBack(6)" mdbWavesEffect type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
+                    </div>
 
-          <div class="col-6">
-            <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon>Save</button>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </form>
+                    <div class="col-6">
+                        <button class="primary" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon>Save</button>
+                    </div>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </form>
 </div>

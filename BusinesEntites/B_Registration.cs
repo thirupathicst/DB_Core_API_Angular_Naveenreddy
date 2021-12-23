@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 
 namespace BusinesEntites
 {
@@ -9,6 +10,7 @@ namespace BusinesEntites
         public string Email { get; set; }
         public string Password { get; set; }
         public string Confirmpassword { get; set; }
+        [JsonIgnore]
         public int PersonId { get; set; }
     }
 }

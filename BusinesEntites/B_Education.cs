@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace BusinesEntites
         public string College { get; set; }
         public string Graducation { get; set; }
         public string Heightqualification { get; set; }
+        [JsonIgnore]
         public int PersonId { get; set; }
     }
 }

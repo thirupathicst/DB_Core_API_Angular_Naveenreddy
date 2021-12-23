@@ -18,16 +18,19 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<AddressController> _logger;
         private readonly IAddressRepository _repository;
-        public AddressController(ILogger<AddressController> logger, IAddressRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public AddressController(ILogger<AddressController> logger, IAddressRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(B_Address), 200)]
         public async Task<IActionResult> Post(B_Address address)
         {
+            address.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddAddress(address));
         }
 
@@ -35,6 +38,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Address), 200)]
         public async Task<IActionResult> Put(B_Address address)
         {
+            address.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateAddress(address));
         }
     }

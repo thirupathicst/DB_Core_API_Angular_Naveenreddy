@@ -19,10 +19,12 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<EducationController> _logger;
         private readonly IEducationRepository _repository;
-        public EducationController(ILogger<EducationController> logger, IEducationRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public EducationController(ILogger<EducationController> logger, IEducationRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]
@@ -35,6 +37,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Education), 200)]
         public async Task<IActionResult> Post(B_Education educationdetails)
         {
+            educationdetails.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddEducationDetails(educationdetails));
         }
 
@@ -42,6 +45,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Education), 200)]
         public async Task<IActionResult> Put(B_Education educationdetails)
         {
+            educationdetails.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateEducationDetails(educationdetails));
         }
     }

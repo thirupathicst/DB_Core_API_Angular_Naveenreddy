@@ -21,11 +21,13 @@ namespace NaveenreddyAPI.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly ILoginRepository _repository;
         private readonly IMemoryCache _cache;
-        public AccountController(ILogger<AccountController> logger, ILoginRepository repository,IMemoryCache memoryCache)
+        private readonly ITokenManager _tokenManager;
+        public AccountController(ILogger<AccountController> logger, ILoginRepository repository,IMemoryCache memoryCache, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
             _cache = memoryCache;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
@@ -60,8 +62,13 @@ namespace NaveenreddyAPI.Controllers
             }
             else if (B_UserStatus.Active == status.Status)
             {
-              status.Message=TokenManager.GenerateToken(login.Emailid);
+              status.Message=TokenManager.GenerateToken(login.Emailid,status.PersonId);
                 return Ok(status);
+            }
+            else if (B_UserStatus.Invalid == status.Status)
+            {
+                status.Message = "Invalid credentails or user not exsist";
+                return BadRequest(status);
             }
             else
             {
@@ -75,6 +82,7 @@ namespace NaveenreddyAPI.Controllers
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword(B_ChangePassword password)
         {
+            password.PersonId = _tokenManager.GetUserId();
             if (password.NewPassword.Equals(password.ConfirmPassword))
             {
                 await _repository.ChangePassword(password);

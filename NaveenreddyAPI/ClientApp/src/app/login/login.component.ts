@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     })
 
-    this.validatingForm.controls.userName.setValue('Ramakrishna@gmail.com');
-    this.validatingForm.controls.password.setValue('Ramakrishna');
   }
 
   //updatevalues() {

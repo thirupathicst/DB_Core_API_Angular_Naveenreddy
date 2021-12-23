@@ -86,14 +86,14 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   startTimer(){
+    this.timeLeft=60;
     const source = timer(0, 1000);
      let subscription=source.subscribe(val => {
-      this.timeLeft=val;
+      this.timeLeft--;
       if(val>=60)
       {
         subscription.unsubscribe()
       }
-       // do stuff you want when the interval ticks
     })
   }
 }

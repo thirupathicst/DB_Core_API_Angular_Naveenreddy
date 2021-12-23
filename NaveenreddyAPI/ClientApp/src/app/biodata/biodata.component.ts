@@ -33,6 +33,10 @@ export class BiodataComponent implements OnInit {
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
   optionsReligous = AppConstants.Religous;
+  optionsEducation=AppConstants.Education;
+  optionsJobType=AppConstants.JobType;
+  optionsVisaType=AppConstants.VisaType;
+  optionsRegion=AppConstants.Region;
   constructor(private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
 
   ngOnInit(): void {

@@ -18,16 +18,19 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<ProfessionalController> _logger;
         private readonly IProfessionalRepository _repository;
-        public ProfessionalController(ILogger<ProfessionalController> logger, IProfessionalRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public ProfessionalController(ILogger<ProfessionalController> logger, IProfessionalRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(B_Professional), 200)]
         public async Task<IActionResult> Post(B_Professional professional)
         {
+            professional.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddProfessional(professional));
         }
 
@@ -35,6 +38,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Professional), 200)]
         public async Task<IActionResult> Put(B_Professional professional)
         {
+            professional.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateProfessional(professional));
         }
     }

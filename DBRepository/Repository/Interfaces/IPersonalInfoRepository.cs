@@ -11,6 +11,7 @@ namespace DBRepository.Repository.Interfaces
    public interface IPersonalInfoRepository: IRepository<PersonalInfo>
     {
 
+        Task<B_PersonalInfo> GetRegistration(int PersonId);
         Task<B_Registration> AddRegistration(B_Registration b_Registration);
 
         Task<B_PersonalInfo> AddBioData(B_PersonalInfo b_PersonalInfo);

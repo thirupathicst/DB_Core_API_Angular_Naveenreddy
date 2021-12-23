@@ -16,6 +16,19 @@ namespace DBRepository.Repository
             repository = _repository;
         }
 
+        public async Task<B_PersonalInfo> GetRegistration(int PersonId)
+        {
+           PersonalInfo info= await this.SelectById(PersonId);
+
+            B_PersonalInfo personalInfo= new B_PersonalInfo()
+            {
+                PersonId = info.PersonId,
+                Age = info.Age.Value,
+                Dateofbirth = info.Dateofbirth.Value
+            };
+            return personalInfo;
+        }
+
         public async Task<B_Registration> AddRegistration(B_Registration registration)
         {
             PersonalInfo info = new PersonalInfo();

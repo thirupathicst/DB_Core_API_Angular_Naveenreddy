@@ -473,13 +473,16 @@ export abstract class AppConstants {
     { value: 'Writer', label: 'Writer' },
     { value: 'Other', label: 'Other' },
   ];
+
   static readonly Filledby = [
     { value: '1', label: 'Self' },
     { value: '2', label: 'Parent' },
     { value: '3', label: 'Sibling' },
-    { value: '4', label: 'Relative/Guardian' },
+    { value: '4', label: 'Guardian' },
     { value: '5', label: 'Friend' },
-    { value: '6', label: 'Other' }];
+    { value: '6', label: 'Relative' },
+    { value: '7', label: 'Other' }];
+
   static readonly Religous = [
     { value: 'Hindu', label: 'Hindu' },
     { value: 'Muslim', label: 'Muslim' },
@@ -493,4 +496,39 @@ export abstract class AppConstants {
     { value: 'Parsi', label: 'Parsi' },
     { value: 'Protestant', label: 'Protestant' },
     { value: 'Other', label: 'Other' }];
+
+    static readonly Education=[
+      { value: 'Upto intermediate', label: 'Upto intermediate' },
+      { value: 'Graduation', label: 'Graduation' },
+      { value: 'PostGraduation', label: 'PostGraduation' },
+      { value: 'Engineering', label: 'Engineering' },
+      { value: 'MCA', label: 'MCA' },
+      { value: 'MBA', label: 'MBA' },
+      { value: 'Medical', label: 'Medical' },
+      { value: 'Other', label: 'Other' },
+    ];
+
+    static readonly JobType=[
+      { value: 'Government', label: 'Government' },
+      { value: 'Private', label: 'Private' },
+      { value: 'Contract', label: 'Contract' },
+      { value: 'Business', label: 'Business' },
+      { value: 'Other', label: 'Other' },
+    ];
+
+    static readonly VisaType=[
+      { value: 'Citizen', label: 'Citizen' },
+      { value: 'Employee', label: 'H1/Work Visa' },
+      { value: 'Immigration', label: 'Immigration' },
+      { value: 'Student', label: 'Student' },
+      { value: 'Temporary Visa', label: 'Temporary Visa' },
+      { value: 'Other', label: 'Other' },
+    ];
+
+    static readonly Region=[
+      { value: 'Andhra', label: 'Andhra' },
+      { value: 'Rayalaseema', label: 'Rayalaseema' },
+      { value: 'Telangana', label: 'Telangana' },
+      { value: 'Other', label: 'Other' }
+    ];
 }

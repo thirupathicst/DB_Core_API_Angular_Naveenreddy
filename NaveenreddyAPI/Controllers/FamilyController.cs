@@ -18,22 +18,26 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<FamilyController> _logger;
         private readonly IFamilyRepository _repository;
-        public FamilyController(ILogger<FamilyController> logger, IFamilyRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public FamilyController(ILogger<FamilyController> logger, IFamilyRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(B_Family),200)]
         public async Task<IActionResult> Post(B_Family family)
         {
+            family.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddFamilyDetails(family));
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(B_Family family)
         {
+            family.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateFamilyDetails(family));
         }
     }

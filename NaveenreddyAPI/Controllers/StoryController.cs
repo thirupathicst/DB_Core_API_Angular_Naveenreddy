@@ -17,17 +17,19 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<StoryController> _logger;
         private readonly IStoryRepository _repository;
-
-        public StoryController(ILogger<StoryController> logger, IStoryRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public StoryController(ILogger<StoryController> logger, IStoryRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(B_Story), 200)]
         public async Task<IActionResult> Post(B_Story story)
         {
+            story.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddStory(story));
         }
 
@@ -35,6 +37,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Story), 200)]
         public async Task<IActionResult> Put(B_Story story)
         {
+            story.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateStory(story));
         }
     }

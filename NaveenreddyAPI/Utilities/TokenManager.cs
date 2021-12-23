@@ -1,31 +1,26 @@
-﻿using BusinesEntites;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace NaveenreddyAPI.Utilities
 {
-    public class TokenManager 
+    public class TokenManager
     {
         private static string Secret = "A1B2C3D4E5F6G7H8I9J0~!@#$%^&*()";
 
-        public static string GenerateToken(string username)
+        public static string GenerateToken(string email, int personid)
         {
             byte[] key = Encoding.ASCII.GetBytes(Secret);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.Name, username)}),
+                      new Claim(ClaimTypes.Name, email),
+                      new Claim(ClaimTypes.Sid,personid.ToString())}),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
@@ -62,6 +57,8 @@ namespace NaveenreddyAPI.Utilities
                 return null;
             }
         }
+
+        
 
         public static string ValidateToken(string token)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,7 @@ namespace BusinesEntites
         public string Raasi { get; set; }
         public string Gothram { get; set; }
         public string MotherTongue { get; set; }
+        [JsonIgnore]
         public int PersonId { get; set; }
     }
 }

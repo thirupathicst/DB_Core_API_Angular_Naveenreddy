@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BusinesEntites
 {
     public class B_PersonalInfo
     {
+        [JsonIgnore]
         public int PersonId { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }

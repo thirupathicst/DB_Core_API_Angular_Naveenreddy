@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DBRepository.Repository.Interfaces;
 using BusinesEntites;
 using Microsoft.AspNetCore.Authorization;
+using NaveenreddyAPI.Utilities;
 
 namespace NaveenreddyAPI.Controllers
 {
@@ -21,12 +22,14 @@ namespace NaveenreddyAPI.Controllers
         private readonly ILogger<ImageUploadController> _logger;
         private readonly IImageRepository _repository;
         readonly IWebHostEnvironment env;
+        private readonly ITokenManager _tokenManager;
 
-        public ImageUploadController(IWebHostEnvironment _env, ILogger<ImageUploadController> logger, IImageRepository repository)
+        public ImageUploadController(IWebHostEnvironment _env, ILogger<ImageUploadController> logger, IImageRepository repository,ITokenManager tokenManager)
         {
             env = _env;
             _logger = logger;
             _repository = repository;
+            _tokenManager=tokenManager;
         }
 
         [HttpGet]
@@ -53,6 +56,7 @@ namespace NaveenreddyAPI.Controllers
                     await item.CopyToAsync(stream);
                 }
                 image.ShortPath = $"~\\wwwroot\\{_locafile}";
+                image.PersonId=_tokenManager.GetUserId();
                 await _repository.AddImage(image);
             }
             return Ok(image);

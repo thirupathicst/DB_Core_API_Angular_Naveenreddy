@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace NaveenreddyAPI
         {
             services.AddControllersWithViews();
             services.AddMemoryCache();
+            services.AddHttpContextAccessor();
             //services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(swager =>
             {
@@ -70,6 +72,7 @@ namespace NaveenreddyAPI
             services.AddTransient<IFamilyRepository, FamilyRepository>();
             services.AddTransient<IStoryRepository, StoryRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<ITokenManager,UserClaims> ();
             services.AddScoped<AdminRepository>();
 
             services.AddAuthentication(x =>

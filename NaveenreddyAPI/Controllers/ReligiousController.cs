@@ -19,16 +19,19 @@ namespace NaveenreddyAPI.Controllers
     {
         private readonly ILogger<ReligiousController> _logger;
         private readonly IReligiousRepository _repository;
-        public ReligiousController(ILogger<ReligiousController> logger, IReligiousRepository repository)
+        private readonly ITokenManager _tokenManager;
+        public ReligiousController(ILogger<ReligiousController> logger, IReligiousRepository repository, ITokenManager tokenManager)
         {
             _logger = logger;
             _repository = repository;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(B_Religious), 200)]
         public async Task<IActionResult> Post(B_Religious religious)
         {
+            religious.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddReligious(religious));
         }
 
@@ -36,6 +39,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Religious), 200)]
         public async Task<IActionResult> Put(B_Religious religious)
         {
+            religious.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateReligious(religious));
         }
     }
