@@ -32,9 +32,7 @@ export class ImageuploadComponent implements OnInit {
       return;
     }
 
-    console.log(this.uploadImg);
     this.apiService.uploadImages(this.uploadImg).subscribe(x => {
-      console.log(x);
       this.router.navigate(['/quicksearch']);
     }, err => {
       console.log(err)

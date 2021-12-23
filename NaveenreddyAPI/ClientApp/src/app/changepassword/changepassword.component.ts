@@ -35,15 +35,12 @@ export class ChangepasswordComponent implements OnInit {
     }
 
     let changePassword = {
-      PersonId: localStorage.getItem('isPersonId'),
       oldPassword: this.validatingForm.controls.Oldpassword.value,
       newpassword: this.validatingForm.controls.Newpassword.value,
       confirmpassword: this.validatingForm.controls.Confirmpassword.value
     }
     this.apiService.changePassword(changePassword).subscribe(resp => {
-      console.log(resp);
     }, err => {
-        //this.toastr.error(`Validation !, ${err.error.Message}.`)
         if (err.status == 400) {
           toastr.error(err.error.Message);
           console.log(err);

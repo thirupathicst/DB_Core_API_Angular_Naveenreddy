@@ -15,16 +15,12 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ReligiousController : ControllerBase
+    public class ReligiousController : NaveenReddyBaseController<ReligiousController>
     {
-        private readonly ILogger<ReligiousController> _logger;
         private readonly IReligiousRepository _repository;
-        private readonly ITokenManager _tokenManager;
-        public ReligiousController(ILogger<ReligiousController> logger, IReligiousRepository repository, ITokenManager tokenManager)
+        public ReligiousController(IReligiousRepository repository)
         {
-            _logger = logger;
             _repository = repository;
-            _tokenManager = tokenManager;
         }
 
         [HttpPost]

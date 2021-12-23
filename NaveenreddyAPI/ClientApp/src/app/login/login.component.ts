@@ -12,7 +12,6 @@ declare let toastr: any;
 export class LoginComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
-  login: any;
   constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
@@ -40,12 +39,12 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.login = {
+    let login = {
       emailid: this.validatingForm.controls.userName.value,
       password: this.validatingForm.controls.password.value
     }
 
-    this.apiService.createLogin(this.login).subscribe(x => {
+    this.apiService.createLogin(login).subscribe(x => {
       if (x.status == 4) {
         this.auth.setUserAuthentication(x);
         //localStorage.setItem('isPersonId', x.personId);

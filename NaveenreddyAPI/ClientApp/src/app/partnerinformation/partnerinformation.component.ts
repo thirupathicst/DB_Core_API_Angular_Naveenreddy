@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AppConstants } from '../constants.service';
 
 @Component({
   selector: 'app-partnerinformation',
@@ -9,6 +10,9 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class PartnerinformationComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
+  optionsCountries = AppConstants.Countries;
+  optionsLanguages = AppConstants.Languages;
+  optionsReligous = AppConstants.Religous;
 
   constructor(private formBuilder: FormBuilder) { }
 

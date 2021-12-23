@@ -32,7 +32,6 @@ export class AddstoryComponent implements OnInit {
       Name: this.validatingForm.controls.Name.value,
       Description: this.validatingForm.controls.Description.value,
       MarriageDate: this.validatingForm.controls.MarriageDate.value,
-      PersonId: localStorage.getItem('isPersonId')
     }
 
     this.apiService.addStory(_story).subscribe(x => {

@@ -9,13 +9,11 @@ namespace NaveenreddyAPI.Controllers
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController:ControllerBase
+    public class AdminController: NaveenReddyBaseController<AdminController>
     {
-        private readonly ILogger<AdminController> _logger;
         private readonly AdminRepository _admin;
-        public AdminController(ILogger<AdminController> logger,AdminRepository admin)
+        public AdminController(AdminRepository admin)
         {
-            _logger=logger;
             _admin=admin;
         }
 

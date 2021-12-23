@@ -16,18 +16,12 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class AccountController : ControllerBase
+    public class AccountController : NaveenReddyBaseController<AccountController>
     {
-        private readonly ILogger<AccountController> _logger;
         private readonly ILoginRepository _repository;
-        private readonly IMemoryCache _cache;
-        private readonly ITokenManager _tokenManager;
-        public AccountController(ILogger<AccountController> logger, ILoginRepository repository,IMemoryCache memoryCache, ITokenManager tokenManager)
+        public AccountController(ILogger<AccountController> logger, ILoginRepository repository)
         {
-            _logger = logger;
             _repository = repository;
-            _cache = memoryCache;
-            _tokenManager = tokenManager;
         }
 
         [HttpPost]

@@ -15,16 +15,12 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class EducationController : ControllerBase
+    public class EducationController : NaveenReddyBaseController<EducationController>
     {
-        private readonly ILogger<EducationController> _logger;
         private readonly IEducationRepository _repository;
-        private readonly ITokenManager _tokenManager;
-        public EducationController(ILogger<EducationController> logger, IEducationRepository repository, ITokenManager tokenManager)
+        public EducationController(IEducationRepository repository)
         {
-            _logger = logger;
             _repository = repository;
-            _tokenManager = tokenManager;
         }
 
         [HttpGet]

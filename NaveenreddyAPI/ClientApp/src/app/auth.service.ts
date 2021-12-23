@@ -15,13 +15,13 @@ export class AuthService {
     return !!sessionStorage.getItem('token');
   }
 
-  getUserId(): number {
-    return parseInt(localStorage.getItem('isPersonId'));
-  }
+  //getUserId(): number {
+  //  return parseInt(localStorage.getItem('isPersonId'));
+  //}
 
   setUserAuthentication(x) {
     sessionStorage.setItem('token', x.message);
-    localStorage.setItem('isPersonId', x.personId);
+    //localStorage.setItem('isPersonId', x.personId);
   }
 
   removeAuthentication() {
