@@ -9,7 +9,7 @@ namespace NaveenreddyAPI.Controllers
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController: NaveenReddyBaseController<AdminController>
+    public class AdminController: ControllerBase
     {
         private readonly AdminRepository _admin;
         public AdminController(AdminRepository admin)

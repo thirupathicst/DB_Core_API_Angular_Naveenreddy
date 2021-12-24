@@ -13,12 +13,16 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class StoryController : NaveenReddyBaseController<StoryController>
+    public class StoryController : ControllerBase
     {
         private readonly IStoryRepository _repository;
-        public StoryController(IStoryRepository repository)
+        private readonly ITokenManager _tokenManager;
+        private readonly ILogger<FamilyController> _logger;
+        public StoryController(IStoryRepository repository, ILogger<FamilyController> logger, ITokenManager tokenManager)
         {
             _repository = repository;
+            _logger = logger;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]

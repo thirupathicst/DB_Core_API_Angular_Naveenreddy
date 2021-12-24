@@ -17,12 +17,16 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class RegistrationController : NaveenReddyBaseController<RegistrationController>
+    public class RegistrationController : ControllerBase
     {
         private readonly IPersonalInfoRepository _repository;
-        public RegistrationController(IPersonalInfoRepository repository)
+        private readonly ITokenManager _tokenManager;
+        private readonly ILogger<FamilyController> _logger;
+        public RegistrationController(IPersonalInfoRepository repository, ILogger<FamilyController> logger, ITokenManager tokenManager)
         {
             _repository = repository;
+            _logger = logger;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]

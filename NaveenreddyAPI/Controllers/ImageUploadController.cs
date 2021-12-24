@@ -17,15 +17,18 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ImageUploadController : NaveenReddyBaseController<ImageUploadController>
+    public class ImageUploadController : ControllerBase
     {
         private readonly IImageRepository _repository;
-        readonly IWebHostEnvironment env;
-
-        public ImageUploadController(IWebHostEnvironment _env,  IImageRepository repository)
+        private readonly IWebHostEnvironment env;
+        private readonly ITokenManager _tokenManager;
+        private readonly ILogger<FamilyController> _logger;
+        public ImageUploadController(IImageRepository repository,IWebHostEnvironment _env, ILogger<FamilyController> logger, ITokenManager tokenManager)
         {
             env = _env;
             _repository = repository;
+            _logger = logger;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]

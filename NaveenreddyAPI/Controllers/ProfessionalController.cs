@@ -14,12 +14,16 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProfessionalController : NaveenReddyBaseController<ProfessionalController>
+    public class ProfessionalController : ControllerBase
     {
         private readonly IProfessionalRepository _repository;
-        public ProfessionalController(IProfessionalRepository repository)
+        private readonly ITokenManager _tokenManager;
+        private readonly ILogger<FamilyController> _logger;
+        public ProfessionalController(IProfessionalRepository repository, ILogger<FamilyController> logger, ITokenManager tokenManager)
         {
             _repository = repository;
+            _logger = logger;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost]
