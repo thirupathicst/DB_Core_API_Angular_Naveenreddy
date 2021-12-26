@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { APIServiceService } from '../apiservice.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,13 +10,18 @@ import { AuthService } from '../auth.service';
 })
 export class HeaderLayoutComponent implements OnInit {
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService,private apiService:APIServiceService) { }
 
   ngOnInit(): void {
     
   }
 
   logout() {
+    this.apiService.signOut().subscribe(resp=>{
+
+    },err=>{
+      
+    })
     this.auth.removeAuthentication();
     this.router.navigate(['/login']);
   }

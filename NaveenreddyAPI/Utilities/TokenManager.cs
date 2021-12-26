@@ -58,8 +58,6 @@ namespace NaveenreddyAPI.Utilities
             }
         }
 
-        
-
         public static string ValidateToken(string token)
         {
             string username = null;

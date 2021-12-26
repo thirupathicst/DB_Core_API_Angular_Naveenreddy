@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { APIServiceService } from './apiservice.service';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+declare let toastr: any;
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -41,9 +42,14 @@ export class LoaderInterceptor implements HttpInterceptor {
             }
           },
           err => {
-            //alert('error' + err);
+            console.log(err)
             if (err.status == 401) {
+              toastr.error('Token expired relogin');
               this.router.navigate(['/login']);
+            }
+            else if(err.status == 400)
+            {
+              toastr.error(err.error.Message);
             }
             this.removeRequest(req);
             observer.error(err);

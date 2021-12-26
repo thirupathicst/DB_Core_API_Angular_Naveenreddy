@@ -127,12 +127,12 @@ namespace NaveenreddyAPI
             {
                 app.UseSpaStaticFiles();
             }
-            app.UseMiddleware<ExceptionMiddleware>();
+            
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

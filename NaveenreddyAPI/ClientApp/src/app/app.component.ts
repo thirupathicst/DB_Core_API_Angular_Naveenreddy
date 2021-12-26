@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Alert } from 'selenium-webdriver';
 import { APIServiceService } from './apiservice.service';
 
 @Component({
@@ -14,6 +15,6 @@ export class AppComponent {
     this.loaderService.isLoading.subscribe((v) => {
       //console.log(v);
       this.loading = v;
-    });
+    })
   }
 }

@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AuthService } from '../auth.service';
-declare let toastr: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -55,10 +55,6 @@ export class LoginComponent implements OnInit {
         else {
           this.router.navigate(['/quicksearch']);
         }
-      }
-    }, err => {
-        if (err.status == 400) {
-          toastr.error(err.error.message);
       }
     })
   }

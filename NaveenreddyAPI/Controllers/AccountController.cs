@@ -22,12 +22,12 @@ namespace NaveenreddyAPI.Controllers
         private readonly ITokenManager _tokenManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IMemoryCache _cache;
-        public AccountController(ILoginRepository repository, IMemoryCache cache, ITokenManager tokenManager,ILogger<AccountController> logger)
+        public AccountController(ILoginRepository repository, IMemoryCache cache, ITokenManager tokenManager, ILogger<AccountController> logger)
         {
             _repository = repository;
             _cache = cache;
             _tokenManager = tokenManager;
-            _logger=logger;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -62,7 +62,8 @@ namespace NaveenreddyAPI.Controllers
             }
             else if (B_UserStatus.Active == status.Status)
             {
-              status.Message=TokenManager.GenerateToken(login.Emailid,status.PersonId);
+                status.Message = TokenManager.GenerateToken(login.Emailid, status.PersonId);
+                _cache.Set<int>($"PersonId-{status.PersonId}", status.PersonId, TimeSpan.FromMinutes(30));
                 return Ok(status);
             }
             else if (B_UserStatus.Invalid == status.Status)
@@ -101,30 +102,33 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> ForgotPassword(B_ForgotPassword forgotPassword)
         {
             await _repository.ForgotPassword(forgotPassword);
-            if(_cache.Get(forgotPassword.EmailId)!=null)
-            {
-                _cache.Remove(forgotPassword.EmailId);
-            }
-            _cache.Set(forgotPassword.EmailId,new Random().Next(0,1000000).ToString("D6"),TimeSpan.FromMinutes(5));
-            _logger.LogInformation(_cache.Get(forgotPassword.EmailId).ToString());
+            _cache.Set<string>(forgotPassword.EmailId, new Random().Next(0, 1000000).ToString("D6"), TimeSpan.FromMinutes(5));
+            _logger.LogInformation(_cache.Get<string>(forgotPassword.EmailId));
             return Ok();
         }
 
         [HttpGet]
         [Route("OTPVerification")]
         [AllowAnonymous]
-        public IActionResult OTPVerification(int OTP,string EmailId)
+        public IActionResult OTPVerification(int OTP, string EmailId)
         {
-            string em=_cache.Get(EmailId).ToString();
-            if(OTP==int.Parse(em))
+            if (OTP ==int.Parse( _cache.Get<string>(EmailId)))
             {
                 _cache.Remove(EmailId);
                 return Ok();
             }
-            else{
+            else
+            {
                 return BadRequest("Invalid OTP");
             }
         }
 
+        [HttpGet]
+        [Route("Sigout")]
+        public IActionResult Sigout()
+        {
+            _cache.Remove($"PersonId-{_tokenManager.GetUserId()}");
+            return Ok();
+        }
     }
 }

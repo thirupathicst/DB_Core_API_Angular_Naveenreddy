@@ -41,7 +41,6 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Post(B_Registration registration)
         {
-            registration.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.AddRegistration(registration));
         }
 

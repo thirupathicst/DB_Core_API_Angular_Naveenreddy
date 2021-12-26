@@ -1,5 +1,6 @@
 ﻿using DBRepository.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,14 @@ namespace NaveenreddyAPI.Utilities
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly IMemoryCache _cache;
+        private readonly ITokenManager _tokenManager;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IMemoryCache cache, ITokenManager tokenManager)
         {
             _logger = logger;
+            _cache = cache;
+            _tokenManager = tokenManager;
             _next = next;
         }
 
@@ -24,6 +29,13 @@ namespace NaveenreddyAPI.Utilities
         {
             try
             {
+                if (httpContext.User.Identity.IsAuthenticated)
+                {
+                   if ((_cache.Get($"PersonId-{_tokenManager.GetUserId()}") == null))
+                   {
+                       throw new MyCustomException("Token expired or invalid");
+                   }
+                }
                 await _next(httpContext);
             }
 
@@ -57,5 +69,6 @@ namespace NaveenreddyAPI.Utilities
                 }.ToString());
             }
         }
+
     }
 }

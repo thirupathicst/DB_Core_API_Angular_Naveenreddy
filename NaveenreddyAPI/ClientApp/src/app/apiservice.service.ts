@@ -43,6 +43,10 @@ export class APIServiceService {
     return this.http.get(`${this.bseAPI}/Account/OTPVerification?OTP=${otp}&EmailId=${emailId}`);
   }
 
+  public signOut(): Observable<any> {
+    return this.http.get(`${this.bseAPI}/Account/Sigout`);
+  }
+
   public createEducation(Education: Object): Observable<any> {
     return this.http.post(`${this.bseAPI}/Education`, Education);
   }

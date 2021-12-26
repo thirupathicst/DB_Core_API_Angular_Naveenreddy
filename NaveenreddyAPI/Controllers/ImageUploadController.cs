@@ -33,10 +33,10 @@ namespace NaveenreddyAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(B_Images[]), 200)]
-        public async Task<IActionResult> Get(int PersonId)
+        public async Task<IActionResult> Get()
         {
-            B_Images[] image;
-           var _img= await _repository.SelectById(PersonId);
+           // B_Images[] image;
+           var _img= await _repository.SelectById(_tokenManager.GetUserId());
             return Ok();
         }
 

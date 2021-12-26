@@ -20,6 +20,6 @@ public class UserClaims : ITokenManager
     public string GetUserEmail()
     {
         var claims = _user.HttpContext.User.Claims;
-        return claims.Where(x => x.Type == ClaimTypes.Sid).FirstOrDefault()?.Value;
+        return claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
     }
 }
