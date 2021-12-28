@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
+declare let toastr: any;
 
 @Component({
   selector: 'app-registration',
@@ -69,9 +70,9 @@ export class RegistrationComponent implements OnInit {
       confirmpassword: this.registerForm.controls.ConfirmPassword.value
     }
     this.apiService.createRegistration(registration).subscribe(resp => {
-      //localStorage.setItem('isPersonId', resp.personId);
+      toastr.success('Account created successfully, Please login to continue.')
       this.router.navigate(['/biodata']);
-    }, err => { console.log(err) });
+    });
   }
 
   onReset() {

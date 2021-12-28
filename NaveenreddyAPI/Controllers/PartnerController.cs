@@ -10,12 +10,12 @@ namespace NaveenreddyAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class PartnerInfoController : ControllerBase
+    public class PartnerController : ControllerBase
     {
         private readonly ITokenManager _tokenManager;
-        private readonly ILogger<PartnerInfoController> _logger;
+        private readonly ILogger<PartnerController> _logger;
         private readonly IPartnerRepository _repository;
-        public PartnerInfoController(IPartnerRepository repository, ITokenManager tokenManager, ILogger<PartnerInfoController> logger)
+        public PartnerController(IPartnerRepository repository, ITokenManager tokenManager, ILogger<PartnerController> logger)
         {
             _logger = logger;
             _tokenManager = tokenManager;

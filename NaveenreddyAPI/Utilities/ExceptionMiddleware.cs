@@ -55,8 +55,8 @@ namespace NaveenreddyAPI.Utilities
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await context.Response.WriteAsync(new ErrorDetails()
                 {
-                    StatusCode = context.Response.StatusCode,
-                    Message = ex.Message
+                    statuscode = context.Response.StatusCode,
+                    message = ex.Message
                 }.ToString());
             }
             else
@@ -64,8 +64,8 @@ namespace NaveenreddyAPI.Utilities
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 await context.Response.WriteAsync(new ErrorDetails()
                 {
-                    StatusCode = context.Response.StatusCode,
-                    Message = ex.Message
+                    statuscode = context.Response.StatusCode,
+                    message = ex.Message
                 }.ToString());
             }
         }

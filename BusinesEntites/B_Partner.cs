@@ -4,16 +4,15 @@ namespace BusinesEntites
 {
     public class B_Partner
     {
-        public int PartnerId { get; set; }
         public int Age { get; set; }
 
-        public int Height { get; set; }
+        public decimal Height { get; set; }
 
         public string Maritalstatus { get; set; }
 
         public string Complexion { get; set; }
 
-        public string Region { get; set; }
+        public string Religion { get; set; }
 
         public string Mothertongue { get; set; }
 

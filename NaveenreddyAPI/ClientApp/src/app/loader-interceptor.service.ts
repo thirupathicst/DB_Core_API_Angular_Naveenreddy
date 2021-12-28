@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  HttpResponse,  HttpRequest,  HttpHandler,  HttpEvent,  HttpInterceptor} from '@angular/common/http';
+import { HttpResponse, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APIServiceService } from './apiservice.service';
 import { AuthService } from './auth.service';
@@ -43,27 +43,25 @@ export class LoaderInterceptor implements HttpInterceptor {
           },
           err => {
             if (err.status == 401) {
-              toastr.error('Token expired relogin');
-              this.router.navigate(['/login']);
+              toastr.error('Unauthorized - Sorry, your session was expired');
             }
-            else if(err.status == 400)
-            {
-              if(err.error.Message!=undefined)
-              {
-              toastr.error(err.error.Message);
+            else if (err.status == 400) {
+              if (err.error.message != undefined) {
+                toastr.error(err.error.message);
               }
-              else{
+              else {
                 toastr.error(err.error);
               }
             }
-            else if(err.status == 404){
+            else if (err.status == 404) {
               toastr.error('Requested url not found')
             }
-            else if(err.status == 500){
-              toastr.error(err.error.Message)
+            else if (err.status == 500) {
+              toastr.error(err.error.message)
             }
             this.removeRequest(req);
             observer.error(err);
+            this.router.navigate(['/login']);
           },
           () => {
             this.removeRequest(req);

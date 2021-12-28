@@ -16,27 +16,30 @@ namespace DBRepository.Repository
         public async Task<B_Partner> GetPartner(int PersonId)
         {
             B_Partner partner = new B_Partner();
-           
-            var partnerInfo = await GetSingle(x=>x.PersonId==PersonId);
-            partner.Age = partnerInfo.Age;
-            partner.Height=partnerInfo.Height;
-            partner.Complexion = partnerInfo.Complexion;
-            partner.Caste = partnerInfo.Caste;
-            partner.Citizen = partnerInfo.Citizen;
-            partner.Country = partnerInfo.Country;
-            partner.Maritalstatus = partnerInfo.Maritalstatus;
-            partner.Mothertongue = partnerInfo.Mothertongue;
-            partner.Education = partnerInfo.Education;
-            partner.State = partnerInfo.State;
-            partner.Occupation = partner.Occupation;
-            partnerInfo.Region = partnerInfo.Region;
+
+            var partnerInfo = await GetSingle(x => x.PersonId == PersonId);
+            if (partnerInfo != null)
+            {
+                partner.Age = partnerInfo.Age;
+                partner.Height = partnerInfo.Height;
+                partner.Complexion = partnerInfo.Complexion;
+                partner.Caste = partnerInfo.Caste;
+                partner.Citizen = partnerInfo.Citizen;
+                partner.Country = partnerInfo.Country;
+                partner.Maritalstatus = partnerInfo.Maritalstatus;
+                partner.Mothertongue = partnerInfo.Mothertongue;
+                partner.Education = partnerInfo.Education;
+                partner.State = partnerInfo.State;
+                partner.Occupation = partnerInfo.Occupation;
+                partner.Religion = partnerInfo.Religion;
+            }
 
             return partner;
         }
 
         public async Task<B_Partner> AddPartner(B_Partner partner)
         {
-            var _partnerInfo = await SelectById(partner.PersonId);
+            var _partnerInfo = await GetSingle(x => x.PersonId == partner.PersonId);
             if (_partnerInfo != null)
             {
                 await this.UpdatePartner(partner, _partnerInfo);
@@ -56,7 +59,7 @@ namespace DBRepository.Repository
                     Education = partner.Education,
                     State = partner.State,
                     Occupation = partner.Occupation,
-                    Region = partner.Region,
+                    Religion = partner.Religion,
                     PersonId = partner.PersonId,
                     Createddatetime=System.DateTime.Now
                 };
@@ -78,7 +81,7 @@ namespace DBRepository.Repository
             partnerInfo.Education = partner.Education;
             partnerInfo.State = partner.State;
             partnerInfo.Occupation = partner.Occupation;
-            partnerInfo.Region = partner.Region;
+            partnerInfo.Religion = partner.Religion;
             partnerInfo.Updateddatetime=System.DateTime.Now;
 
             await this.UpdateAsync(partnerInfo);

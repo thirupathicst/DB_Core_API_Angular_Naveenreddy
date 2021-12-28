@@ -100,15 +100,15 @@ export class APIServiceService {
   }
 
   public getPartner(): Observable<any> {
-    return this.http.get(`${this.bseAPI}/PartnerInfo`);
+    return this.http.get(`${this.bseAPI}/Partner`);
   }
 
   public addPartner(Partner: object): Observable<any> {
-    return this.http.post(`${this.bseAPI}/PartnerInfo`, Partner);
+    return this.http.post(`${this.bseAPI}/Partner`, Partner);
   }
 
   public updatePartner(Partner: object): Observable<any> {
-    return this.http.put(`${this.bseAPI}/PartnerInfo`, Partner);
+    return this.http.put(`${this.bseAPI}/Partner`, Partner);
   }
 
   private getHeaders(): HttpHeaders {

@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
+declare let toastr: any;
 
 @Component({
   selector: 'app-partnerinformation',
@@ -10,11 +11,14 @@ import { AppConstants } from '../constants.service';
   styleUrls: ['./partnerinformation.component.css']
 })
 export class PartnerinformationComponent implements OnInit {
+
+  save_update: boolean = false;
   validatingForm: FormGroup;
   submitted = false;
   optionsCountries = AppConstants.Countries;
   optionsLanguages = AppConstants.Languages;
   optionsReligous = AppConstants.Religous;
+  optionsMaritialStatus = AppConstants.MaritialStatus;
 
   constructor(private formBuilder: FormBuilder, private apiService: APIServiceService, private router: Router) { }
 
@@ -38,11 +42,28 @@ export class PartnerinformationComponent implements OnInit {
     this.validatingForm.controls.Caste.setValue('Any');
   }
 
- public ngAfterViewInit():void
-  {
-    this.apiService.getPartner().subscribe(resp=>{
-      console.log(resp)
+  ngAfterViewInit(): void {
+    this.apiService.getPartner().subscribe(resp => {
+      if (resp.age > 0) {
+        this.BindControlValues(resp);
+      }
     })
+  }
+
+  BindControlValues(resp) {
+    this.save_update = true;
+    this.validatingForm.controls.Age.setValue(resp.age);
+    this.validatingForm.controls.Maritalstatus.setValue(resp.maritalstatus);
+    this.validatingForm.controls.Height.setValue(resp.height);
+    this.validatingForm.controls.Complexion.setValue(resp.complexion);
+    this.validatingForm.controls.Religion.setValue(resp.religion);
+    this.validatingForm.controls.Caste.setValue(resp.caste);
+    this.validatingForm.controls.Mothertongue.setValue(resp.mothertongue);
+    this.validatingForm.controls.Education.setValue(resp.education);
+    this.validatingForm.controls.Occupation.setValue(resp.occupation);
+    this.validatingForm.controls.Citizenof.setValue(resp.citizen);
+    this.validatingForm.controls.Countryliving.setValue(resp.country);
+    this.validatingForm.controls.Residestate.setValue(resp.state);
   }
 
   get f() { return this.validatingForm.controls; }
@@ -59,7 +80,7 @@ export class PartnerinformationComponent implements OnInit {
       "height": this.validatingForm.controls.Height.value,
       "maritalstatus": this.validatingForm.controls.Maritalstatus.value,
       "complexion": this.validatingForm.controls.Complexion.value,
-      "region": this.validatingForm.controls.Religion.value,
+      "religion": this.validatingForm.controls.Religion.value,
       "mothertongue": this.validatingForm.controls.Mothertongue.value,
       "caste": this.validatingForm.controls.Caste.value,
       "education": this.validatingForm.controls.Education.value,
@@ -69,11 +90,16 @@ export class PartnerinformationComponent implements OnInit {
       "state": this.validatingForm.controls.Residestate.value,
     }
 
-    this.apiService.addPartner(partner).subscribe(resp => {
-      this.router.navigate(['/quicksearch']);
-    })
+    if (this.save_update) {
+      this.apiService.updatePartner(partner).subscribe(resp => {
+        toastr.success('Data updated successfully')
+      })
+    }
+    else {
+      this.apiService.addPartner(partner).subscribe(resp => {
+        toastr.success('Data saved successfully')
+      })
+    }
+    this.router.navigate(['/quicksearch']);
   }
-
 }
-
-

@@ -15,7 +15,9 @@ namespace DBRepository.Tables
         public string Gender { get; set; }
         public DateTime? Dateofbirth { get; set; }
         public string Timeofbirth { get; set; }
-        public string Height { get; set; }
+        
+        [Column(TypeName = "decimal(2,1)")]
+        public decimal? Height { get; set; }
         public string Complexion { get; set; }
         [StringLength(100)]
         public string Emailid { get; set; }

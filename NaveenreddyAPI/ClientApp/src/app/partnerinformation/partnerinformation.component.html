@@ -30,37 +30,13 @@
           <div class="col-sm-8">
             <div class="md-form mt-0">
               <select id="Maritalstatus" [ngClass]="{'invalid': submitted && f.Maritalstatus.errors}" formControlName="Maritalstatus" class="browser-default custom-select">
-                <option selected="selected" value="">
-                  Select...
-                </option>
-                <option value="Never Married">
-                  Never Married
-                </option>
-                <option value="Divorced with Children">
-                  Divorced with Children
-                </option>
-                <option value="Divorced without Children">
-                  Divorced without Children
-                </option>
-                <option value="Widow with Children">
-                  Widow with Children
-                </option>
-                <option value="Widow without Children">
-                  Widow without Children
-                </option>
-                <option value="Widower with Children">
-                  Widower with Children
-                </option>
-                <option value="Widower without Children">
-                  Widower without Children
-                </option>
+                <option selected="selected" value="">Select...</option>
+                <option *ngFor="let c of optionsMaritialStatus" [ngValue]="c.value">{{c.label}}</option>
               </select>
               <mdb-error *ngIf="f.Maritalstatus.invalid && submitted">Marital status is required</mdb-error>
             </div>
           </div>
         </div>
-
-
 
         <div class=" row">
           <label for="Complexion" class="col-sm-4 col-form-label">Complexion</label>
@@ -177,7 +153,8 @@
         </div>
 
         <div class="col-8 offset-4">
-          <button type="submit" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Save and continue</button>
+          <button type="submit" mdbBtn color="primary" [hidden]="save_update" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Save and continue</button>
+          <button type="submit" mdbBtn color="secondary" [hidden]="!save_update" mdbWavesEffect><mdb-icon fas icon="edit" class="mr-1"></mdb-icon> Update</button>
         </div>
       </form>
 

@@ -531,4 +531,14 @@ export abstract class AppConstants {
       { value: 'Telangana', label: 'Telangana' },
       { value: 'Other', label: 'Other' }
     ];
+
+    static readonly MaritialStatus=[
+      { value: 'Never Married', label: 'Never Married' },
+      { value: 'Divorced with Children', label: 'Divorced with Children' },
+      { value: 'Divorced without Children', label: 'Divorced without Children' },
+      { value: 'Widow with Children', label: 'Widow with Children' },
+      { value: 'Widow without Children', label: 'Widow without Children' },
+      { value: 'Widower with Children', label: 'Widower with Children' },
+      { value: 'Widower without Children', label: 'Widower without Children' },
+    ];
 }

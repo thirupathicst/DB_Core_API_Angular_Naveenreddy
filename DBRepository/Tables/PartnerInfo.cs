@@ -8,8 +8,11 @@ namespace DBRepository.Tables
     {
         [Key]
         public int PartnerId { get; set; }
+        
         public int Age { get; set; }
-        public int Height { get; set; }
+        
+        [Column(TypeName = "decimal(2,1)")]
+        public decimal Height { get; set; }
 
         [StringLength(30)]
         public string Maritalstatus { get; set; }
@@ -18,7 +21,7 @@ namespace DBRepository.Tables
         public string Complexion { get; set; }
 
         [StringLength(20)]
-        public string Region { get; set; }
+        public string Religion { get; set; }
 
         [StringLength(15)]
         public string Mothertongue { get; set; }

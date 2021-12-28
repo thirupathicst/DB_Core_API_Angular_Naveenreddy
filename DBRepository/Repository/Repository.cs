@@ -36,7 +36,7 @@ namespace NaveenreddyAPI.DB
 
         public async Task<T> GetSingle(Expression<Func<T, bool>> predicate)
         {
-            return await dbContext.Set<T>().Where(predicate).SingleOrDefaultAsync();
+            return await dbContext.Set<T>().Where(predicate).FirstOrDefaultAsync();
         }
         
         public async Task<List<T>> SelectAll()
