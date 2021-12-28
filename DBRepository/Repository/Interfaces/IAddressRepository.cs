@@ -1,4 +1,5 @@
 ﻿using BusinesEntites;
+using DBRepository.Tables;
 using NaveenreddyAPI.Repository.Interfaces;
 using System;
 using System.Collections.Generic;

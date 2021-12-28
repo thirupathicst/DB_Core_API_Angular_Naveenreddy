@@ -42,14 +42,25 @@ export class LoaderInterceptor implements HttpInterceptor {
             }
           },
           err => {
-            console.log(err)
             if (err.status == 401) {
               toastr.error('Token expired relogin');
               this.router.navigate(['/login']);
             }
             else if(err.status == 400)
             {
+              if(err.error.Message!=undefined)
+              {
               toastr.error(err.error.Message);
+              }
+              else{
+                toastr.error(err.error);
+              }
+            }
+            else if(err.status == 404){
+              toastr.error('Requested url not found')
+            }
+            else if(err.status == 500){
+              toastr.error(err.error.Message)
             }
             this.removeRequest(req);
             observer.error(err);

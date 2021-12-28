@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DBRepository
+namespace DBRepository.Tables
 {
     public class PersonalInfo
     {

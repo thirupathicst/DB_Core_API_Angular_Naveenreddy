@@ -26,7 +26,7 @@
                     <div class="col-sm-9">
                         <div class="md-form mt-0 input-group">
                             <input type="number" class="form-control" placeholder="18" formControlName="Age" id="Age" [ngClass]="{'invalid': submitted && f.Age.errors}">
-                            <input type="number" aria-label="Last name" class="form-control" placeholder="70">
+                            <input type="number" class="form-control" placeholder="70">
                             <mdb-error *ngIf="submitted && f.Age.invalid">Age is required</mdb-error>
                         </div>
                     </div>
@@ -38,76 +38,7 @@
                         <div class="md-form mt-0">
                             <select formControlName="Caste" id="Caste" [ngClass]="{'invalid': submitted && f.Caste.errors}" class="browser-default custom-select">
                                 <option selected="selected" value="Any">Any</option>
-                                <option value="Dont wish to specify">Dont wish to specify</option>
-                                <option value="Agnikula Kshatriya">Agnikula Kshatriya</option>
-                                <option value="Arya vysya">Arya vysya</option>
-                                <option value="Balija">Balija</option>
-                                <option value="Besta">Besta</option>
-                                <option value="Brahmin">Brahmin</option>
-                                <option value="Chettiar">Chettiar</option>
-                                <option value="Devanga">Devanga</option>
-                                <option value="Gandla">Gandla</option>
-                                <option value="Gavara">Gavara</option>
-                                <option value="Goud">Goud</option>
-                                <option value="Gowda">Gowda</option>
-                                <option value="Intercaste">Intercaste</option>
-                                <option value="Kalinga">Kalinga</option>
-                                <option value="Kamma">Kamma</option>
-                                <option value="Kapu">Kapu</option>
-                                <option value="Kshatriya">Kshatriya</option>
-                                <option value="Kummari">Kummari</option>
-                                <option value="Kuruba">Kuruba</option>
-                                <option value="Lingayath">Lingayath</option>
-                                <option value="Madiga">Madiga</option>
-                                <option value="Mahendra">Mahendra</option>
-                                <option value="Mala">Mala</option>
-                                <option value="Mannuru Kapu">Mannuru Kapu</option>
-                                <option value="Maratha">Maratha</option>
-                                <option value="Meru Darji">Meru Darji</option>
-                                <option value="Mudaliyar">Mudaliyar</option>
-                                <option value="Mudiraj">Mudiraj</option>
-                                <option value="Nadar">Nadar</option>
-                                <option value="Nai">
-                                    Nai</option>
-                                <option value="Naidu">
-                                    Naidu</option>
-                                <option value="Padmasali">
-                                    Padmasali</option>
-                                <option value="Patnaick">
-                                    Patnaick</option>
-                                <option value="Rajaka">
-                                    Rajaka</option>
-                                <option value="Rajput">
-                                    Rajput</option>
-                                <option value="Reddy">
-                                    Reddy</option>
-                                <option value="SC">
-                                    SC</option>
-                                <option value="ST">
-                                    ST</option>
-                                <option value="Telaga">
-                                    Telaga</option>
-                                <option value="Uppara">
-                                    Uppara</option>
-                                <option value="Vaddera">
-                                    Vaddera</option>
-                                <option value="Vaishnava">
-                                    Vaishnava</option>
-                                <option value="Valmiki">
-                                    Valmiki</option>
-                                <option value="Vanjara">
-                                    Vanjara</option>
-                                <option value="Velama">
-                                    Velama</option>
-                                <option value="Viswabrahmin">
-                                    Viswabrahmin</option>
-                                <option value="Vokkaliga">
-                                    Vokkaliga</option>
-                                <option value="Yadav">
-                                    Yadav</option>
-                                <option value="Other Castes">
-                                    Other Castes</option>
-                            
+                                <option *ngFor="let c of optionsCaste" [ngValue]="c.value">{{c.label}}</option>
                             </select>
                             <mdb-error *ngIf="submitted && f.Caste.invalid">Caste is required</mdb-error>
                         </div>
@@ -120,14 +51,7 @@
                         <div class="md-form mt-0">
                             <select formControlName="Education" id="Education" [ngClass]="{'invalid': submitted && f.Education.errors}" class="browser-default custom-select">
                                 <option selected="selected" value="Any">Any</option>
-                                <option value="Upto intermediate">Upto intermediate</option>
-                                <option value="Graduation">Graduation</option>
-                                <option value="PostGraduation">PostGraduation</option>
-                                <option value="Engineers">Engineers</option>
-                                <option value="MCA">MCA</option>
-                                <option value="Medical">Medical</option>
-                                <option value="Abroads">Abroads</option>
-                                <option value="Other">Other</option>
+                                <option *ngFor="let c of optionsEducation" [ngValue]="c.value">{{c.label}}</option>
                             </select>
                             <mdb-error *ngIf="submitted && f.Education.invalid">Education is required</mdb-error>
                         </div>
@@ -135,10 +59,11 @@
                 </div>
 
                 <div class="row">
-                    <label for="Height" class="col-sm-3 col-form-label">Height from</label>
+                    <label for="Height" class="col-sm-3 col-form-label">Height</label>
                     <div class="col-sm-9">
-                        <div class="md-form mt-0">
-                            <input type="text" class="form-control" formControlName="Height" id="Height" [ngClass]="{'invalid': submitted && f.Height.errors}">
+                        <div class="md-form mt-0 input-group">
+                            <input type="number" class="form-control" formControlName="Height" placeholder="4.5" id="Height" [ngClass]="{'invalid': submitted && f.Height.errors}">
+                            <input type="number" class="form-control" formControlName="Height" placeholder="6" id="Height" [ngClass]="{'invalid': submitted && f.Height.errors}">
                             <mdb-error *ngIf="submitted && f.Height.invalid">Height is required</mdb-error>
                         </div>
                     </div>
@@ -158,27 +83,7 @@
                     </div>
                 </div>
 
-                <div class="md-form input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text md-addon">ft</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <div class="input-group-append">
-                        <span class="input-group-text md-addon">cm</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text md-addon">ft</span>
-                    </div>
-
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <div class="input-group-append">
-                        <span class="input-group-text md-addon">cm</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                </div>
-
-                <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit">Search</button>
+                <button mdbBtn color="info" outline="true"  block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit"><mdb-icon fas icon="search"></mdb-icon> Search</button>
             </form>
         </div>
     </mdb-card-body>

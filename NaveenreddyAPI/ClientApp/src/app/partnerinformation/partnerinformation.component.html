@@ -15,6 +15,16 @@
           </div>
         </div>
 
+        <div class="row">
+          <label for="Height" class="col-sm-4 col-form-label">Height</label>
+          <div class="col-sm-8">
+            <div class="md-form mt-0">
+              <input id="Height" class="form-control" [ngClass]="{'invalid': submitted && f.Height.errors}" formControlName="Height" type="number" mdbInput>
+              <mdb-error *ngIf="f.Height.invalid && submitted">Height is required</mdb-error>
+            </div>
+          </div>
+        </div>
+
         <div class=" row">
           <label for="Maritalstatus" class="col-sm-4 col-form-label">Marital Status</label>
           <div class="col-sm-8">
@@ -166,18 +176,8 @@
           </div>
         </div>
 
-        <div class=" row">
-          <label for="Partnerinfo" class="col-sm-4 col-form-label">About your partner</label>
-          <div class="col-sm-8">
-            <div class="md-form mt-0">
-              <textarea id="Partnerinfo" class="md-textarea form-control" formControlName="Partnerinfo" mdbInput [ngClass]="{'invalid': submitted && f.Partnerinfo.errors}"></textarea>
-              <mdb-error *ngIf="submitted && f.Partnerinfo.invalid">About your partner is required</mdb-error>
-            </div>
-          </div>
-        </div>
-
         <div class="col-8 offset-4">
-          <button type="submit" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon> Save and continue</button>
+          <button type="submit" mdbBtn color="primary" mdbWavesEffect><mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Save and continue</button>
         </div>
       </form>
 

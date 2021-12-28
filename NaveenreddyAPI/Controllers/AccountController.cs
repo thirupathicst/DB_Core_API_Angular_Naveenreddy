@@ -124,8 +124,8 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Sigout")]
-        public IActionResult Sigout()
+        [Route("Signout")]
+        public IActionResult Signout()
         {
             _cache.Remove($"PersonId-{_tokenManager.GetUserId()}");
             return Ok();

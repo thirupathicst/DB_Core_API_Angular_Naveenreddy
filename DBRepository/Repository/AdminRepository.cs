@@ -1,4 +1,5 @@
 using NaveenreddyAPI.DB;
+using DBRepository.Tables;
 
 namespace DBRepository.Repository
 {

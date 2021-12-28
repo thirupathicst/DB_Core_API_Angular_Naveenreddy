@@ -54,8 +54,6 @@ export class ForgotpasswordComponent implements OnInit {
     this.apiService.forgotPassword(forgotPassword).subscribe(resp => {
       this.showConformation();
       this.startTimer()
-    }, err => {
-      toastr.error(err.error.Message)
     })
   }
 
@@ -75,8 +73,6 @@ export class ForgotpasswordComponent implements OnInit {
 
     this.apiService.otpVerification(this.validatingForm.controls.emailId.value, this.OtpForm.controls.otp.value).subscribe(resp => {
       this.router.navigate(['/login']);
-    }, err => {
-      toastr.error(err.error)
     })
   }
 

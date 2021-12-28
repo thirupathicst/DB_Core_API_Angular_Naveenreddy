@@ -19,8 +19,6 @@ export class HeaderLayoutComponent implements OnInit {
   logout() {
     this.apiService.signOut().subscribe(resp=>{
 
-    },err=>{
-      
     })
     this.auth.removeAuthentication();
     this.router.navigate(['/login']);

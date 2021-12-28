@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DBRepository.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,5 +27,6 @@ namespace DBRepository
         public DbSet<ProfessionalDetails> Tbl_ProfessionalDetails { get; set; }
         public DbSet<Images> Tbl_Images { get; set; }
         public DbSet<Story> Tbl_Story { get; set; }
+        public DbSet<PartnerInfo> Tbl_Partner { get; set; }
     }
 }

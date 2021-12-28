@@ -13,8 +13,10 @@ export class AppComponent {
   loading: boolean;
   constructor(private loaderService: APIServiceService) {
     this.loaderService.isLoading.subscribe((v) => {
-      //console.log(v);
-      this.loading = v;
+      //this.loading = v;
+      setTimeout(() => {
+        this.loading = v;
+      }, 0);
     })
   }
 }

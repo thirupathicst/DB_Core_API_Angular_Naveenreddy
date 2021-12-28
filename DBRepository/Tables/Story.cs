@@ -4,14 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace DBRepository
+namespace DBRepository.Tables
 {
-    public class Images
+    public class Story
     {
         [Key]
-        public int ImageId { get; set; }
-        public string Physicalpath { get; set; }
-        public string Shortpath { get; set; }
+        public int StoryId { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
+        [StringLength(200)]
+        public string Description { get; set; }
+        public DateTime Marriagedate { get; set; }
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }

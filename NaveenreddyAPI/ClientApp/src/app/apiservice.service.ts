@@ -44,7 +44,7 @@ export class APIServiceService {
   }
 
   public signOut(): Observable<any> {
-    return this.http.get(`${this.bseAPI}/Account/Sigout`);
+    return this.http.get(`${this.bseAPI}/Account/Signout`);
   }
 
   public createEducation(Education: Object): Observable<any> {
@@ -97,6 +97,18 @@ export class APIServiceService {
 
   public addStory(Story: object): Observable<any> {
     return this.http.post(`${this.bseAPI}/Story`, Story);
+  }
+
+  public getPartner(): Observable<any> {
+    return this.http.get(`${this.bseAPI}/PartnerInfo`);
+  }
+
+  public addPartner(Partner: object): Observable<any> {
+    return this.http.post(`${this.bseAPI}/PartnerInfo`, Partner);
+  }
+
+  public updatePartner(Partner: object): Observable<any> {
+    return this.http.put(`${this.bseAPI}/PartnerInfo`, Partner);
   }
 
   private getHeaders(): HttpHeaders {
