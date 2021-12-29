@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Family> AddFamilyDetails(B_Family familydetails)
+        public async Task<B_Family> CreateAsync(B_Family familydetails)
         {
             PersonalInfo info = await _personalInfo.SelectById(familydetails.PersonId);
             FamilyDetails family = new FamilyDetails
@@ -38,12 +38,12 @@ namespace DBRepository.Repository
                 Createddatetime = DateTime.Now
             };
 
-            await CreateAsync(family);
+            await base.CreateAsync(family);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, info.PersonId);
             return familydetails;
         }
 
-        public async Task<B_Family> UpdateFamilyDetails(B_Family familydetails)
+        public async Task<B_Family> UpdateAsync(B_Family familydetails)
         {
 
             FamilyDetails family =await SelectById(familydetails.PersonId);
@@ -64,7 +64,7 @@ namespace DBRepository.Repository
             family.Sisteroccupation = familydetails.Sisteroccupation;
             family.Updateddatetime = DateTime.Now;
 
-            await UpdateAsync(family);
+            await base.UpdateAsync(family);
 
             return familydetails;
         }

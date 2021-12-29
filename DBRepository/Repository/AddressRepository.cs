@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Address> AddAddress(B_Address address)
+        public async Task<B_Address> CreateAsync(B_Address address)
         {
             PersonalInfo info = await _personalInfo.SelectById(address.PersonId);
             AddressDetails addressdetails = new AddressDetails();
@@ -33,14 +33,13 @@ namespace DBRepository.Repository
             addressdetails.Permanentaddress = $"{address.PermanentAddress}${address.Country}${address.State}${ address.District}${address.Native}";
             addressdetails.Createddatetime = DateTime.Now;
 
-            await CreateAsync(addressdetails);
+            await base.CreateAsync(addressdetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(4, info.PersonId);
             return address;
         }
 
-        public async Task<B_Address> UpdateAddress(B_Address address)
+        public async Task<B_Address> UpdateAsync(B_Address address)
         {
-            // PersonalInfo info = await SelectById(address.PersonId);
             AddressDetails addressdetails = await SelectById(address.PersonId);
             addressdetails.Pincode = address.Pincode;
             addressdetails.Contactaddress = address.ContactAddress;
@@ -53,7 +52,7 @@ namespace DBRepository.Repository
             addressdetails.Permanentaddress = $"{address.PermanentAddress}${address.Country}${address.State}${ address.District}${address.Native}";
             addressdetails.Updateddatetime = DateTime.Now;
 
-            await UpdateAsync(addressdetails);
+            await base.UpdateAsync(addressdetails);
             return address;
         }
     }

@@ -30,7 +30,7 @@ namespace DBRepository.Repository
             return personalInfo;
         }
 
-        public async Task<B_Registration> AddRegistration(B_Registration registration)
+        public async Task<B_Registration> CreateAsync(B_Registration registration)
         {
             PersonalInfo info = new PersonalInfo();
             info.Emailid = registration.Email;
@@ -38,7 +38,7 @@ namespace DBRepository.Repository
             info.Generatedby = registration.Filledby;
             info.Createddatetime = DateTime.Now;
 
-            await CreateAsync(info);
+            await base.CreateAsync(info);
 
             LoginDetails login = new LoginDetails();
             login.ActiveStatus = true;
@@ -52,7 +52,7 @@ namespace DBRepository.Repository
             return registration;
         }
 
-        public async Task<B_PersonalInfo> AddBioData(B_PersonalInfo personalInfo)
+        public async Task<B_PersonalInfo> CreateAsync(B_PersonalInfo personalInfo)
         {
             PersonalInfo info = await SelectById(personalInfo.PersonId);
             info.Mobileno = personalInfo.Mobileno;
@@ -67,7 +67,7 @@ namespace DBRepository.Repository
             info.Age = new DateTime((DateTime.Now - info.Dateofbirth).Value.Ticks).Year - 1;
             info.ProfileStage = 1;
 
-            await UpdateAsync(info);
+            await base.UpdateAsync(info);
             return personalInfo;
         }
 
@@ -76,7 +76,7 @@ namespace DBRepository.Repository
             PersonalInfo info = await SelectById(PersonId);
             info.ProfileStage = ProfileStage;
             info.Updateddatetime = DateTime.Now;
-            await UpdateAsync(info);
+            await base.UpdateAsync(info);
             return true;
         }
 

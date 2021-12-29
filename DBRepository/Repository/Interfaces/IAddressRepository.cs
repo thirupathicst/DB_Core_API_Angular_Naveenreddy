@@ -10,7 +10,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IAddressRepository: IRepository<AddressDetails>
     {
-        Task<B_Address> AddAddress(B_Address address);
-        Task<B_Address> UpdateAddress(B_Address address);
+        Task<B_Address> CreateAsync(B_Address address);
+        Task<B_Address> UpdateAsync(B_Address address);
     }
 }

@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Professional> AddProfessional(B_Professional professional)
+        public async Task<B_Professional> CreateAsync(B_Professional professional)
         {
             PersonalInfo info = await _personalInfo.SelectById(professional.PersonId);
             ProfessionalDetails professionaldetails = new ProfessionalDetails();
@@ -29,12 +29,12 @@ namespace DBRepository.Repository
             professionaldetails.PersonId = info.PersonId;
             professionaldetails.Createddatetime = DateTime.Now;
 
-            await CreateAsync(professionaldetails);
+            await base.CreateAsync(professionaldetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, info.PersonId);
             return professional;
         }
 
-        public async Task<B_Professional> UpdateProfessional(B_Professional professional)
+        public async Task<B_Professional> UpdateAsync(B_Professional professional)
         {
             PersonalInfo info = await _personalInfo.SelectById(professional.PersonId);
             ProfessionalDetails professionaldetails = new ProfessionalDetails();
@@ -46,7 +46,7 @@ namespace DBRepository.Repository
             professionaldetails.PersonId = info.PersonId;
             professionaldetails.Updateddatetime = DateTime.Now;
 
-            await UpdateAsync(professionaldetails);
+            await base.UpdateAsync(professionaldetails);
             return professional;
         }
     }

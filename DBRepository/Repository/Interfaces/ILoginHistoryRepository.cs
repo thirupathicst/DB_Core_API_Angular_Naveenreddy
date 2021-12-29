@@ -10,6 +10,6 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface ILoginHistoryRepository: IRepository<LoginHistory>
     {
-        Task<B_LoginHistory> AddLoginHistory(B_LoginHistory loginhistory);
+        Task<B_LoginHistory> CreateAsync(B_LoginHistory loginhistory);
     }
 }

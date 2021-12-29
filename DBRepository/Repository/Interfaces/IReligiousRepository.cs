@@ -10,7 +10,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IReligiousRepository: IRepository<ReligiousDetails>
     {
-        Task<B_Religious> AddReligious(B_Religious religious);
-        Task<B_Religious> UpdateReligious(B_Religious religious);
+        Task<B_Religious> CreateAsync(B_Religious religious);
+        Task<B_Religious> UpdateAsync(B_Religious religious);
     }
 }

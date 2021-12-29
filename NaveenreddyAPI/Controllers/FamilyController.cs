@@ -31,14 +31,14 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Post(B_Family family)
         {
             family.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.AddFamilyDetails(family));
+            return Ok(await _repository.CreateAsync(family));
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(B_Family family)
         {
             family.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.UpdateFamilyDetails(family));
+            return Ok(await _repository.UpdateAsync(family));
         }
     }
 }

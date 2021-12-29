@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Religious> AddReligious(B_Religious religious)
+        public async Task<B_Religious> CreateAsync(B_Religious religious)
         {
             PersonalInfo info = await _personalInfo.SelectById(religious.PersonId);
             ReligiousDetails religiousdetails = new ReligiousDetails();
@@ -31,12 +31,12 @@ namespace DBRepository.Repository
             religiousdetails.PersonId = info.PersonId;
             religiousdetails.Createddatetime = DateTime.Now;
 
-            await CreateAsync(religiousdetails);
+            await base.CreateAsync(religiousdetails);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, info.PersonId);
             return religious;
         }
 
-        public async Task<B_Religious> UpdateReligious(B_Religious religious)
+        public async Task<B_Religious> UpdateAsync(B_Religious religious)
         {
             PersonalInfo info = await _personalInfo.SelectById(religious.PersonId);
             ReligiousDetails religiousdetails = new ReligiousDetails();
@@ -50,7 +50,7 @@ namespace DBRepository.Repository
             religiousdetails.PersonId = info.PersonId;
             religiousdetails.Updateddatetime = DateTime.Now;
 
-            await UpdateAsync(religiousdetails);
+            await base.UpdateAsync(religiousdetails);
             return religious;
         }
     }

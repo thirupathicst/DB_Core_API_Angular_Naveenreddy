@@ -16,7 +16,7 @@ namespace DBRepository.Repository
             
         }
 
-        public async Task<B_Story> AddStory(B_Story story)
+        public async Task<B_Story> CreateAsync(B_Story story)
         {
             Story _story = new Story()
             {
@@ -26,11 +26,11 @@ namespace DBRepository.Repository
                 PersonId = story.PersonId,
                 Createddatetime=DateTime.Now
             };
-            await CreateAsync(_story);
+            await base.CreateAsync(_story);
             return story;
         }
 
-        public async Task<B_Story> UpdateStory(B_Story story)
+        public async Task<B_Story> UpdateAsync(B_Story story)
         {
             var _story = await SelectById(story.PersonId);
             if (_story != null)
@@ -41,7 +41,7 @@ namespace DBRepository.Repository
                 _story.PersonId = story.PersonId;
                 _story.Updateddatetime = DateTime.Now;
 
-                await UpdateAsync(_story);
+                await base.UpdateAsync(_story);
                 return story;
             }
             else

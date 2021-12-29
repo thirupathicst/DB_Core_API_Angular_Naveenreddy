@@ -10,8 +10,8 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IFamilyRepository : IRepository<FamilyDetails>
     {
-        Task<B_Family> AddFamilyDetails(B_Family familydetails);
+        Task<B_Family> CreateAsync(B_Family familydetails);
 
-        Task<B_Family> UpdateFamilyDetails(B_Family familydetails);
+        Task<B_Family> UpdateAsync(B_Family familydetails);
     }
 }

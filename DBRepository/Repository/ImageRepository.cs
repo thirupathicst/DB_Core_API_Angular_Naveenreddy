@@ -16,7 +16,7 @@ namespace DBRepository.Repository
             
         }
 
-        public async Task<B_Images> AddImage(B_Images images)
+        public async Task<B_Images> CreateAsync(B_Images images)
         {
             Images _image = new Images()
             {
@@ -25,11 +25,11 @@ namespace DBRepository.Repository
                 PersonId = images.PersonId,
                 Createddatetime=DateTime.Now
             };
-            await CreateAsync(_image);
+            await base.CreateAsync(_image);
             return images;
         }
 
-        public async Task<B_Images> UpdateImage(B_Images images)
+        public async Task<B_Images> UpdateAsync(B_Images images)
         {
            var _image= await SelectById(images.PersonId);
             if (_image!=null)
@@ -37,7 +37,7 @@ namespace DBRepository.Repository
                 _image.Physicalpath = images.PhysicalPath;
                 _image.Shortpath = images.ShortPath;
                 _image.Updateddatetime = DateTime.Now;
-                await UpdateAsync(_image);
+                await base.UpdateAsync(_image);
                 return images;
             }
             else

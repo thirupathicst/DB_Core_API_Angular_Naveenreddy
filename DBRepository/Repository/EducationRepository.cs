@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Education> AddEducationDetails(B_Education educationdetails)
+        public async Task<B_Education> CreateAsync(B_Education educationdetails)
         {
             PersonalInfo info = await _personalInfo.SelectById(educationdetails.PersonId);
             EducationDetails education = new EducationDetails();
@@ -28,12 +28,12 @@ namespace DBRepository.Repository
             education.PersonId = info.PersonId;
             education.Createddatetime = DateTime.Now;
 
-             await CreateAsync(education);
+             await base.CreateAsync(education);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, info.PersonId);
             return educationdetails;
         }
 
-        public async Task<B_Education> UpdateEducationDetails(B_Education educationdetails)
+        public async Task<B_Education> UpdateAsync(B_Education educationdetails)
         {
             PersonalInfo info = await _personalInfo.SelectById(educationdetails.PersonId);
             EducationDetails education = new EducationDetails();
@@ -43,7 +43,7 @@ namespace DBRepository.Repository
             education.School = educationdetails.School;
             education.Updateddatetime = DateTime.Now;
 
-            await UpdateAsync(education);
+            await base.UpdateAsync(education);
 
             return educationdetails;
         }

@@ -10,7 +10,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IProfessionalRepository:IRepository<ProfessionalDetails>
     {
-        Task<B_Professional> AddProfessional(B_Professional religious);
-        Task<B_Professional> UpdateProfessional(B_Professional religious);
+        Task<B_Professional> CreateAsync(B_Professional religious);
+        Task<B_Professional> UpdateAsync(B_Professional religious);
     }
 }

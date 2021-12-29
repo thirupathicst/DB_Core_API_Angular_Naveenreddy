@@ -30,7 +30,7 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Post(B_Story story)
         {
             story.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.AddStory(story));
+            return Ok(await _repository.CreateAsync(story));
         }
 
         [HttpPut]
@@ -38,7 +38,7 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Put(B_Story story)
         {
             story.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.UpdateStory(story));
+            return Ok(await _repository.UpdateAsync(story));
         }
     }
 }

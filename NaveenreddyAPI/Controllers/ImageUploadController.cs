@@ -35,7 +35,6 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Images[]), 200)]
         public async Task<IActionResult> Get()
         {
-           // B_Images[] image;
            var _img= await _repository.SelectById(_tokenManager.GetUserId());
             return Ok();
         }
@@ -56,7 +55,7 @@ namespace NaveenreddyAPI.Controllers
                 }
                 image.ShortPath = $"~\\wwwroot\\{_locafile}";
                 image.PersonId=_tokenManager.GetUserId();
-                await _repository.AddImage(image);
+                await _repository.CreateAsync(image);
             }
             return Ok(image);
         }

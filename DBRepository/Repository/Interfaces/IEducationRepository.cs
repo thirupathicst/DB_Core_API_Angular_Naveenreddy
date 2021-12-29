@@ -11,8 +11,8 @@ namespace DBRepository.Repository.Interfaces
 {
    public  interface IEducationRepository : IRepository<EducationDetails>
     {
-        Task<B_Education> AddEducationDetails(B_Education educationdetails);
+        Task<B_Education> CreateAsync(B_Education educationdetails);
 
-        Task<B_Education> UpdateEducationDetails(B_Education educationdetails);
+        Task<B_Education> UpdateAsync(B_Education educationdetails);
     }
 }

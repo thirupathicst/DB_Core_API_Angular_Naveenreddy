@@ -37,12 +37,12 @@ namespace DBRepository.Repository
             return partner;
         }
 
-        public async Task<B_Partner> AddPartner(B_Partner partner)
+        public async Task<B_Partner> CreateAsync(B_Partner partner)
         {
             var _partnerInfo = await GetSingle(x => x.PersonId == partner.PersonId);
             if (_partnerInfo != null)
             {
-                await this.UpdatePartner(partner, _partnerInfo);
+                await UpdateAsync(partner, _partnerInfo);
             }
             else
             {
@@ -63,12 +63,12 @@ namespace DBRepository.Repository
                     PersonId = partner.PersonId,
                     Createddatetime=System.DateTime.Now
                 };
-                await this.CreateAsync(partnerInfo);
+                await base.CreateAsync(partnerInfo);
             }
             return partner;
         }
 
-        private async Task UpdatePartner(B_Partner partner, PartnerInfo partnerInfo)
+        private async Task UpdateAsync(B_Partner partner, PartnerInfo partnerInfo)
         {
             partnerInfo.Age = partner.Age;
             partnerInfo.Height=partner.Height;
@@ -84,7 +84,7 @@ namespace DBRepository.Repository
             partnerInfo.Religion = partner.Religion;
             partnerInfo.Updateddatetime=System.DateTime.Now;
 
-            await this.UpdateAsync(partnerInfo);
+            await base.UpdateAsync(partnerInfo);
         }
 
     }

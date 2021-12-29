@@ -34,7 +34,7 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Put(B_Partner partner)
         {
             partner.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.AddPartner(partner));
+            return Ok(await _repository.CreateAsync(partner));
         }
 
         [HttpPost]
@@ -42,7 +42,7 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Post(B_Partner partner)
         {
             partner.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.AddPartner(partner));
+            return Ok(await _repository.CreateAsync(partner));
         }
     }
 }

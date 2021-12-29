@@ -41,7 +41,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Post(B_Registration registration)
         {
-            return Ok(await _repository.AddRegistration(registration));
+            return Ok(await _repository.CreateAsync(registration));
         }
 
         [HttpPut]
@@ -49,7 +49,7 @@ namespace NaveenreddyAPI.Controllers
         public async Task<IActionResult> Put(B_PersonalInfo personalinfo)
         {
             personalinfo.PersonId = _tokenManager.GetUserId();
-            return Ok(await _repository.AddBioData(personalinfo));
+            return Ok(await _repository.CreateAsync(personalinfo));
         }
     }
 }

@@ -40,11 +40,7 @@ export class ChangepasswordComponent implements OnInit {
       confirmpassword: this.validatingForm.controls.Confirmpassword.value
     }
     this.apiService.changePassword(changePassword).subscribe(resp => {
-    }, err => {
-        if (err.status == 400) {
-          toastr.error(err.error.Message);
-          console.log(err);
-        }
+      console.log(resp)
     })
   }
 

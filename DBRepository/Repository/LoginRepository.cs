@@ -13,14 +13,12 @@ namespace DBRepository.Repository
     public class LoginRepository : Repository<LoginDetails>, ILoginRepository
     {
         private readonly ILoginHistoryRepository repository;
-        //private readonly IPersonalInfoRepository personalRepository;
         public LoginRepository(NaveenReddyDbContext repositoryContext, ILoginHistoryRepository _repository) : base(repositoryContext)
         {
             repository = _repository;
-            //personalRepository = _personalRepository;
         }
 
-        public async Task<B_Login> AddLogin(B_Login logindetails)
+        public async Task<B_Login> CreateAsync(B_Login logindetails)
         {
             LoginDetails login = new LoginDetails
             {
@@ -29,19 +27,19 @@ namespace DBRepository.Repository
                 Password = logindetails.Password,
                 PersonId = logindetails.PersonId
             };
-            await CreateAsync(login);
+            await base.CreateAsync(login);
 
             B_LoginHistory loginHistory = new B_LoginHistory
             {
                 LoginId = login.LoginId,
                 Logindatetime = DateTime.Now,
             };
-            await repository.AddLoginHistory(loginHistory);
+            await repository.CreateAsync(loginHistory);
 
             return logindetails;
         }
 
-        public B_UserInfo AddLogin(B_Login logindetails, B_LoginHistory history)
+        public B_UserInfo CreateAsync(B_Login logindetails, B_LoginHistory history)
         {
             try
             {
@@ -58,11 +56,10 @@ namespace DBRepository.Repository
                     {
                         logindetails.Password = string.Empty;
                         history.LoginId = login.LoginId;
-                        repository.AddLoginHistory(history).Wait();
+                        repository.CreateAsync(history).Wait();
                       
                         info.PersonId = login.PersonId;
                         var person = new PersonalInfoRepository(this.dbContext, null).SelectById(login.PersonId).Result;
-                        //var person = personalRepository.SelectById(login.PersonId).Result;
                         info.Profilestage = person.ProfileStage;
                         info.Status = B_UserStatus.Active;
                     }
@@ -97,7 +94,7 @@ namespace DBRepository.Repository
                 else if(changepassword.NewPassword.Equals(changepassword.ConfirmPassword))
                 {
                     login.Password = changepassword.NewPassword;
-                    await this.UpdateAsync(login);
+                    await base.UpdateAsync(login);
                 }
             }
             return changepassword;

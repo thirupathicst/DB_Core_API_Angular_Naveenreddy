@@ -11,7 +11,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IStoryRepository:IRepository<Story>
     {
-        Task<B_Story> AddStory(B_Story story);
-        Task<B_Story> UpdateStory(B_Story story);
+        Task<B_Story> CreateAsync(B_Story story);
+        Task<B_Story> UpdateAsync(B_Story story);
     }
 }

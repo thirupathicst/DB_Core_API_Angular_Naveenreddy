@@ -15,7 +15,7 @@ namespace DBRepository.Repository
         {
         }
 
-        public async Task<B_LoginHistory> AddLoginHistory(B_LoginHistory loginhistory)
+        public async Task<B_LoginHistory> CreateAsync(B_LoginHistory loginhistory)
         {
             LoginHistory history = new LoginHistory
             {
@@ -25,7 +25,7 @@ namespace DBRepository.Repository
                 LoginId = loginhistory.LoginId,
             };
 
-            await CreateAsync(history);
+            await base.CreateAsync(history);
             return loginhistory;
         }
     }

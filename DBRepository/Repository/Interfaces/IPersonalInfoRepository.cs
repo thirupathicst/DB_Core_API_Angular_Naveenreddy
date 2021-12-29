@@ -13,9 +13,8 @@ namespace DBRepository.Repository.Interfaces
     {
 
         Task<B_PersonalInfo> GetRegistration(int PersonId);
-        Task<B_Registration> AddRegistration(B_Registration b_Registration);
-
-        Task<B_PersonalInfo> AddBioData(B_PersonalInfo b_PersonalInfo);
+        Task<B_Registration> CreateAsync(B_Registration b_Registration);
+        Task<B_PersonalInfo> CreateAsync(B_PersonalInfo b_PersonalInfo);
 
     }
 }

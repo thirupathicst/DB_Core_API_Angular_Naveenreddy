@@ -49,7 +49,7 @@ namespace NaveenreddyAPI.Controllers
                 IPaddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
                 Logindatetime = DateTime.Now
             };
-            status = _repository.AddLogin(_login, history);
+            status = _repository.CreateAsync(_login, history);
             if (B_UserStatus.Invalid == status.Status)
             {
                 status.Message = "Invalid credentails or user not exsist";
