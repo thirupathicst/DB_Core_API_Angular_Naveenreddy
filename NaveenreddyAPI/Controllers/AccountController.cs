@@ -33,7 +33,7 @@ namespace NaveenreddyAPI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Login")]
-        public IActionResult Login(Login login)
+        public async Task<IActionResult> Login(Login login)
         {
             B_UserInfo status;
             B_Login _login = new B_Login()
@@ -49,7 +49,7 @@ namespace NaveenreddyAPI.Controllers
                 IPaddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
                 Logindatetime = DateTime.Now
             };
-            status = _repository.CreateAsync(_login, history);
+            status =await _repository.CreateAsync(_login, history);
             if (B_UserStatus.Invalid == status.Status)
             {
                 status.Message = "Invalid credentails or user not exsist";
@@ -73,7 +73,6 @@ namespace NaveenreddyAPI.Controllers
             }
             else
             {
-                //return Ok(login);
                 status.Message = "Currently not accepting user details";
                 return BadRequest(status);
             }
@@ -86,8 +85,7 @@ namespace NaveenreddyAPI.Controllers
             password.PersonId = _tokenManager.GetUserId();
             if (password.NewPassword.Equals(password.ConfirmPassword))
             {
-                await _repository.ChangePassword(password);
-                return Ok();
+                return Ok(await _repository.ChangePassword(password));
             }
             else
             {

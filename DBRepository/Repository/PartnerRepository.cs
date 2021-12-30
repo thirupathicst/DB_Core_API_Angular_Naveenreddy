@@ -17,7 +17,7 @@ namespace DBRepository.Repository
         {
             B_Partner partner = new B_Partner();
 
-            var partnerInfo = await GetSingle(x => x.PersonId == PersonId);
+            var partnerInfo = await base.GetSingle(x => x.PersonId == PersonId);
             if (partnerInfo != null)
             {
                 partner.Age = partnerInfo.Age;

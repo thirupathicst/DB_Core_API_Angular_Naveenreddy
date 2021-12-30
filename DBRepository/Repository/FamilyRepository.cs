@@ -9,7 +9,7 @@ using DBRepository.Tables;
 
 namespace DBRepository.Repository
 {
-    public class FamilyRepository: Repository<FamilyDetails>, IFamilyRepository
+    public class FamilyRepository : Repository<FamilyDetails>, IFamilyRepository
     {
         private readonly IPersonalInfoRepository _personalInfo;
         public FamilyRepository(NaveenReddyDbContext repositoryContext, IPersonalInfoRepository personalInfo) : base(repositoryContext)
@@ -45,27 +45,25 @@ namespace DBRepository.Repository
 
         public async Task<B_Family> UpdateAsync(B_Family familydetails)
         {
-
-            FamilyDetails family =await SelectById(familydetails.PersonId);
-            if(family==null)
+            FamilyDetails family = await base.GetSingle(x => x.PersonId == familydetails.PersonId);
+            if (family != null)
             {
+                family.Brotheroccupation = familydetails.Brotheroccupation;
+                family.Noofbrothersmarrried = familydetails.Noofbrothersmarrried;
+                family.Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried;
+                family.Fathername = familydetails.Fathername;
+                family.Fatheroccupation = familydetails.Fatheroccupation;
+                family.Mothername = familydetails.Mothername;
+                family.Motheroccupation = familydetails.Motheroccupation;
+                family.Noofbrothers = familydetails.Noofbrothers;
+                family.Noofsisters = familydetails.Noofsisters;
+                family.Noofsistersmarrried = familydetails.Noofsistersmarrried;
+                family.Noofsistersunmarrried = familydetails.Noofsistersunmarrried;
+                family.Sisteroccupation = familydetails.Sisteroccupation;
+                family.Updateddatetime = DateTime.Now;
+
+                await base.UpdateAsync(family);
             }
-            family.Brotheroccupation = familydetails.Brotheroccupation;
-            family.Noofbrothersmarrried = familydetails.Noofbrothersmarrried;
-            family.Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried;
-            family.Fathername = familydetails.Fathername;
-            family.Fatheroccupation = familydetails.Fatheroccupation;
-            family.Mothername = familydetails.Mothername;
-            family.Motheroccupation = familydetails.Motheroccupation;
-            family.Noofbrothers = familydetails.Noofbrothers;
-            family.Noofsisters = familydetails.Noofsisters;
-            family.Noofsistersmarrried = familydetails.Noofsistersmarrried;
-            family.Noofsistersunmarrried = familydetails.Noofsistersunmarrried;
-            family.Sisteroccupation = familydetails.Sisteroccupation;
-            family.Updateddatetime = DateTime.Now;
-
-            await base.UpdateAsync(family);
-
             return familydetails;
         }
     }

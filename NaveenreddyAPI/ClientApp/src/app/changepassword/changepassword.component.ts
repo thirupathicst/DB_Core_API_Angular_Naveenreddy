@@ -40,7 +40,7 @@ export class ChangepasswordComponent implements OnInit {
       confirmpassword: this.validatingForm.controls.Confirmpassword.value
     }
     this.apiService.changePassword(changePassword).subscribe(resp => {
-      console.log(resp)
+      toastr.success('Password changed successfully.')
     })
   }
 

@@ -39,13 +39,12 @@ namespace DBRepository.Repository
             return logindetails;
         }
 
-        public B_UserInfo CreateAsync(B_Login logindetails, B_LoginHistory history)
+        public async Task<B_UserInfo> CreateAsync(B_Login logindetails, B_LoginHistory history)
         {
             try
             {
                 B_UserInfo info = new B_UserInfo();
-                var data = SelectAll().Result;
-                LoginDetails login = data.Where(x => x.Emailid == logindetails.Emailid).FirstOrDefault();
+                LoginDetails login = await base.GetSingle(x => x.Emailid == logindetails.Emailid);
                 if (login != null)
                 {
                     if(!login.ActiveStatus)
@@ -56,7 +55,7 @@ namespace DBRepository.Repository
                     {
                         logindetails.Password = string.Empty;
                         history.LoginId = login.LoginId;
-                        repository.CreateAsync(history).Wait();
+                        await repository.CreateAsync(history);
                       
                         info.PersonId = login.PersonId;
                         var person = new PersonalInfoRepository(this.dbContext, null).SelectById(login.PersonId).Result;
@@ -81,10 +80,9 @@ namespace DBRepository.Repository
 
         }
 
-        public async Task<B_ChangePassword> ChangePassword(B_ChangePassword changepassword)
+        public async  Task<B_ChangePassword> ChangePassword(B_ChangePassword changepassword)
         {
-            var data = await SelectAll();
-            LoginDetails login = data.Where(x => x.PersonId == changepassword.PersonId && x.Password == changepassword.OldPassword).FirstOrDefault();
+            LoginDetails login = await base.GetSingle(x => x.PersonId == changepassword.PersonId && x.Password == changepassword.OldPassword);
             if (login != null)
             {
                 if(login.Password.Equals(changepassword.NewPassword))
@@ -97,13 +95,15 @@ namespace DBRepository.Repository
                     await base.UpdateAsync(login);
                 }
             }
+            else{
+                throw new NoDetailsFoundException("Inavlid credentials");
+            }
             return changepassword;
         }
 
         public async Task<B_ForgotPassword> ForgotPassword(B_ForgotPassword forgotPassword )
         {
-             var data = await SelectAll();
-            LoginDetails login = data.Where(x => x.Emailid == forgotPassword.EmailId && x.ActiveStatus == true).FirstOrDefault();
+            LoginDetails login = await base.GetSingle(x => x.Emailid == forgotPassword.EmailId && x.ActiveStatus == true);
             if (login != null)
             {
                 return forgotPassword;

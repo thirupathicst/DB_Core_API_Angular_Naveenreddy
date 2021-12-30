@@ -31,10 +31,10 @@ namespace NaveenreddyAPI.Utilities
             {
                 if (httpContext.User.Identity.IsAuthenticated)
                 {
-                   if ((_cache.Get($"PersonId-{_tokenManager.GetUserId()}") == null))
-                   {
-                       throw new MyCustomException("Token expired or invalid");
-                   }
+                    if ((_cache.Get($"PersonId-{_tokenManager.GetUserId()}") == null))
+                    {
+                        throw new UnauthorizedAccessException("Token expired or invalid");
+                    }
                 }
                 await _next(httpContext);
             }
@@ -50,9 +50,18 @@ namespace NaveenreddyAPI.Utilities
         {
             context.Response.ContentType = "application/json";
 
-            if (ex is MyCustomException)
+            if (ex is MyCustomException||ex is NoDetailsFoundException)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                await context.Response.WriteAsync(new ErrorDetails()
+                {
+                    statuscode = context.Response.StatusCode,
+                    message = ex.Message
+                }.ToString());
+            }
+            else if (ex is UnauthorizedAccessException)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 await context.Response.WriteAsync(new ErrorDetails()
                 {
                     statuscode = context.Response.StatusCode,

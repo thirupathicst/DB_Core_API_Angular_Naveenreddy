@@ -31,7 +31,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Images> UpdateAsync(B_Images images)
         {
-           var _image= await SelectById(images.PersonId);
+           var _image= await base.GetSingle(x=>x.PersonId== images.PersonId);
             if (_image!=null)
             {
                 _image.Physicalpath = images.PhysicalPath;

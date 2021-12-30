@@ -43,14 +43,19 @@ export class LoaderInterceptor implements HttpInterceptor {
           },
           err => {
             if (err.status == 401) {
+              this.auth.removeAuthentication()
               toastr.error('Unauthorized - Sorry, your session was expired');
+              this.router.navigate(['/login']);
             }
             else if (err.status == 400) {
               if (err.error.message != undefined) {
-                toastr.error(err.error.message);
+                toastr.error(err.error.message)
+              }
+              else if (err.error.title != undefined) {
+                toastr.error(err.error.title)
               }
               else {
-                toastr.error(err.error);
+                toastr.error(err.error)
               }
             }
             else if (err.status == 404) {
@@ -61,7 +66,6 @@ export class LoaderInterceptor implements HttpInterceptor {
             }
             this.removeRequest(req);
             observer.error(err);
-            this.router.navigate(['/login']);
           },
           () => {
             this.removeRequest(req);

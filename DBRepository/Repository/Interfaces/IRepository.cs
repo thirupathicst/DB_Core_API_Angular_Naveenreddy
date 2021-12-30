@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace NaveenreddyAPI.Repository.Interfaces
@@ -9,6 +10,7 @@ namespace NaveenreddyAPI.Repository.Interfaces
     {
         Task<List<T>> SelectAll();
         Task<T> SelectById(int Id);
+        Task<T> GetSingle(Expression<Func<T, bool>> predicate);
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task<T> DeleteAsync(T entity);
