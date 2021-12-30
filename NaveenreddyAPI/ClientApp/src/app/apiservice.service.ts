@@ -87,6 +87,10 @@ export class APIServiceService {
     return this.http.put(`${this.bseAPI}/Religious`, Religious);
   }
 
+  public getImages(): Observable<any> {
+    return this.http.get(`${this.bseAPI}/ImageUpload`);
+  }
+
   public uploadImages(Image: File[]): Observable<any> {
     const formData: FormData = new FormData();
     Image.forEach(item => {

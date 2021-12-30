@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Religious> CreateAsync(B_Religious religious)
         {
-            PersonalInfo info = await _personalInfo.SelectById(religious.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(religious.PersonId);
             ReligiousDetails religiousdetails = new ReligiousDetails();
             religiousdetails.Caste = religious.Caste;
             religiousdetails.Gothram = religious.Gothram;
@@ -38,7 +38,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Religious> UpdateAsync(B_Religious religious)
         {
-            PersonalInfo info = await _personalInfo.SelectById(religious.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(religious.PersonId);
             ReligiousDetails religiousdetails = new ReligiousDetails();
             religiousdetails.Caste = religious.Caste;
             religiousdetails.Gothram = religious.Gothram;

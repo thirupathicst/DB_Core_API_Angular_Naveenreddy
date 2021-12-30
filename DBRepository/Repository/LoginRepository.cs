@@ -44,7 +44,7 @@ namespace DBRepository.Repository
             try
             {
                 B_UserInfo info = new B_UserInfo();
-                LoginDetails login = await base.GetSingle(x => x.Emailid == logindetails.Emailid);
+                LoginDetails login = await base.GetSingleAsync(x => x.Emailid == logindetails.Emailid);
                 if (login != null)
                 {
                     if(!login.ActiveStatus)
@@ -58,7 +58,7 @@ namespace DBRepository.Repository
                         await repository.CreateAsync(history);
                       
                         info.PersonId = login.PersonId;
-                        var person = new PersonalInfoRepository(this.dbContext, null).SelectById(login.PersonId).Result;
+                        var person = new PersonalInfoRepository(this.dbContext, null).SelectByIdAsync(login.PersonId).Result;
                         info.Profilestage = person.ProfileStage;
                         info.Status = B_UserStatus.Active;
                     }
@@ -82,7 +82,7 @@ namespace DBRepository.Repository
 
         public async  Task<B_ChangePassword> ChangePassword(B_ChangePassword changepassword)
         {
-            LoginDetails login = await base.GetSingle(x => x.PersonId == changepassword.PersonId && x.Password == changepassword.OldPassword);
+            LoginDetails login = await base.GetSingleAsync(x => x.PersonId == changepassword.PersonId && x.Password == changepassword.OldPassword);
             if (login != null)
             {
                 if(login.Password.Equals(changepassword.NewPassword))
@@ -103,7 +103,7 @@ namespace DBRepository.Repository
 
         public async Task<B_ForgotPassword> ForgotPassword(B_ForgotPassword forgotPassword )
         {
-            LoginDetails login = await base.GetSingle(x => x.Emailid == forgotPassword.EmailId && x.ActiveStatus == true);
+            LoginDetails login = await base.GetSingleAsync(x => x.Emailid == forgotPassword.EmailId && x.ActiveStatus == true);
             if (login != null)
             {
                 return forgotPassword;

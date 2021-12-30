@@ -17,7 +17,7 @@ namespace DBRepository.Repository
         {
             B_Partner partner = new B_Partner();
 
-            var partnerInfo = await base.GetSingle(x => x.PersonId == PersonId);
+            var partnerInfo = await base.GetSingleAsync(x => x.PersonId == PersonId);
             if (partnerInfo != null)
             {
                 partner.Age = partnerInfo.Age;
@@ -39,7 +39,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Partner> CreateAsync(B_Partner partner)
         {
-            var _partnerInfo = await GetSingle(x => x.PersonId == partner.PersonId);
+            var _partnerInfo = await GetSingleAsync(x => x.PersonId == partner.PersonId);
             if (_partnerInfo != null)
             {
                 await UpdateAsync(partner, _partnerInfo);

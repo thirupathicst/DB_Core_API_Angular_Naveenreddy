@@ -15,18 +15,20 @@ namespace NaveenreddyAPI
     {
         public static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
-            //.WriteTo.Debug(outputTemplate:DateTime.Now.ToString())  
-            .WriteTo.Console() 
-            .WriteTo.File("NaveenReddyLogger.log", rollingInterval: RollingInterval.Day)
-            .CreateLogger();
+            // Log.Logger = new LoggerConfiguration()
+            // .Enrich.FromLogContext()
+            // //.WriteTo.Console() 
+            // //.WriteTo.File("NaveenReddyLogger.log", rollingInterval: RollingInterval.Day)
+            // .CreateLogger();
             CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog()
+                .UseSerilog((hostingContext, loggerConfig) =>{
+                     loggerConfig.ReadFrom
+                    .Configuration(hostingContext.Configuration);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

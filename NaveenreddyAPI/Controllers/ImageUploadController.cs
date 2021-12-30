@@ -35,8 +35,8 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Images[]), 200)]
         public async Task<IActionResult> Get()
         {
-           var _img= await _repository.SelectById(_tokenManager.GetUserId());
-            return Ok();
+           var _img= await _repository.SelectAllAsync(x=>x.PersonId== _tokenManager.GetUserId());
+            return Ok(_img);
         }
 
         [HttpPost]
@@ -47,13 +47,12 @@ namespace NaveenreddyAPI.Controllers
             CreaateImageDirectory($"{env.WebRootPath}\\Images");
             foreach (var item in file)
             {
-                string _locafile = $"Images\\{Guid.NewGuid()}{Path.GetExtension(item.FileName)}";
-                image.PhysicalPath = Path.Combine(env.WebRootPath, _locafile);
+                image.ShortPath = $"Images\\{Guid.NewGuid()}{Path.GetExtension(item.FileName)}";
+                image.PhysicalPath = Path.Combine(env.WebRootPath, image.ShortPath);
                 using (var stream = new FileStream(image.PhysicalPath, FileMode.Create))
                 {
                     await item.CopyToAsync(stream);
                 }
-                image.ShortPath = $"~\\wwwroot\\{_locafile}";
                 image.PersonId=_tokenManager.GetUserId();
                 await _repository.CreateAsync(image);
             }

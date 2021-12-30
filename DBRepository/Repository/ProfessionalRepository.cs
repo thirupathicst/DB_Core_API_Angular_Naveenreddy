@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Professional> CreateAsync(B_Professional professional)
         {
-            PersonalInfo info = await _personalInfo.SelectById(professional.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(professional.PersonId);
             ProfessionalDetails professionaldetails = new ProfessionalDetails();
             professionaldetails.Companydetails = professional.Companydetails;
             professionaldetails.Income = professional.Income;
@@ -36,7 +36,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Professional> UpdateAsync(B_Professional professional)
         {
-            PersonalInfo info = await _personalInfo.SelectById(professional.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(professional.PersonId);
             ProfessionalDetails professionaldetails = new ProfessionalDetails();
             professionaldetails.Companydetails = professional.Companydetails;
             professionaldetails.Income = professional.Income;

@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Address> CreateAsync(B_Address address)
         {
-            PersonalInfo info = await _personalInfo.SelectById(address.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(address.PersonId);
             AddressDetails addressdetails = new AddressDetails();
             addressdetails.Contactaddress = address.ContactAddress;
             addressdetails.Pincode = address.Pincode;
@@ -40,7 +40,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Address> UpdateAsync(B_Address address)
         {
-            AddressDetails addressdetails = await SelectById(address.PersonId);
+            AddressDetails addressdetails = await SelectByIdAsync(address.PersonId);
             addressdetails.Pincode = address.Pincode;
             addressdetails.Contactaddress = address.ContactAddress;
             addressdetails.Visa = address.Visa;

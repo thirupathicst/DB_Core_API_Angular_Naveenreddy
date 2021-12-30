@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Education> CreateAsync(B_Education educationdetails)
         {
-            PersonalInfo info = await _personalInfo.SelectById(educationdetails.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(educationdetails.PersonId);
             EducationDetails education = new EducationDetails();
             education.College = educationdetails.College;
             education.Graducation = educationdetails.Graducation;
@@ -35,7 +35,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Education> UpdateAsync(B_Education educationdetails)
         {
-            PersonalInfo info = await _personalInfo.SelectById(educationdetails.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(educationdetails.PersonId);
             EducationDetails education = new EducationDetails();
             education.College = educationdetails.College;
             education.Graducation = educationdetails.Graducation;

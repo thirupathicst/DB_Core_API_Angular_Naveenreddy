@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Family> CreateAsync(B_Family familydetails)
         {
-            PersonalInfo info = await _personalInfo.SelectById(familydetails.PersonId);
+            PersonalInfo info = await _personalInfo.SelectByIdAsync(familydetails.PersonId);
             FamilyDetails family = new FamilyDetails
             {
                 Brotheroccupation = familydetails.Brotheroccupation,
@@ -45,7 +45,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Family> UpdateAsync(B_Family familydetails)
         {
-            FamilyDetails family = await base.GetSingle(x => x.PersonId == familydetails.PersonId);
+            FamilyDetails family = await base.GetSingleAsync(x => x.PersonId == familydetails.PersonId);
             if (family != null)
             {
                 family.Brotheroccupation = familydetails.Brotheroccupation;

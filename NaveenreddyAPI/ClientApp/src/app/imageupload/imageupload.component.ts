@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 
 @Component({
@@ -14,12 +13,25 @@ export class ImageuploadComponent implements OnInit {
   uploadImg: File[]=[];
   filePath1: string;
   filePath2: string;
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService) { }
+  imageResp:any;
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
       upload1: ['', Validators.required],
       upload2: ['', Validators.required],
+    })
+  }
+
+  ngAfterViewInit(): void {
+    this.apiService.getImages().subscribe(resp => {
+      this.imageResp=resp
+    })
+  }
+
+  onloadImages(){
+    this.apiService.getImages().subscribe(resp => {
+      this.imageResp=resp
     })
   }
 
@@ -33,9 +45,7 @@ export class ImageuploadComponent implements OnInit {
     }
 
     this.apiService.uploadImages(this.uploadImg).subscribe(x => {
-      this.router.navigate(['/quicksearch']);
-    }, err => {
-      console.log(err)
+      window.location.reload()
     })
   }
 

@@ -1,13 +1,15 @@
 <form [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
 
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <!-- Card -->
       <mdb-card>
         <div class="view rgba-white-slight waves-dark" mdbWavesEffect>
           <!-- Card img -->
           <div *ngIf="filePath1==null">
-            <mdb-card-img  src="http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030" alt="Card image cap"></mdb-card-img>
+            <mdb-card-img
+              src="http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030"
+              alt="Card image cap"></mdb-card-img>
           </div>
           <div *ngIf="filePath1 && filePath1 !== ''">
             <mdb-card-img [src]="filePath1" [alt]="validatingForm.value.name"></mdb-card-img>
@@ -25,7 +27,8 @@
 
           <!--Text-->
           <mdb-card-text>
-            <input type="file" accept="image/*" name="upload1" formControlName="upload1" class="form-control" (change)="imagePreview($event,0)" mdbInput />
+            <input type="file" accept="image/*" name="upload1" formControlName="upload1" class="form-control"
+              (change)="imagePreview($event,0)" mdbInput />
             <span *ngIf="submitted && f.upload1.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
           </mdb-card-text>
         </mdb-card-body>
@@ -33,13 +36,15 @@
       <!-- Card -->
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
       <!-- Card -->
       <mdb-card>
         <div class="view rgba-white-slight waves-dark" mdbWavesEffect>
           <!-- Card img -->
           <div *ngIf="filePath2==null">
-            <mdb-card-img src="http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030" alt="Card image cap"></mdb-card-img>
+            <mdb-card-img
+              src="http://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png/revision/latest?cb=20130819001030"
+              alt="Card image cap"></mdb-card-img>
           </div>
           <div *ngIf="filePath2 && filePath2 !== ''">
             <mdb-card-img [src]="filePath2" [alt]="validatingForm.value.name"></mdb-card-img>
@@ -57,19 +62,35 @@
 
           <!--Text-->
           <mdb-card-text>
-            <input type="file" accept="image/*" formControlName="upload2" name="upload2" class="form-control" (change)="imagePreview($event,1)" mdbInput />
+            <input type="file" accept="image/*" formControlName="upload2" name="upload2" class="form-control"
+              (change)="imagePreview($event,1)" mdbInput />
             <span *ngIf="submitted && f.upload2.invalid" class="text-danger">Please select png/jpg/jpeg.</span>
           </mdb-card-text>
 
-          
+
         </mdb-card-body>
       </mdb-card>
       <!-- Card -->
     </div>
   </div>
- 
-  
-  
+
   <br />
-  <button type="submit" mdbBtn color="primary" class="my-4 waves-effect" mdbWavesEffect><mdb-icon fas icon="cloud-upload-alt" class="mr-1"></mdb-icon> Upload</button>
+  <button type="submit" mdbBtn color="primary" class="my-4 waves-effect" mdbWavesEffect>
+    <mdb-icon fas icon="cloud-upload-alt" class="mr-1"></mdb-icon> Upload
+  </button>
 </form>
+
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title>
+      <h4><b>Your image's gallery</b></h4>
+      <hr>
+    </mdb-card-title>
+    <div class="row">
+      <div class="col-4 view overlay zoom" *ngFor="let c of imageResp">
+        <img src="{{c.shortpath}}" class="img-fluid z-depth-1">
+        <br>
+      </div>
+    </div>
+  </mdb-card-body>
+</mdb-card>

@@ -32,7 +32,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Story> UpdateAsync(B_Story story)
         {
-            var _story = await SelectById(story.PersonId);
+            var _story = await SelectByIdAsync(story.PersonId);
             if (_story != null)
             {
                 _story.Description = story.Description;

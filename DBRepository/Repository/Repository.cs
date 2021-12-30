@@ -11,7 +11,6 @@ namespace NaveenreddyAPI.DB
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-
         protected readonly NaveenReddyDbContext dbContext;
 
         public Repository(NaveenReddyDbContext context)
@@ -34,18 +33,23 @@ namespace NaveenreddyAPI.DB
             return entity;
         }
 
-        public async Task<T> GetSingle(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate)
         {
             //return await dbContext.Set<T>().Where(predicate).FirstOrDefaultAsync();
             return await dbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
         
-        public async Task<List<T>> SelectAll()
+        public async Task<List<T>> SelectAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T> SelectById(int Id)
+        public async Task<List<T>> SelectAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await dbContext.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public async Task<T> SelectByIdAsync(int Id)
         {
             return await dbContext.Set<T>().FindAsync(Id);
         }

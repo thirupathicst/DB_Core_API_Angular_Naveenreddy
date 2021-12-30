@@ -19,7 +19,7 @@ namespace DBRepository.Repository
 
         public async Task<B_PersonalInfo> GetRegistration(int PersonId)
         {
-           PersonalInfo info= await this.SelectById(PersonId);
+           PersonalInfo info= await this.SelectByIdAsync(PersonId);
 
             B_PersonalInfo personalInfo= new B_PersonalInfo()
             {
@@ -54,7 +54,7 @@ namespace DBRepository.Repository
 
         public async Task<B_PersonalInfo> CreateAsync(B_PersonalInfo personalInfo)
         {
-            PersonalInfo info = await SelectById(personalInfo.PersonId);
+            PersonalInfo info = await SelectByIdAsync(personalInfo.PersonId);
             info.Mobileno = personalInfo.Mobileno;
             info.Height = personalInfo.Height;
             info.Gender = personalInfo.Gender;
@@ -73,7 +73,7 @@ namespace DBRepository.Repository
 
         public async Task<bool> UpdateProfileStage(int ProfileStage,int PersonId)
         {
-            PersonalInfo info = await SelectById(PersonId);
+            PersonalInfo info = await SelectByIdAsync(PersonId);
             info.ProfileStage = ProfileStage;
             info.Updateddatetime = DateTime.Now;
             await base.UpdateAsync(info);
