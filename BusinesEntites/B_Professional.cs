@@ -10,6 +10,8 @@ namespace BusinesEntites
         public int ProfessionalId { get; set; }
         public short Yearofstart { get; set; }
         public string Joblocation { get; set; }
+        public string Professiondetails{get;set;}
+        public string Professiontype{get;set;}
         public int Income { get; set; }
         public string Companydetails { get; set; }
         public string Jobtype { get; set; }

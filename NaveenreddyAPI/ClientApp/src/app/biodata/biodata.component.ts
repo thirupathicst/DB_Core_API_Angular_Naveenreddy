@@ -1,5 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIServiceService } from '../apiservice.service';
 import { AppConstants } from '../constants.service';
@@ -32,10 +33,12 @@ export class BiodataComponent implements OnInit {
   optionsCaste = AppConstants.Caste;
   optionsOccupation = AppConstants.Occupation;
   optionsReligous = AppConstants.Religous;
-  optionsEducation=AppConstants.Education;
-  optionsJobType=AppConstants.JobType;
-  optionsVisaType=AppConstants.VisaType;
-  optionsRegion=AppConstants.Region;
+  optionsEducation = AppConstants.Education;
+  optionsJobType = AppConstants.JobType;
+  optionsVisaType = AppConstants.VisaType;
+  optionsRegion = AppConstants.Region;
+  optionsMaritial = AppConstants.MaritialStatus;
+
   constructor(private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
@@ -111,11 +114,11 @@ export class BiodataComponent implements OnInit {
       MaritalStatus: ['', Validators.required],
       Height: ['', [Validators.required, Validators.min(4), Validators.max(8)]],
       Complexion: ['', Validators.required],
-      //Age: ['', [Validators.required, Validators.min(18), Validators.max(60)]],
       Yourself: ['', Validators.required],
       Dateofbirth: ['', Validators.required],
       Phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-
+    }, {
+      validator: this.dateValidator('Dateofbirth')
     });
   }
 
@@ -125,6 +128,36 @@ export class BiodataComponent implements OnInit {
   get f4() { return this.contact4.controls; }
   get f5() { return this.family5.controls; }
   get f6() { return this.partner6.controls; }
+
+  ngAfterViewInit(): void {
+    this.apiService.getBioData().subscribe(resp => {
+      console.log(resp[2])
+
+      this.personal1.controls.Name.setValue(resp[0].name)
+      this.personal1.controls.Gender.setValue(resp[0].gender)
+      this.personal1.controls.PlaceOfBirth.setValue(resp[0].placeofbirth)
+      this.personal1.controls.TimeOfBirth.setValue(resp[0].timeofbirth)
+      this.personal1.controls.MaritalStatus.setValue(resp[0].maritalstatus)
+      this.personal1.controls.Height.setValue(resp[0].height)
+      this.personal1.controls.Complexion.setValue(resp[0].complexion)
+      this.personal1.controls.Yourself.setValue(resp[0].yourself)
+      this.personal1.controls.Dateofbirth.setValue(formatDate(resp[0].dateofbirth,'yyyy-MM-dd','en'))
+      this.personal1.controls.Phone.setValue(resp[0].mobileno)
+
+      this.education2.controls.EducationCategory.setValue(resp[1].heightqualification)
+      this.education2.controls.EducationDetails.setValue(resp[1].graducation)
+      this.education2.controls.SchoolName.setValue(resp[1].school)
+      this.education2.controls.College.setValue(resp[1].college)
+
+      this.profession3.controls.Occupation.setValue(resp[2].companydetails)
+      this.profession3.controls.OccupationDetails.setValue(resp[2].companydetails)
+      this.profession3.controls.CompanyName.setValue(resp[2].companydetails)
+      this.profession3.controls.PlaceofJob.setValue(resp[2].joblocation)
+      this.profession3.controls.WorkingSince.setValue(resp[2].yearofstart)
+      this.profession3.controls.AnnualIncome.setValue(resp[2].income)
+      this.profession3.controls.Jobtype.setValue(resp[2].jobtype)
+    })
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -147,9 +180,21 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createPersonalInfo(registration).subscribe(x => {
       this.divIndex = 2;
-    }, err => {
-      console.log(err);
     });
+  }
+
+  dateValidator(controlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      if (control.errors) {
+        return;
+      }
+      else if (new Date(control.value) >= new Date('01/01/1990')) {
+        control.setErrors({ dateValidatorshow: true });
+      } else {
+        control.setErrors(null);
+      }
+    }
   }
 
   onEducationSubmit() {
@@ -167,8 +212,6 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createEducation(education).subscribe(x => {
       this.divIndex = 3;
-    }, err => {
-      console.log(err);
     });
   }
 
@@ -189,8 +232,6 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createProfessional(profession).subscribe(x => {
       this.divIndex = 4;
-    }, err => {
-      console.log(err);
     });
   }
 
@@ -215,8 +256,6 @@ export class BiodataComponent implements OnInit {
     console.log(address);
     this.apiService.createAddress(address).subscribe(x => {
       this.divIndex = 5;
-    }, err => {
-      console.log(err);
     });
   }
 
@@ -244,8 +283,6 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createFamily(family).subscribe(x => {
       this.divIndex = 6;
-    }, err => {
-      console.log(err);
     });
   }
 
@@ -268,8 +305,6 @@ export class BiodataComponent implements OnInit {
 
     this.apiService.createReligious(partner).subscribe(x => {
       this.router.navigate(['/imageupload']);
-    }, err => {
-      console.log(err);
     });
   }
 

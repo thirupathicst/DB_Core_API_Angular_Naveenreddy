@@ -9,12 +9,26 @@ using DBRepository.Tables;
 
 namespace DBRepository.Repository
 {
-    public class EducationRepository: Repository<EducationDetails>, IEducationRepository
+    public class EducationRepository : Repository<EducationDetails>, IEducationRepository
     {
         private readonly IPersonalInfoRepository _personalInfo;
         public EducationRepository(NaveenReddyDbContext repositoryContext, IPersonalInfoRepository personalInfo) : base(repositoryContext)
         {
             _personalInfo = personalInfo;
+        }
+
+        public async Task<B_Education> SelectByIdAsync(int PersonId)
+        {
+            EducationDetails info = await base.GetSingleAsync(x => x.PersonId == PersonId);
+            B_Education education = new B_Education();
+            if (info != null)
+            {
+                education.College = info.College;
+                education.Graducation = info.Graducation;
+                education.Heightqualification = info.Heightqualification;
+                education.School = info.School;
+            }
+            return education;
         }
 
         public async Task<B_Education> CreateAsync(B_Education educationdetails)
@@ -28,7 +42,7 @@ namespace DBRepository.Repository
             education.PersonId = info.PersonId;
             education.Createddatetime = DateTime.Now;
 
-             await base.CreateAsync(education);
+            await base.CreateAsync(education);
             await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, info.PersonId);
             return educationdetails;
         }
@@ -36,16 +50,22 @@ namespace DBRepository.Repository
         public async Task<B_Education> UpdateAsync(B_Education educationdetails)
         {
             PersonalInfo info = await _personalInfo.SelectByIdAsync(educationdetails.PersonId);
-            EducationDetails education = new EducationDetails();
-            education.College = educationdetails.College;
-            education.Graducation = educationdetails.Graducation;
-            education.Heightqualification = educationdetails.Heightqualification;
-            education.School = educationdetails.School;
-            education.Updateddatetime = DateTime.Now;
+            if (info != null)
+            {
+                EducationDetails education = new EducationDetails();
+                education.College = educationdetails.College;
+                education.Graducation = educationdetails.Graducation;
+                education.Heightqualification = educationdetails.Heightqualification;
+                education.School = educationdetails.School;
+                education.Updateddatetime = DateTime.Now;
 
-            await base.UpdateAsync(education);
-
-            return educationdetails;
+                await base.UpdateAsync(education);
+                return educationdetails;
+            }
+            else
+            {
+                throw new NoDetailsFoundException();
+            }
         }
 
     }

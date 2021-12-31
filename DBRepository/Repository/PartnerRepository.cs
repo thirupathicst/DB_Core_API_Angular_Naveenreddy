@@ -13,7 +13,7 @@ namespace DBRepository.Repository
 
         }
 
-        public async Task<B_Partner> GetPartner(int PersonId)
+        public new async Task<B_Partner> SelectByIdAsync(int PersonId)
         {
             B_Partner partner = new B_Partner();
 
@@ -34,7 +34,7 @@ namespace DBRepository.Repository
                 partner.Religion = partnerInfo.Religion;
             }
 
-            return partner;
+            return new B_Partner();
         }
 
         public async Task<B_Partner> CreateAsync(B_Partner partner)

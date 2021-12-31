@@ -12,7 +12,7 @@ namespace DBRepository.Repository.Interfaces
    public interface IPersonalInfoRepository: IRepository<PersonalInfo>
     {
 
-        Task<B_PersonalInfo> GetRegistration(int PersonId);
+        Task<B_PersonalInfo> GetPersonByIdAsync(int PersonId);
         Task<B_Registration> CreateAsync(B_Registration b_Registration);
         Task<B_PersonalInfo> CreateAsync(B_PersonalInfo b_PersonalInfo);
 

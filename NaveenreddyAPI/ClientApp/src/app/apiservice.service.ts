@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +113,16 @@ export class APIServiceService {
 
   public updatePartner(Partner: object): Observable<any> {
     return this.http.put(`${this.bseAPI}/Partner`, Partner);
+  }
+
+  public getBioData():Observable<any>{
+    let personal=this.http.get(`${this.bseAPI}/Registration`);
+    let education=this.http.get(`${this.bseAPI}/Education`);
+    let profession=this.http.get(`${this.bseAPI}/Professional`);
+    let address=this.http.get(`${this.bseAPI}/Address`);
+    let family=this.http.get(`${this.bseAPI}/Family`);
+    let Religious=this.http.get(`${this.bseAPI}/Religious`);
+    return forkJoin([personal,education,profession,address,family,Religious])
   }
 
   private getHeaders(): HttpHeaders {

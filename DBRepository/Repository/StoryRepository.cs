@@ -16,6 +16,20 @@ namespace DBRepository.Repository
             
         }
 
+        public async Task<B_Story> SelectByIdAsync(int PersonId)
+        {
+            var story = await base.GetSingleAsync(x=>x.PersonId==PersonId);
+            B_Story _story=new B_Story();
+            if (_story != null)
+            {
+                _story.Description = story.Description;
+                _story.Name = story.Name;
+                _story.MarriageDate = story.Marriagedate;
+                _story.PersonId = story.PersonId;
+            }
+             return _story;
+        }
+
         public async Task<B_Story> CreateAsync(B_Story story)
         {
             Story _story = new Story()
@@ -32,7 +46,7 @@ namespace DBRepository.Repository
 
         public async Task<B_Story> UpdateAsync(B_Story story)
         {
-            var _story = await SelectByIdAsync(story.PersonId);
+            var _story = await base.GetSingleAsync(x=>x.PersonId==story.PersonId);
             if (_story != null)
             {
                 _story.Description = story.Description;

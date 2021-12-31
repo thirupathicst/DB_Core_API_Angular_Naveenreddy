@@ -17,6 +17,29 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
+        public async Task<B_Family> SelectByIdAsync(int PersonId)
+        {
+            FamilyDetails familydetails = await base.GetSingleAsync(x => x.PersonId == PersonId);
+            B_Family family = new B_Family();
+            if (family != null)
+            {
+                family.Brotheroccupation = familydetails.Brotheroccupation;
+                family.Noofbrothersmarrried = familydetails.Noofbrothersmarrried;
+                family.Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried;
+                family.Fathername = familydetails.Fathername;
+                family.Fatheroccupation = familydetails.Fatheroccupation;
+                family.Mothername = familydetails.Mothername;
+                family.Motheroccupation = familydetails.Motheroccupation;
+                family.Noofbrothers = familydetails.Noofbrothers;
+                family.Noofsisters = familydetails.Noofsisters;
+                family.Noofsistersmarrried = familydetails.Noofsistersmarrried;
+                family.Noofsistersunmarrried = familydetails.Noofsistersunmarrried;
+                family.Sisteroccupation = familydetails.Sisteroccupation;
+
+            }
+            return family;
+        }
+
         public async Task<B_Family> CreateAsync(B_Family familydetails)
         {
             PersonalInfo info = await _personalInfo.SelectByIdAsync(familydetails.PersonId);
@@ -63,8 +86,12 @@ namespace DBRepository.Repository
                 family.Updateddatetime = DateTime.Now;
 
                 await base.UpdateAsync(family);
+                return familydetails;
             }
-            return familydetails;
+            else
+            {
+                throw new NoDetailsFoundException();
+            }
         }
     }
 }

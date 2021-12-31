@@ -27,6 +27,13 @@ namespace NaveenreddyAPI.Controllers
             _tokenManager = tokenManager;
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(B_Religious), 200)]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _repository.SelectByIdAsync(_tokenManager.GetUserId()));
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(B_Religious), 200)]
         public async Task<IActionResult> Post(B_Religious religious)

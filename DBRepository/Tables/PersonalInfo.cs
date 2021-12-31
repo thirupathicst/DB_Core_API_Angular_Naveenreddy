@@ -111,6 +111,13 @@ namespace DBRepository.Tables
         [StringLength(100)]
         public string Joblocation { get; set; }
         public int Income { get; set; }
+
+        [StringLength(100)]
+        public string Professiondetails{get;set;}
+        
+        [StringLength(100)]
+        public string Professiontype{get;set;}
+
         [StringLength(100)]
         public string Companydetails { get; set; }
         [StringLength(20)]

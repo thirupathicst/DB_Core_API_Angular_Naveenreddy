@@ -28,9 +28,10 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(typeof(B_Education), 200)]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            return Ok(await _repository.SelectByIdAsync(_tokenManager.GetUserId()));
         }
 
         [HttpPost]

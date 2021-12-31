@@ -26,7 +26,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_Partner), 200)]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _repository.GetPartner(_tokenManager.GetUserId()));
+            return Ok(await _repository.SelectByIdAsync(_tokenManager.GetUserId()));
         }
 
         [HttpPut]

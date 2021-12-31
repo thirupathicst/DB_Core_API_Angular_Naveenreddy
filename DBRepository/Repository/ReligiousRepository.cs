@@ -17,6 +17,24 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
+        public async Task<B_Religious> SelectByIdAsync(int PersonId)
+        {
+            ReligiousDetails religious = await base.GetSingleAsync(x => x.PersonId == PersonId);
+            B_Religious religiousdetails = new B_Religious();
+            if (religious != null)
+            {
+                religiousdetails.Caste = religious.Caste;
+                religiousdetails.Gothram = religious.Gothram;
+                religiousdetails.MotherTongue = religious.Mothertongue;
+                religiousdetails.Raasi = religious.Raasi;
+                religiousdetails.Religion = religious.Religion;
+                religiousdetails.Star = religious.Star;
+                religiousdetails.Subcaste = religious.Subcaste;
+            }
+
+            return religiousdetails;
+        }
+
         public async Task<B_Religious> CreateAsync(B_Religious religious)
         {
             PersonalInfo info = await _personalInfo.SelectByIdAsync(religious.PersonId);
@@ -43,7 +61,7 @@ namespace DBRepository.Repository
             religiousdetails.Caste = religious.Caste;
             religiousdetails.Gothram = religious.Gothram;
             religiousdetails.Mothertongue = religious.MotherTongue;
-            religious.Raasi = religious.Raasi;
+            religiousdetails.Raasi = religious.Raasi;
             religiousdetails.Religion = religious.Religion;
             religiousdetails.Star = religious.Star;
             religiousdetails.Subcaste = religious.Subcaste;

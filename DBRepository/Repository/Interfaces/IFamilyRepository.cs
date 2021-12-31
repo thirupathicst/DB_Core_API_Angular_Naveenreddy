@@ -10,6 +10,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IFamilyRepository : IRepository<FamilyDetails>
     {
+        Task<B_Family> SelectByIdAsync(int PersonId);
         Task<B_Family> CreateAsync(B_Family familydetails);
 
         Task<B_Family> UpdateAsync(B_Family familydetails);

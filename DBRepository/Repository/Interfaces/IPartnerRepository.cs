@@ -7,7 +7,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IPartnerRepository : IRepository<PartnerInfo>
     {
-        Task<B_Partner> GetPartner(int PersonId);
+        Task<B_Partner> SelectByIdAsync(int PersonId);
         Task<B_Partner> CreateAsync(B_Partner partner);
     }
 }

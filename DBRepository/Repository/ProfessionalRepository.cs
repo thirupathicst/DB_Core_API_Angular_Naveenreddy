@@ -17,6 +17,24 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
+        public async Task<B_Professional> SelectByIdAsync(int PersonId)
+        {
+            ProfessionalDetails info = await base.GetSingleAsync(x => x.PersonId == PersonId);
+            B_Professional professionaldetails = new B_Professional();
+            if (info != null)
+            {
+                professionaldetails.Companydetails = info.Companydetails;
+                professionaldetails.Income = info.Income;
+                professionaldetails.Joblocation = info.Joblocation;
+                professionaldetails.Jobtype = info.Jobtype;
+                professionaldetails.Yearofstart = info.Yearofstart;
+                professionaldetails.PersonId = info.PersonId;
+                professionaldetails.Professiontype = info.Professiontype;
+                professionaldetails.Professiondetails = info.Professiondetails;
+            }
+            return professionaldetails;
+        }
+
         public async Task<B_Professional> CreateAsync(B_Professional professional)
         {
             PersonalInfo info = await _personalInfo.SelectByIdAsync(professional.PersonId);
@@ -26,6 +44,8 @@ namespace DBRepository.Repository
             professionaldetails.Joblocation = professional.Joblocation;
             professionaldetails.Jobtype = professional.Jobtype;
             professionaldetails.Yearofstart = professional.Yearofstart;
+            professionaldetails.Professiontype = professional.Professiontype;
+            professionaldetails.Professiondetails = professional.Professiondetails;
             professionaldetails.PersonId = info.PersonId;
             professionaldetails.Createddatetime = DateTime.Now;
 
@@ -43,6 +63,8 @@ namespace DBRepository.Repository
             professionaldetails.Joblocation = professional.Joblocation;
             professionaldetails.Jobtype = professional.Jobtype;
             professionaldetails.Yearofstart = professional.Yearofstart;
+            professionaldetails.Professiontype = professional.Professiontype;
+            professionaldetails.Professiondetails = professional.Professiondetails;
             professionaldetails.PersonId = info.PersonId;
             professionaldetails.Updateddatetime = DateTime.Now;
 

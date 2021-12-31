@@ -33,7 +33,7 @@ namespace NaveenreddyAPI.Controllers
         [ProducesResponseType(typeof(B_PersonalInfo), 200)]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _repository.GetRegistration(_tokenManager.GetUserId()));
+            return Ok(await _repository.GetPersonByIdAsync(_tokenManager.GetUserId()));
         }
 
         [HttpPost]
