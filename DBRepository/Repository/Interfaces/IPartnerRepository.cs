@@ -9,5 +9,6 @@ namespace DBRepository.Repository.Interfaces
     {
         Task<B_Partner> SelectByIdAsync(int PersonId);
         Task<B_Partner> CreateAsync(B_Partner partner);
+        Task<B_Partner> UpdateAsync(B_Partner partner);
     }
 }

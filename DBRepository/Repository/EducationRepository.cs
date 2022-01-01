@@ -33,26 +33,32 @@ namespace DBRepository.Repository
 
         public async Task<B_Education> CreateAsync(B_Education educationdetails)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(educationdetails.PersonId);
-            EducationDetails education = new EducationDetails();
-            education.College = educationdetails.College;
-            education.Graducation = educationdetails.Graducation;
-            education.Heightqualification = educationdetails.Heightqualification;
-            education.School = educationdetails.School;
-            education.PersonId = info.PersonId;
-            education.Createddatetime = DateTime.Now;
+            EducationDetails education = await base.GetSingleAsync(x => x.PersonId == educationdetails.PersonId);
+            if (education == null)
+            {
+                education = new EducationDetails();
+                education.College = educationdetails.College;
+                education.Graducation = educationdetails.Graducation;
+                education.Heightqualification = educationdetails.Heightqualification;
+                education.School = educationdetails.School;
+                education.PersonId = educationdetails.PersonId;
+                education.Createddatetime = DateTime.Now;
 
-            await base.CreateAsync(education);
-            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, info.PersonId);
-            return educationdetails;
+                await base.CreateAsync(education);
+                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, educationdetails.PersonId);
+                return educationdetails;
+            }
+            else
+            {
+                return new B_Education();
+            }
         }
 
         public async Task<B_Education> UpdateAsync(B_Education educationdetails)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(educationdetails.PersonId);
-            if (info != null)
+            EducationDetails education = await base.GetSingleAsync(x => x.PersonId == educationdetails.PersonId);
+            if (education != null)
             {
-                EducationDetails education = new EducationDetails();
                 education.College = educationdetails.College;
                 education.Graducation = educationdetails.Graducation;
                 education.Heightqualification = educationdetails.Heightqualification;

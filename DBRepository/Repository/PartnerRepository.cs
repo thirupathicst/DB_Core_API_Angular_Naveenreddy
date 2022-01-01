@@ -39,17 +39,13 @@ namespace DBRepository.Repository
 
         public async Task<B_Partner> CreateAsync(B_Partner partner)
         {
-            var _partnerInfo = await GetSingleAsync(x => x.PersonId == partner.PersonId);
-            if (_partnerInfo != null)
+            PartnerInfo partnerInfo = await base.GetSingleAsync(x => x.PersonId == partner.PersonId);
+            if (partnerInfo == null)
             {
-                await UpdateAsync(partner, _partnerInfo);
-            }
-            else
-            {
-                PartnerInfo partnerInfo = new PartnerInfo()
+                partnerInfo = new PartnerInfo()
                 {
                     Age = partner.Age,
-                    Height=partner.Height,
+                    Height = partner.Height,
                     Complexion = partner.Complexion,
                     Caste = partner.Caste,
                     Citizen = partner.Citizen,
@@ -61,30 +57,43 @@ namespace DBRepository.Repository
                     Occupation = partner.Occupation,
                     Religion = partner.Religion,
                     PersonId = partner.PersonId,
-                    Createddatetime=System.DateTime.Now
+                    Createddatetime = System.DateTime.Now
                 };
                 await base.CreateAsync(partnerInfo);
+                return partner;
             }
-            return partner;
+            else
+            {
+                return new B_Partner();
+            }
         }
 
-        private async Task UpdateAsync(B_Partner partner, PartnerInfo partnerInfo)
+        public async Task<B_Partner> UpdateAsync(B_Partner partner)
         {
-            partnerInfo.Age = partner.Age;
-            partnerInfo.Height=partner.Height;
-            partnerInfo.Complexion = partner.Complexion;
-            partnerInfo.Caste = partner.Caste;
-            partnerInfo.Citizen = partner.Citizen;
-            partnerInfo.Country = partner.Country;
-            partnerInfo.Maritalstatus = partner.Maritalstatus;
-            partnerInfo.Mothertongue = partner.Mothertongue;
-            partnerInfo.Education = partner.Education;
-            partnerInfo.State = partner.State;
-            partnerInfo.Occupation = partner.Occupation;
-            partnerInfo.Religion = partner.Religion;
-            partnerInfo.Updateddatetime=System.DateTime.Now;
+            PartnerInfo partnerInfo = await base.GetSingleAsync(x => x.PersonId == partner.PersonId);
+            if (partnerInfo != null)
+            {
+                partnerInfo.Age = partner.Age;
+                partnerInfo.Height = partner.Height;
+                partnerInfo.Complexion = partner.Complexion;
+                partnerInfo.Caste = partner.Caste;
+                partnerInfo.Citizen = partner.Citizen;
+                partnerInfo.Country = partner.Country;
+                partnerInfo.Maritalstatus = partner.Maritalstatus;
+                partnerInfo.Mothertongue = partner.Mothertongue;
+                partnerInfo.Education = partner.Education;
+                partnerInfo.State = partner.State;
+                partnerInfo.Occupation = partner.Occupation;
+                partnerInfo.Religion = partner.Religion;
+                partnerInfo.Updateddatetime = System.DateTime.Now;
 
-            await base.UpdateAsync(partnerInfo);
+                await base.UpdateAsync(partnerInfo);
+                return partner;
+            }
+            else
+            {
+                throw new NoDetailsFoundException();
+            }
         }
 
     }

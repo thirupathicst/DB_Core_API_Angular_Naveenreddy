@@ -1,7 +1,7 @@
 <div class="col-md-12 p-b-0 p-t-0">
 
     <!-- Stepers Wrapper -->
-    <ul class="stepper stepper-horizontal p-0">
+    <ul class="stepper stepper-horizontal p-0" *ngIf="!editBiodata">
 
         <!-- First Step completed -->
         <li [ngClass]="{'active': divIndex==1}">
@@ -49,7 +49,56 @@
         </li>
 
     </ul>
-    <!-- /.Stepers Wrapper -->
+
+     <!-- Edit Stepers Wrapper -->
+     <ul class="stepper stepper-horizontal p-0" *ngIf="editBiodata">
+
+        <!-- First Step completed -->
+        <li class="active">
+            <a (click)="stepperNext(0)">
+                <span class="circle">1</span>
+                <span class="label text-success">Personal</span>
+            </a>
+        </li>
+
+        <!-- Second Step -->
+        <li class="active">
+            <a (click)="stepperNext(1)">
+                <span class="circle">2</span>
+                <span class="label text-success">Education</span>
+            </a>
+        </li>
+
+        <!-- Third Step -->
+        <li class="active">
+            <a (click)="stepperNext(2)">
+                <span class="circle">3</span>
+                <span class="label text-success">Profession</span>
+            </a>
+        </li>
+
+        <li class="active">
+            <a (click)="stepperNext(3)">
+                <span class="circle">4</span>
+                <span class="label text-success">Contact</span>
+            </a>
+        </li>
+
+        <li class="active">
+            <a (click)="stepperNext(4)">
+                <span class="circle">5</span>
+                <span class="label text-success">Family</span>
+            </a>
+        </li>
+
+        <li class="active">
+            <a (click)="stepperNext(5)" class="active">
+                <span class="circle">6</span>
+                <span class="label text-success">Partner</span>
+            </a>
+        </li>
+
+    </ul>
 
 </div>
 
@@ -198,9 +247,15 @@
                         </div>
                     </div>
 
-                    <div class="col-6 offset-md-4">
+                    <div class="col-6 offset-md-4" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next
+                        </button>
+                    </div>
+
+                    <div class="col-6 offset-md-4" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>
@@ -266,9 +321,15 @@
                             type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next
+                        </button>
+                    </div>
+
+                    <div class="col-6" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>
@@ -370,9 +431,15 @@
                             type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next
+                        </button>
+                    </div>
+
+                    <div class="col-6" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>
@@ -388,16 +455,6 @@
             <mdb-card-body>
 
                 <div class="form-row">
-                    <div class="col-6">
-                        <div class="md-form md-outline">
-                            <select formControlName="CitizenOf" class="browser-default custom-select"
-                                [ngClass]="{'is-invalid': submitted4 && f4.CitizenOf.errors,'is-valid': submitted4}">
-                                <option value="">Select citizen</option>
-                                <option *ngFor="let c of optionsSelect" [ngValue]="c.value">{{c.label}}</option>
-                            </select>
-                            <mdb-error *ngIf="submitted4 && f4.CitizenOf.invalid">Citizen of is required</mdb-error>
-                        </div>
-                    </div>
 
                     <div class="col-6">
                         <div class="md-form md-outline">
@@ -468,18 +525,6 @@
 
                     <div class="col-6">
                         <div class="md-form md-outline">
-                            <select id="Region" class="browser-default custom-select"
-                                [ngClass]="{'is-invalid': submitted4 && f4.Region.errors,'is-valid':submitted4}"
-                                formControlName="Region">
-                                <option value="">Select Region</option>
-                                <option *ngFor="let c of optionsRegion" [ngValue]="c.value">{{c.label}}</option>
-                            </select>
-                            <mdb-error *ngIf="submitted4 && f4.Region.invalid">Region is required</mdb-error>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="md-form md-outline">
                             <textarea id="ContactAddress" class="md-textarea form-control" mdbInput
                                 [ngClass]="{'invalid': submitted4 && f4.ContactAddress.errors,'valid': submitted4}"
                                 formControlName="ContactAddress" rows="3"></textarea>
@@ -489,15 +534,31 @@
                         </div>
                     </div>
 
-                    <div class="col-6">&nbsp;</div>
+                    <div class="col-6">
+                        <div class="md-form md-outline">
+                            <textarea id="PerminentAddress" class="md-textarea form-control" mdbInput
+                                [ngClass]="{'invalid': submitted4 && f4.PerminentAddress.errors,'valid': submitted4}"
+                                formControlName="PerminentAddress" rows="3"></textarea>
+                            <label for="PerminentAddress">Contact Address</label>
+                            <mdb-error *ngIf="submitted4 && f4.PerminentAddress.invalid">Perminent address is required
+                            </mdb-error>
+                        </div>
+                    </div>
+                    
                     <div class="col-md-2 offset-md-4">
                         <button class="default" mdbBtn color="light" (click)="clickBack(4)" mdbWavesEffect
                             type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next
+                        </button>
+                    </div>
+
+                    <div class="col-6" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>
@@ -647,9 +708,15 @@
                             type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Next
+                        </button>
+                    </div>
+
+                    <div class="col-6" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>
@@ -685,16 +752,6 @@
                                 <option *ngFor="let c of optionsCaste" [ngValue]="c.value">{{c.label}}</option>
                             </select>
                             <mdb-error *ngIf="submitted6 && f6.Caste.invalid">Caste is required</mdb-error>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="md-form md-outline">
-                            <input id="SubCaste" type="text" class="form-control" mdbInput
-                                [ngClass]="{'invalid': submitted6 && f6.SubCaste.errors,'valid': submitted6}"
-                                formControlName="SubCaste">
-                            <label for="SubCaste">Sub Caste</label>
-                            <mdb-error *ngIf="submitted6 && f6.SubCaste.invalid">SubCaste is required</mdb-error>
                         </div>
                     </div>
 
@@ -747,9 +804,15 @@
                             type="button">Back <mdb-icon fas icon="chevron-left" class="ml-1"></mdb-icon></button>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="!editBiodata">
                         <button class="primary" mdbBtn color="primary" mdbWavesEffect>
                             <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon>Save
+                        </button>
+                    </div>
+
+                    <div class="col-6" *ngIf="editBiodata">
+                        <button class="secondary" mdbBtn color="secondary" mdbWavesEffect>
+                            <mdb-icon fas icon="chevron-right" class="mr-1"></mdb-icon> Update
                         </button>
                     </div>
                 </div>

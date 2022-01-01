@@ -25,6 +25,8 @@ export class BiodataComponent implements OnInit {
   submitted5 = false;
   submitted6 = false;
 
+  editBiodata: boolean = false;
+
   divIndex: number = 1;
   optionsSelect = AppConstants.Countries;
   optionsStates = AppConstants.States;
@@ -69,7 +71,6 @@ export class BiodataComponent implements OnInit {
     })
 
     this.contact4 = this.formBuilder.group({
-      CitizenOf: ['', Validators.required],
       CountryLivingIn: ['', Validators.required],
       VisaStatus: ['', Validators.required],
       StateLivingIn: ['', Validators.required],
@@ -77,7 +78,7 @@ export class BiodataComponent implements OnInit {
       NativePlace: ['', Validators.required],
       SettledPlace: ['', Validators.required],
       ContactAddress: ['', Validators.required],
-      Region: ['', Validators.required],
+      PerminentAddress: ['', Validators.required],
     })
 
     this.family5 = this.formBuilder.group({
@@ -98,7 +99,6 @@ export class BiodataComponent implements OnInit {
     this.partner6 = this.formBuilder.group({
       Religion: ['', Validators.required],
       Caste: ['', Validators.required],
-      SubCaste: ['', Validators.required],
       Star: ['', Validators.required],
       Raasi: ['', Validators.required],
       Gothram: ['', Validators.required],
@@ -130,33 +130,64 @@ export class BiodataComponent implements OnInit {
   get f6() { return this.partner6.controls; }
 
   ngAfterViewInit(): void {
-    this.apiService.getBioData().subscribe(resp => {
-      console.log(resp[2])
+    if (this.editBiodata) {
+      this.apiService.getBioData().subscribe(resp => {
 
-      this.personal1.controls.Name.setValue(resp[0].name)
-      this.personal1.controls.Gender.setValue(resp[0].gender)
-      this.personal1.controls.PlaceOfBirth.setValue(resp[0].placeofbirth)
-      this.personal1.controls.TimeOfBirth.setValue(resp[0].timeofbirth)
-      this.personal1.controls.MaritalStatus.setValue(resp[0].maritalstatus)
-      this.personal1.controls.Height.setValue(resp[0].height)
-      this.personal1.controls.Complexion.setValue(resp[0].complexion)
-      this.personal1.controls.Yourself.setValue(resp[0].yourself)
-      this.personal1.controls.Dateofbirth.setValue(formatDate(resp[0].dateofbirth,'yyyy-MM-dd','en'))
-      this.personal1.controls.Phone.setValue(resp[0].mobileno)
+        this.personal1.controls.Name.setValue(resp[0].name)
+        this.personal1.controls.Gender.setValue(resp[0].gender)
+        this.personal1.controls.PlaceOfBirth.setValue(resp[0].placeofbirth)
+        this.personal1.controls.TimeOfBirth.setValue(resp[0].timeofbirth)
+        this.personal1.controls.MaritalStatus.setValue(resp[0].maritalstatus)
+        this.personal1.controls.Height.setValue(resp[0].height)
+        this.personal1.controls.Complexion.setValue(resp[0].complexion)
+        this.personal1.controls.Yourself.setValue(resp[0].yourself)
+        this.personal1.controls.Dateofbirth.setValue(formatDate(resp[0].dateofbirth, 'yyyy-MM-dd', 'en'))
+        this.personal1.controls.Phone.setValue(resp[0].mobileno)
 
-      this.education2.controls.EducationCategory.setValue(resp[1].heightqualification)
-      this.education2.controls.EducationDetails.setValue(resp[1].graducation)
-      this.education2.controls.SchoolName.setValue(resp[1].school)
-      this.education2.controls.College.setValue(resp[1].college)
+        this.education2.controls.EducationCategory.setValue(resp[1].heightqualification)
+        this.education2.controls.EducationDetails.setValue(resp[1].graducation)
+        this.education2.controls.SchoolName.setValue(resp[1].school)
+        this.education2.controls.College.setValue(resp[1].college)
 
-      this.profession3.controls.Occupation.setValue(resp[2].companydetails)
-      this.profession3.controls.OccupationDetails.setValue(resp[2].companydetails)
-      this.profession3.controls.CompanyName.setValue(resp[2].companydetails)
-      this.profession3.controls.PlaceofJob.setValue(resp[2].joblocation)
-      this.profession3.controls.WorkingSince.setValue(resp[2].yearofstart)
-      this.profession3.controls.AnnualIncome.setValue(resp[2].income)
-      this.profession3.controls.Jobtype.setValue(resp[2].jobtype)
-    })
+        this.profession3.controls.Occupation.setValue(resp[2].companydetails)
+        this.profession3.controls.OccupationDetails.setValue(resp[2].companydetails)
+        this.profession3.controls.CompanyName.setValue(resp[2].companydetails)
+        this.profession3.controls.PlaceofJob.setValue(resp[2].joblocation)
+        this.profession3.controls.WorkingSince.setValue(resp[2].yearofstart)
+        this.profession3.controls.AnnualIncome.setValue(resp[2].income)
+        this.profession3.controls.Jobtype.setValue(resp[2].jobtype)
+
+        this.contact4.controls.CountryLivingIn.setValue(resp[3].country)
+        this.contact4.controls.VisaStatus.setValue(resp[3].visa)
+        this.contact4.controls.StateLivingIn.setValue(resp[3].state)
+        this.contact4.controls.CityLivingIn.setValue(resp[3].district)
+        this.contact4.controls.NativePlace.setValue(resp[3].native)
+        this.contact4.controls.SettledPlace.setValue(resp[3].settled)
+        this.contact4.controls.ContactAddress.setValue(resp[3].contactAddress)
+        this.contact4.controls.PerminentAddress.setValue(resp[3].permanentAddress)
+
+        this.family5.controls.FatherName.setValue(resp[4].fathername)
+        this.family5.controls.MotherName.setValue(resp[4].mothername)
+        this.family5.controls.NoOfBrothers.setValue(resp[4].noofbrothers)
+        this.family5.controls.NoOfBrotherUnmarried.setValue(resp[4].noofbrothersunmarrried)
+        this.family5.controls.NoOfBrotherMarried.setValue(resp[4].noofbrothersmarrried)
+        this.family5.controls.BrotherOccupation.setValue(resp[4].brotheroccupation)
+        this.family5.controls.FathersOccupation.setValue(resp[4].fatheroccupation)
+        this.family5.controls.MothersOccupation.setValue(resp[4].motheroccupation)
+        this.family5.controls.NoOfSister.setValue(resp[4].noofsisters)
+        this.family5.controls.NoOfSisterMarried.setValue(resp[4].noofsistersmarrried)
+        this.family5.controls.NoOfSisterUnmarried.setValue(resp[4].noofsistersunmarrried)
+        this.family5.controls.SisterOccupation.setValue(resp[4].sisteroccupation)
+
+        this.partner6.controls.Religion.setValue(resp[5].religion)
+        this.partner6.controls.Caste.setValue(resp[5].caste)
+        this.partner6.controls.Star.setValue(resp[5].star)
+        this.partner6.controls.Raasi.setValue(resp[5].raasi)
+        this.partner6.controls.Gothram.setValue(resp[5].gothram)
+        this.partner6.controls.MotherTongue.setValue(resp[5].motherTongue)
+
+      })
+    }
   }
 
   onSubmit() {
@@ -178,9 +209,16 @@ export class BiodataComponent implements OnInit {
       Dateofbirth: this.personal1.controls.Dateofbirth.value,
     }
 
-    this.apiService.createPersonalInfo(registration).subscribe(x => {
-      this.divIndex = 2;
-    });
+    if (!this.editBiodata) {
+      this.apiService.createPersonalInfo(registration).subscribe(x => {
+        this.divIndex = 2;
+      });
+    }
+    else {
+      this.apiService.updateRegistration(registration).subscribe(x => {
+        this.divIndex = 2;
+      });
+    }
   }
 
   dateValidator(controlName: string) {
@@ -210,9 +248,16 @@ export class BiodataComponent implements OnInit {
       College: this.education2.controls.College.value,
     }
 
-    this.apiService.createEducation(education).subscribe(x => {
-      this.divIndex = 3;
-    });
+    if (!this.editBiodata) {
+      this.apiService.createEducation(education).subscribe(x => {
+        this.divIndex = 3;
+      })
+    }
+    else {
+      this.apiService.updateEducation(education).subscribe(x => {
+        this.divIndex = 3;
+      })
+    }
   }
 
   onProfessionSubmit() {
@@ -228,11 +273,20 @@ export class BiodataComponent implements OnInit {
       Income: this.profession3.controls.AnnualIncome.value,
       Companydetails: this.profession3.controls.OccupationDetails.value,
       Jobtype: this.profession3.controls.Jobtype.value,
+      Professiondetails: this.profession3.controls.OccupationDetails.value,
+      Professiontype: this.profession3.controls.Occupation.value,
     }
 
-    this.apiService.createProfessional(profession).subscribe(x => {
-      this.divIndex = 4;
-    });
+    if (!this.editBiodata) {
+      this.apiService.createProfessional(profession).subscribe(x => {
+        this.divIndex = 4;
+      })
+    }
+    else {
+      this.apiService.updateProfessional(profession).subscribe(x => {
+        this.divIndex = 4;
+      })
+    }
   }
 
   onContactSubmit() {
@@ -245,18 +299,24 @@ export class BiodataComponent implements OnInit {
     let address = {
       ContactAddress: this.contact4.controls.ContactAddress.value,
       Visa: this.contact4.controls.VisaStatus.value,
-      Pincode: 0,
       District: this.contact4.controls.CityLivingIn.value,
       State: this.contact4.controls.StateLivingIn.value,
       Country: this.contact4.controls.CountryLivingIn.value,
       Settled: this.contact4.controls.SettledPlace.value,
       Native: this.contact4.controls.NativePlace.value,
-      PermanentAddress: this.contact4.controls.CitizenOf.value,
+      PermanentAddress: this.contact4.controls.PerminentAddress.value,
     }
-    console.log(address);
-    this.apiService.createAddress(address).subscribe(x => {
-      this.divIndex = 5;
-    });
+
+    if (!this.editBiodata) {
+      this.apiService.createAddress(address).subscribe(x => {
+        this.divIndex = 5;
+      })
+    }
+    else {
+      this.apiService.updateAddress(address).subscribe(x => {
+        this.divIndex = 5;
+      })
+    }
   }
 
   onFamilySubmit() {
@@ -281,9 +341,16 @@ export class BiodataComponent implements OnInit {
       Sisteroccupation: this.family5.controls.SisterOccupation.value,
     }
 
-    this.apiService.createFamily(family).subscribe(x => {
-      this.divIndex = 6;
-    });
+    if (!this.editBiodata) {
+      this.apiService.createFamily(family).subscribe(x => {
+        this.divIndex = 6;
+      })
+    }
+    else {
+      this.apiService.updateFamily(family).subscribe(x => {
+        this.divIndex = 6;
+      })
+    }
   }
 
   onPartnerSubmit() {
@@ -296,19 +363,29 @@ export class BiodataComponent implements OnInit {
     let partner = {
       Religion: this.partner6.controls.Religion.value,
       Caste: this.partner6.controls.Caste.value,
-      Subcaste: this.partner6.controls.SubCaste.value,
       Star: this.partner6.controls.Star.value,
       Raasi: this.partner6.controls.Raasi.value,
       Gothram: this.partner6.controls.Gothram.value,
       MotherTongue: this.partner6.controls.MotherTongue.value,
     }
 
-    this.apiService.createReligious(partner).subscribe(x => {
-      this.router.navigate(['/imageupload']);
-    });
+    if (!this.editBiodata) {
+      this.apiService.createReligious(partner).subscribe(x => {
+        this.router.navigate(['/imageupload']);
+      })
+    }
+    else {
+      this.apiService.updateReligious(partner).subscribe(x => {
+        this.router.navigate(['/imageupload']);
+      })
+    }
   }
 
   clickBack(e) {
     this.divIndex = e - 1;
+  }
+
+  stepperNext(index) {
+    this.divIndex = index + 1;
   }
 }

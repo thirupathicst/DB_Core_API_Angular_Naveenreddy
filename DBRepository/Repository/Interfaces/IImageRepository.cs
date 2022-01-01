@@ -11,6 +11,5 @@ namespace DBRepository.Repository.Interfaces
     public interface IImageRepository : IRepository<Images>
     {
         Task<B_Images> CreateAsync(B_Images images);
-        Task<B_Images> UpdateAsync(B_Images images);
     }
 }

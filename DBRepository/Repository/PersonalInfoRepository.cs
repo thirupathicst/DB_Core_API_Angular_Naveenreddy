@@ -21,19 +21,19 @@ namespace DBRepository.Repository
         {
             PersonalInfo personalInfo = await base.SelectByIdAsync(PersonId);
             B_PersonalInfo info = new B_PersonalInfo();
-            if (info != null)
+            if (personalInfo != null)
             {
                 info.Name=personalInfo.Name;
-                info.Mobileno = personalInfo.Mobileno.Value;
-                info.Height = personalInfo.Height.Value;
+                info.Mobileno = personalInfo.Mobileno.GetValueOrDefault();
+                info.Height = personalInfo.Height.GetValueOrDefault();
                 info.Gender = personalInfo.Gender;
-                info.Dateofbirth = personalInfo.Dateofbirth.Value;
+                info.Dateofbirth = personalInfo.Dateofbirth.GetValueOrDefault();
                 info.Timeofbirth = personalInfo.Timeofbirth;
                 info.Complexion = personalInfo.Complexion;
                 info.Yourself = personalInfo.Yourself;
                 info.Maritalstatus = personalInfo.Maritalstatus;
                 info.Placeofbirth = personalInfo.Placeofbirth;
-                info.Age = personalInfo.Age.Value;
+                info.Age = personalInfo.Age.GetValueOrDefault();
             }
             return info;
         }

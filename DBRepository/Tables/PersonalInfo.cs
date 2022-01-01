@@ -66,7 +66,7 @@ namespace DBRepository.Tables
         [StringLength(250)]
         public string Contactaddress { get; set; }
         public string Visa { get; set; }
-        public int Pincode { get; set; }
+
         [StringLength(50)]
         public string District { get; set; }
         [StringLength(50)]
@@ -90,7 +90,6 @@ namespace DBRepository.Tables
         public int ReligiousId { get; set; }
         public string Religion { get; set; }
         public string Caste { get; set; }
-        public string Subcaste { get; set; }
         public string Star { get; set; }
         public string Raasi { get; set; }
         [StringLength(50)]

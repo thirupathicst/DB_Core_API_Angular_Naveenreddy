@@ -59,6 +59,16 @@ namespace NaveenreddyAPI.Controllers
             return Ok(image);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int Id)
+        {
+
+            var _files = await _repository.GetSingleAsync(x => x.PersonId == _tokenManager.GetUserId() && x.ImageId == Id);
+            new FileInfo(_files.Physicalpath).Delete();
+            _logger.LogInformation($"file deleted: {_files.Physicalpath}");
+            return NoContent();
+        }
+
         private bool CreaateImageDirectory(string path)
         {
             if (!Directory.Exists(path))

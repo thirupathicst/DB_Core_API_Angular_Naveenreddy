@@ -11,7 +11,6 @@ namespace BusinesEntites
         public string PermanentAddress { get; set; }
         public string ContactAddress { get; set; }
         public string Visa { get; set; }
-        public int Pincode { get; set; }
         public string District { get; set; }
         public string State { get; set; }
         public string Country { get; set; }

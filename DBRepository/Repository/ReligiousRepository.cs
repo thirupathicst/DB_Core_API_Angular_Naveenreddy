@@ -9,7 +9,7 @@ using DBRepository.Tables;
 
 namespace DBRepository.Repository
 {
-    public class ReligiousRepository: Repository<ReligiousDetails>, IReligiousRepository
+    public class ReligiousRepository : Repository<ReligiousDetails>, IReligiousRepository
     {
         private readonly IPersonalInfoRepository _personalInfo;
         public ReligiousRepository(NaveenReddyDbContext repositoryContext, IPersonalInfoRepository personalInfo) : base(repositoryContext)
@@ -29,7 +29,6 @@ namespace DBRepository.Repository
                 religiousdetails.Raasi = religious.Raasi;
                 religiousdetails.Religion = religious.Religion;
                 religiousdetails.Star = religious.Star;
-                religiousdetails.Subcaste = religious.Subcaste;
             }
 
             return religiousdetails;
@@ -37,39 +36,49 @@ namespace DBRepository.Repository
 
         public async Task<B_Religious> CreateAsync(B_Religious religious)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(religious.PersonId);
-            ReligiousDetails religiousdetails = new ReligiousDetails();
-            religiousdetails.Caste = religious.Caste;
-            religiousdetails.Gothram = religious.Gothram;
-            religiousdetails.Mothertongue = religious.MotherTongue;
-            religiousdetails.Raasi = religious.Raasi;
-            religiousdetails.Religion = religious.Religion;
-            religiousdetails.Star = religious.Star;
-            religiousdetails.Subcaste = religious.Subcaste;
-            religiousdetails.PersonId = info.PersonId;
-            religiousdetails.Createddatetime = DateTime.Now;
+            ReligiousDetails religiousdetails = await base.GetSingleAsync(x => x.PersonId == religious.PersonId);
+            if (religiousdetails == null)
+            {
+                religiousdetails = new ReligiousDetails();
+                religiousdetails.Caste = religious.Caste;
+                religiousdetails.Gothram = religious.Gothram;
+                religiousdetails.Mothertongue = religious.MotherTongue;
+                religiousdetails.Raasi = religious.Raasi;
+                religiousdetails.Religion = religious.Religion;
+                religiousdetails.Star = religious.Star;
+                religiousdetails.PersonId = religious.PersonId;
+                religiousdetails.Createddatetime = DateTime.Now;
 
-            await base.CreateAsync(religiousdetails);
-            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, info.PersonId);
-            return religious;
+                await base.CreateAsync(religiousdetails);
+                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, religious.PersonId);
+                return religious;
+            }
+            else
+            {
+                return new B_Religious();
+            }
         }
 
         public async Task<B_Religious> UpdateAsync(B_Religious religious)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(religious.PersonId);
-            ReligiousDetails religiousdetails = new ReligiousDetails();
-            religiousdetails.Caste = religious.Caste;
-            religiousdetails.Gothram = religious.Gothram;
-            religiousdetails.Mothertongue = religious.MotherTongue;
-            religiousdetails.Raasi = religious.Raasi;
-            religiousdetails.Religion = religious.Religion;
-            religiousdetails.Star = religious.Star;
-            religiousdetails.Subcaste = religious.Subcaste;
-            religiousdetails.PersonId = info.PersonId;
-            religiousdetails.Updateddatetime = DateTime.Now;
+            ReligiousDetails religiousdetails = await base.GetSingleAsync(x => x.PersonId == religious.PersonId);
+            if (religiousdetails != null)
+            {
+                religiousdetails.Caste = religious.Caste;
+                religiousdetails.Gothram = religious.Gothram;
+                religiousdetails.Mothertongue = religious.MotherTongue;
+                religiousdetails.Raasi = religious.Raasi;
+                religiousdetails.Religion = religious.Religion;
+                religiousdetails.Star = religious.Star;
+                religiousdetails.Updateddatetime = DateTime.Now;
 
-            await base.UpdateAsync(religiousdetails);
-            return religious;
+                await base.UpdateAsync(religiousdetails);
+                return religious;
+            }
+            else
+            {
+                throw new NoDetailsFoundException();
+            }
         }
     }
 }

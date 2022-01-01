@@ -29,21 +29,5 @@ namespace DBRepository.Repository
             return images;
         }
 
-        public async Task<B_Images> UpdateAsync(B_Images images)
-        {
-           var _image= await base.GetSingleAsync(x=>x.PersonId== images.PersonId);
-            if (_image!=null)
-            {
-                _image.Physicalpath = images.PhysicalPath;
-                _image.Shortpath = images.ShortPath;
-                _image.Updateddatetime = DateTime.Now;
-                await base.UpdateAsync(_image);
-                return images;
-            }
-            else
-            {
-                throw new NoDetailsFoundException();
-            }
-        }
     }
 }

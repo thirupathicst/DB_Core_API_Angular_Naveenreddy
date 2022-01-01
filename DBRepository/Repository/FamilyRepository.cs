@@ -21,7 +21,7 @@ namespace DBRepository.Repository
         {
             FamilyDetails familydetails = await base.GetSingleAsync(x => x.PersonId == PersonId);
             B_Family family = new B_Family();
-            if (family != null)
+            if (familydetails != null)
             {
                 family.Brotheroccupation = familydetails.Brotheroccupation;
                 family.Noofbrothersmarrried = familydetails.Noofbrothersmarrried;
@@ -42,28 +42,35 @@ namespace DBRepository.Repository
 
         public async Task<B_Family> CreateAsync(B_Family familydetails)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(familydetails.PersonId);
-            FamilyDetails family = new FamilyDetails
+            FamilyDetails family = await base.GetSingleAsync(x => x.PersonId == familydetails.PersonId);
+            if (family == null)
             {
-                Brotheroccupation = familydetails.Brotheroccupation,
-                Noofbrothersmarrried = familydetails.Noofbrothersmarrried,
-                Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried,
-                Fathername = familydetails.Fathername,
-                Fatheroccupation = familydetails.Fatheroccupation,
-                Mothername = familydetails.Mothername,
-                Motheroccupation = familydetails.Motheroccupation,
-                Noofbrothers = familydetails.Noofbrothers,
-                Noofsisters = familydetails.Noofsisters,
-                Noofsistersmarrried = familydetails.Noofsistersmarrried,
-                Noofsistersunmarrried = familydetails.Noofsistersunmarrried,
-                Sisteroccupation = familydetails.Sisteroccupation,
-                PersonId = info.PersonId,
-                Createddatetime = DateTime.Now
-            };
+                family = new FamilyDetails
+                {
+                    Brotheroccupation = familydetails.Brotheroccupation,
+                    Noofbrothersmarrried = familydetails.Noofbrothersmarrried,
+                    Noofbrothersunmarrried = familydetails.Noofbrothersunmarrried,
+                    Fathername = familydetails.Fathername,
+                    Fatheroccupation = familydetails.Fatheroccupation,
+                    Mothername = familydetails.Mothername,
+                    Motheroccupation = familydetails.Motheroccupation,
+                    Noofbrothers = familydetails.Noofbrothers,
+                    Noofsisters = familydetails.Noofsisters,
+                    Noofsistersmarrried = familydetails.Noofsistersmarrried,
+                    Noofsistersunmarrried = familydetails.Noofsistersunmarrried,
+                    Sisteroccupation = familydetails.Sisteroccupation,
+                    PersonId = familydetails.PersonId,
+                    Createddatetime = DateTime.Now
+                };
 
-            await base.CreateAsync(family);
-            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, info.PersonId);
-            return familydetails;
+                await base.CreateAsync(family);
+                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, family.PersonId);
+                return familydetails;
+            }
+            else
+            {
+                return new B_Family();
+            }
         }
 
         public async Task<B_Family> UpdateAsync(B_Family familydetails)

@@ -9,7 +9,7 @@ using DBRepository.Tables;
 
 namespace DBRepository.Repository
 {
-    public class ProfessionalRepository: Repository<ProfessionalDetails>, IProfessionalRepository
+    public class ProfessionalRepository : Repository<ProfessionalDetails>, IProfessionalRepository
     {
         private readonly IPersonalInfoRepository _personalInfo;
         public ProfessionalRepository(NaveenReddyDbContext repositoryContext, IPersonalInfoRepository personalInfo) : base(repositoryContext)
@@ -37,39 +37,51 @@ namespace DBRepository.Repository
 
         public async Task<B_Professional> CreateAsync(B_Professional professional)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(professional.PersonId);
-            ProfessionalDetails professionaldetails = new ProfessionalDetails();
-            professionaldetails.Companydetails = professional.Companydetails;
-            professionaldetails.Income = professional.Income;
-            professionaldetails.Joblocation = professional.Joblocation;
-            professionaldetails.Jobtype = professional.Jobtype;
-            professionaldetails.Yearofstart = professional.Yearofstart;
-            professionaldetails.Professiontype = professional.Professiontype;
-            professionaldetails.Professiondetails = professional.Professiondetails;
-            professionaldetails.PersonId = info.PersonId;
-            professionaldetails.Createddatetime = DateTime.Now;
+            ProfessionalDetails professionaldetails = await base.GetSingleAsync(x => x.PersonId == professional.PersonId);
+            if (professionaldetails == null)
+            {
+                professionaldetails=new ProfessionalDetails();
+                professionaldetails.Companydetails = professional.Companydetails;
+                professionaldetails.Income = professional.Income;
+                professionaldetails.Joblocation = professional.Joblocation;
+                professionaldetails.Jobtype = professional.Jobtype;
+                professionaldetails.Yearofstart = professional.Yearofstart;
+                professionaldetails.Professiontype = professional.Professiontype;
+                professionaldetails.Professiondetails = professional.Professiondetails;
+                professionaldetails.PersonId = professional.PersonId;
+                professionaldetails.Createddatetime = DateTime.Now;
 
-            await base.CreateAsync(professionaldetails);
-            await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, info.PersonId);
-            return professional;
+                await base.CreateAsync(professionaldetails);
+                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, professional.PersonId);
+                return professional;
+            }
+            else
+            {
+                return new B_Professional();
+            }
         }
 
         public async Task<B_Professional> UpdateAsync(B_Professional professional)
         {
-            PersonalInfo info = await _personalInfo.SelectByIdAsync(professional.PersonId);
-            ProfessionalDetails professionaldetails = new ProfessionalDetails();
-            professionaldetails.Companydetails = professional.Companydetails;
-            professionaldetails.Income = professional.Income;
-            professionaldetails.Joblocation = professional.Joblocation;
-            professionaldetails.Jobtype = professional.Jobtype;
-            professionaldetails.Yearofstart = professional.Yearofstart;
-            professionaldetails.Professiontype = professional.Professiontype;
-            professionaldetails.Professiondetails = professional.Professiondetails;
-            professionaldetails.PersonId = info.PersonId;
-            professionaldetails.Updateddatetime = DateTime.Now;
+            ProfessionalDetails professionaldetails = await base.GetSingleAsync(x => x.PersonId == professional.PersonId);
+            if (professionaldetails != null)
+            {
+                professionaldetails.Companydetails = professional.Companydetails;
+                professionaldetails.Income = professional.Income;
+                professionaldetails.Joblocation = professional.Joblocation;
+                professionaldetails.Jobtype = professional.Jobtype;
+                professionaldetails.Yearofstart = professional.Yearofstart;
+                professionaldetails.Professiontype = professional.Professiontype;
+                professionaldetails.Professiondetails = professional.Professiondetails;
+                professionaldetails.Updateddatetime = DateTime.Now;
 
-            await base.UpdateAsync(professionaldetails);
-            return professional;
+                await base.UpdateAsync(professionaldetails);
+                return professional;
+            }
+            else
+            {
+                throw new NoDetailsFoundException();
+            }
         }
     }
 }
