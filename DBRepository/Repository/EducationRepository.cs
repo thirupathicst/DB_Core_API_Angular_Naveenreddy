@@ -45,7 +45,8 @@ namespace DBRepository.Repository
                 education.Createddatetime = DateTime.Now;
 
                 await base.CreateAsync(education);
-                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, educationdetails.PersonId);
+                await _personalInfo.UpdateProfileStage(2,educationdetails.PersonId);
+                //await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(2, educationdetails.PersonId);
                 return educationdetails;
             }
             else

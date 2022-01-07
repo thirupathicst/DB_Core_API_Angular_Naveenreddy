@@ -52,7 +52,8 @@ namespace DBRepository.Repository
                 professionaldetails.Createddatetime = DateTime.Now;
 
                 await base.CreateAsync(professionaldetails);
-                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, professional.PersonId);
+                await  _personalInfo.UpdateProfileStage(3, professional.PersonId);
+                //await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(3, professional.PersonId);
                 return professional;
             }
             else

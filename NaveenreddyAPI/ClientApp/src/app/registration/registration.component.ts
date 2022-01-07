@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { APIServiceService } from '../apiservice.service';
-import { AppConstants } from '../constants.service';
-declare let toastr: any;
+import { APIServiceService } from '../Services/apiservice.service';
+import { AppConstants } from '../Services/constants.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +15,7 @@ export class RegistrationComponent implements OnInit {
   optionsSelect = AppConstants.Filledby;
   registerForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService,private notification:NotificationService) { }
 
   ngOnInit(): void {
 
@@ -70,7 +70,7 @@ export class RegistrationComponent implements OnInit {
       confirmpassword: this.registerForm.controls.ConfirmPassword.value
     }
     this.apiService.createRegistration(registration).subscribe(resp => {
-      toastr.success('Account created successfully, Please login to continue.')
+      this.notification.showSuccess('Account created successfully, Please login to continue.')
       this.router.navigate(['/biodata']);
     });
   }

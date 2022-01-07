@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { APIServiceService } from '../apiservice.service';
+import { APIServiceService } from '../Services/apiservice.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-addstory',
@@ -10,7 +11,7 @@ import { APIServiceService } from '../apiservice.service';
 export class AddstoryComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService,private notification:NotificationService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
@@ -35,9 +36,7 @@ export class AddstoryComponent implements OnInit {
     }
 
     this.apiService.addStory(_story).subscribe(x => {
-      console.log(x);
-    }, err => {
-      console.log(err);
+      this.notification.showSuccess('Success story saved successfully.')
     });
   }
 

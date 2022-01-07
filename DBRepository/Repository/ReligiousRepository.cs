@@ -50,7 +50,8 @@ namespace DBRepository.Repository
                 religiousdetails.Createddatetime = DateTime.Now;
 
                 await base.CreateAsync(religiousdetails);
-                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, religious.PersonId);
+                await  _personalInfo.UpdateProfileStage(6, religious.PersonId);
+                //await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(6, religious.PersonId);
                 return religious;
             }
             else

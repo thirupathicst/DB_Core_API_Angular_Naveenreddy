@@ -16,7 +16,6 @@ namespace DBRepository.Repository
         public new async Task<B_Partner> SelectByIdAsync(int PersonId)
         {
             B_Partner partner = new B_Partner();
-
             var partnerInfo = await base.GetSingleAsync(x => x.PersonId == PersonId);
             if (partnerInfo != null)
             {
@@ -34,7 +33,7 @@ namespace DBRepository.Repository
                 partner.Religion = partnerInfo.Religion;
             }
 
-            return new B_Partner();
+            return partner;
         }
 
         public async Task<B_Partner> CreateAsync(B_Partner partner)

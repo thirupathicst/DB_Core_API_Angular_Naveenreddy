@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { APIServiceService } from './apiservice.service';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-declare let toastr: any;
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private loaderService: APIServiceService, private auth: AuthService, private router: Router) { }
+  constructor(private loaderService: APIServiceService, private auth: AuthService,private notification:NotificationService, private router: Router) { }
 
   removeRequest(req: HttpRequest<any>) {
     const i = this.requests.indexOf(req);
@@ -44,25 +44,25 @@ export class LoaderInterceptor implements HttpInterceptor {
           err => {
             if (err.status == 401) {
               this.auth.removeAuthentication()
-              toastr.error('Unauthorized - Sorry, your session was expired');
+              this.notification.showError('Unauthorized - Sorry, your session was expired');
               this.router.navigate(['/login']);
             }
             else if (err.status == 400) {
               if (err.error.message != undefined) {
-                toastr.error(err.error.message)
+                this.notification.showError(err.error.message)
               }
               else if (err.error.title != undefined) {
-                toastr.error(err.error.title)
+                this.notification.showError(err.error.title)
               }
               else {
-                toastr.error(err.error)
+                this.notification.showError(err.error)
               }
             }
             else if (err.status == 404) {
-              toastr.error('Requested url not found')
+              this.notification.showError('Requested url not found')
             }
             else if (err.status == 500) {
-              toastr.error(err.error.message)
+              this.notification.showError(err.error.message)
             }
             this.removeRequest(req);
             observer.error(err);

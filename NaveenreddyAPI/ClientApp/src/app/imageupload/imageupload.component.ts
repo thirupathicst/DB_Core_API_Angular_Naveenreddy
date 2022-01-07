@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { APIServiceService } from '../apiservice.service';
+import { APIServiceService } from '../Services/apiservice.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-imageupload',
@@ -14,7 +15,7 @@ export class ImageuploadComponent implements OnInit {
   filePath1: string;
   filePath2: string;
   imageResp:any;
-  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService,private notification:NotificationService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
@@ -45,6 +46,7 @@ export class ImageuploadComponent implements OnInit {
     }
 
     this.apiService.uploadImages(this.uploadImg).subscribe(x => {
+      this.notification.showSuccess('Image uploaded successfully')
       window.location.reload()
     })
   }
@@ -75,7 +77,8 @@ export class ImageuploadComponent implements OnInit {
       else if (id == 1) {
         this.validatingForm.controls.upload2.reset();
       }
-      alert("Invalid File Format");
+      this.notification.showError('Invalid File Format.')
+      //alert("Invalid File Format");
     }
   }
 }

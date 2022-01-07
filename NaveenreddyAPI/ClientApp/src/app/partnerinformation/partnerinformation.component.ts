@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { APIServiceService } from '../apiservice.service';
-import { AppConstants } from '../constants.service';
-declare let toastr: any;
+import { APIServiceService } from '../Services/apiservice.service';
+import { AppConstants } from '../Services/constants.service';
+import { NotificationService } from '../Services/notification.service';
+//declare let toastr: any;
 
 @Component({
   selector: 'app-partnerinformation',
@@ -20,7 +21,7 @@ export class PartnerinformationComponent implements OnInit {
   optionsReligous = AppConstants.Religous;
   optionsMaritialStatus = AppConstants.MaritialStatus;
 
-  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService,private notification:NotificationService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -45,6 +46,7 @@ export class PartnerinformationComponent implements OnInit {
   ngAfterViewInit(): void {
     this.apiService.getPartner().subscribe(resp => {
       if (resp.age > 0) {
+        this.notification.showInfo('Already have details you can edit')
         this.BindControlValues(resp);
       }
     })
@@ -92,12 +94,12 @@ export class PartnerinformationComponent implements OnInit {
 
     if (this.save_update) {
       this.apiService.updatePartner(partner).subscribe(resp => {
-        toastr.success('Data updated successfully')
+        this.notification.showSuccess('Data updated successfully')
       })
     }
     else {
       this.apiService.addPartner(partner).subscribe(resp => {
-        toastr.success('Data saved successfully')
+        this.notification.showSuccess('Data saved successfully')
       })
     }
     this.router.navigate(['/quicksearch']);

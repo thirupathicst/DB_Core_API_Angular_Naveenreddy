@@ -64,7 +64,8 @@ namespace DBRepository.Repository
                 };
 
                 await base.CreateAsync(family);
-                await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, family.PersonId);
+                await _personalInfo.UpdateProfileStage(5,family.PersonId);
+                //await new PersonalInfoRepository(this.dbContext, null).UpdateProfileStage(5, family.PersonId);
                 return familydetails;
             }
             else

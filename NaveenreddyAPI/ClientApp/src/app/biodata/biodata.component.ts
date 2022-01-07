@@ -2,8 +2,9 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIServiceService } from '../apiservice.service';
-import { AppConstants } from '../constants.service';
+import { APIServiceService } from '../Services/apiservice.service';
+import { AppConstants } from '../Services/constants.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-biodata',
@@ -41,7 +42,7 @@ export class BiodataComponent implements OnInit {
   optionsRegion = AppConstants.Region;
   optionsMaritial = AppConstants.MaritialStatus;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
+  constructor(private notification:NotificationService,private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private apiService: APIServiceService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -50,6 +51,14 @@ export class BiodataComponent implements OnInit {
       }
       else {
         this.divIndex = parseInt(params.get('Id')) + 1;
+      }
+      
+    })
+
+    this.activatedRoute.url.subscribe(url=>{
+      if(url[0].path=="editbiodata")
+      {
+        this.editBiodata=true;
       }
     })
 
@@ -133,6 +142,8 @@ export class BiodataComponent implements OnInit {
     if (this.editBiodata) {
       this.apiService.getBioData().subscribe(resp => {
 
+        //this.notification.showInfo("You are in edit mode.")
+
         this.personal1.controls.Name.setValue(resp[0].name)
         this.personal1.controls.Gender.setValue(resp[0].gender)
         this.personal1.controls.PlaceOfBirth.setValue(resp[0].placeofbirth)
@@ -149,8 +160,8 @@ export class BiodataComponent implements OnInit {
         this.education2.controls.SchoolName.setValue(resp[1].school)
         this.education2.controls.College.setValue(resp[1].college)
 
-        this.profession3.controls.Occupation.setValue(resp[2].companydetails)
-        this.profession3.controls.OccupationDetails.setValue(resp[2].companydetails)
+        this.profession3.controls.Occupation.setValue(resp[2].professiontype)
+        this.profession3.controls.OccupationDetails.setValue(resp[2].professiondetails)
         this.profession3.controls.CompanyName.setValue(resp[2].companydetails)
         this.profession3.controls.PlaceofJob.setValue(resp[2].joblocation)
         this.profession3.controls.WorkingSince.setValue(resp[2].yearofstart)
@@ -211,11 +222,13 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createPersonalInfo(registration).subscribe(x => {
+        this.notification.showSuccess("Personal information saved succefully.")
         this.divIndex = 2;
       });
     }
     else {
       this.apiService.updateRegistration(registration).subscribe(x => {
+        this.notification.showSuccess("Personal information updated succefully.")
         this.divIndex = 2;
       });
     }
@@ -250,11 +263,13 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createEducation(education).subscribe(x => {
+      this.notification.showSuccess("Education saved succefully.")
         this.divIndex = 3;
       })
     }
     else {
       this.apiService.updateEducation(education).subscribe(x => {
+        this.notification.showSuccess("Education updated succefully.")
         this.divIndex = 3;
       })
     }
@@ -271,7 +286,7 @@ export class BiodataComponent implements OnInit {
       Yearofstart: this.profession3.controls.WorkingSince.value,
       Joblocation: this.profession3.controls.PlaceofJob.value,
       Income: this.profession3.controls.AnnualIncome.value,
-      Companydetails: this.profession3.controls.OccupationDetails.value,
+      Companydetails: this.profession3.controls.CompanyName.value,
       Jobtype: this.profession3.controls.Jobtype.value,
       Professiondetails: this.profession3.controls.OccupationDetails.value,
       Professiontype: this.profession3.controls.Occupation.value,
@@ -279,12 +294,14 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createProfessional(profession).subscribe(x => {
+      this.notification.showSuccess("Profession saved succefully.")
         this.divIndex = 4;
       })
     }
     else {
       this.apiService.updateProfessional(profession).subscribe(x => {
-        this.divIndex = 4;
+      this.notification.showSuccess("Profession updated succefully.")
+      this.divIndex = 4;
       })
     }
   }
@@ -309,11 +326,13 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createAddress(address).subscribe(x => {
+        this.notification.showSuccess("Contact saved succefully.")
         this.divIndex = 5;
       })
     }
     else {
       this.apiService.updateAddress(address).subscribe(x => {
+        this.notification.showSuccess("Contact updated succefully.")
         this.divIndex = 5;
       })
     }
@@ -343,11 +362,13 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createFamily(family).subscribe(x => {
+        this.notification.showSuccess("Family saved succefully.")
         this.divIndex = 6;
       })
     }
     else {
       this.apiService.updateFamily(family).subscribe(x => {
+        this.notification.showSuccess("Family updated succefully.")
         this.divIndex = 6;
       })
     }
@@ -371,11 +392,13 @@ export class BiodataComponent implements OnInit {
 
     if (!this.editBiodata) {
       this.apiService.createReligious(partner).subscribe(x => {
+        this.notification.showSuccess("Religious saved succefully.")
         this.router.navigate(['/imageupload']);
       })
     }
     else {
       this.apiService.updateReligious(partner).subscribe(x => {
+        this.notification.showSuccess("Religious updated succefully.")
         this.router.navigate(['/imageupload']);
       })
     }

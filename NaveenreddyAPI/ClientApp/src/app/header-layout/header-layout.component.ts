@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APIServiceService } from '../apiservice.service';
-import { AuthService } from '../auth.service';
+import { Alert } from 'selenium-webdriver';
+import { APIServiceService } from '../Services/apiservice.service';
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'app-header-layout',

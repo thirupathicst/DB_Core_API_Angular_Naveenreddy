@@ -1,7 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { APIServiceService } from '../apiservice.service';
-declare let toastr: any;
+import { APIServiceService } from '../Services/apiservice.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-changepassword',
@@ -11,7 +11,7 @@ declare let toastr: any;
 export class ChangepasswordComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService,private notification:NotificationService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group(
@@ -40,7 +40,7 @@ export class ChangepasswordComponent implements OnInit {
       confirmpassword: this.validatingForm.controls.Confirmpassword.value
     }
     this.apiService.changePassword(changePassword).subscribe(resp => {
-      toastr.success('Password changed successfully.')
+      this.notification.showSuccess('Password changed successfully.')
     })
   }
 

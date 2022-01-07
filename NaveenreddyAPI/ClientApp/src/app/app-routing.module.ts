@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddstoryComponent } from './addstory/addstory.component';
-import { AuthguardService } from './authguard.service';
+import { AuthguardService } from './Services/authguard.service';
 import { BiodataComponent } from './biodata/biodata.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ContactusComponent } from './contactus/contactus.component';
@@ -24,6 +24,7 @@ const routes: Routes = [
       { path: 'registration', component: RegistrationComponent },
       { path: 'biodata/:Id', component: BiodataComponent, canActivate: [AuthguardService] },
       { path: 'biodata', component: BiodataComponent, canActivate: [AuthguardService] },
+      { path: 'editbiodata', component: BiodataComponent, canActivate: [AuthguardService] },
       { path: 'forgotpassword', component: ForgotpasswordComponent },
       { path: 'quicksearch', component: QuicksearchComponent },
       { path: 'changepassword', component: ChangepasswordComponent, canActivate: [AuthguardService] },

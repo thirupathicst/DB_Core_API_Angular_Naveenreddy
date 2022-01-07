@@ -21,11 +21,12 @@ import { SearchbynameComponent } from './searchbyname/searchbyname.component';
 import { SearchbyprofileComponent } from './searchbyprofile/searchbyprofile.component';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { AddstoryComponent } from './addstory/addstory.component';
-import { LoaderInterceptor } from './loader-interceptor.service';
-import { APIServiceService } from './apiservice.service';
+import { LoaderInterceptor } from './Services/loader-interceptor.service';
+import { APIServiceService } from './Services/apiservice.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { AuthguardService } from './authguard.service';
+import { AuthguardService } from './Services/authguard.service';
 import { ContactusComponent } from './contactus/contactus.component';
+import{NotificationService} from './Services/notification.service';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ContactusComponent } from './contactus/contactus.component';
   ],
   providers: [
     APIServiceService,
+    NotificationService,
     AuthguardService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],

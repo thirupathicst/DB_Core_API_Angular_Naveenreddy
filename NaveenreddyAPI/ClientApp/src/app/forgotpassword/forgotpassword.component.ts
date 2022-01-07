@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { APIServiceService } from '../apiservice.service';
+import { APIServiceService } from '../Services/apiservice.service';
 import { ModalDirective } from 'angular-bootstrap-md';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
-declare let toastr: any;
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -19,7 +19,7 @@ export class ForgotpasswordComponent implements OnInit {
   timeLeft: number = 60;
   @ViewChild('demoBasic', { static: true }) demoBasic: ModalDirective;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: APIServiceService,private notification:NotificationService) { }
 
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
@@ -72,6 +72,7 @@ export class ForgotpasswordComponent implements OnInit {
     }
 
     this.apiService.otpVerification(this.validatingForm.controls.emailId.value, this.OtpForm.controls.otp.value).subscribe(resp => {
+     this.notification.showSuccess('Successfully rest password, login to continue.')
       this.router.navigate(['/login']);
     })
   }
