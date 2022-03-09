@@ -8,8 +8,8 @@ namespace NaveenreddyAPI.Repository.Interfaces
 {
     public interface IRepository<T> where T : class, new()
     {
-        Task<List<T>> SelectAllAsync();
-        Task<List<T>> SelectAllAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> SelectAllAsync();
+        Task<IEnumerable<T>> SelectAllAsync(Expression<Func<T, bool>> predicate);
         Task<T> SelectByIdAsync(int Id);
         Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate);
         Task<T> CreateAsync(T entity);

@@ -14,7 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NaveenreddyAPI.Utilities;
+using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NaveenreddyAPI
 {
@@ -33,7 +35,7 @@ namespace NaveenreddyAPI
             services.AddControllersWithViews();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
-            
+
             //services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(swager =>
             {
@@ -61,7 +63,7 @@ namespace NaveenreddyAPI
                     }
                 });
             });
-            
+
             services.AddDbContext<DBRepository.NaveenReddyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlCon")));
             services.AddTransient<IPersonalInfoRepository, PersonalInfoRepository>();
             services.AddTransient<IEducationRepository, EducationRepository>();
@@ -74,7 +76,7 @@ namespace NaveenreddyAPI
             services.AddTransient<IStoryRepository, StoryRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IPartnerRepository, PartnerRepository>();
-            services.AddTransient<ITokenManager,UserClaims> ();
+            services.AddTransient<ITokenManager, UserClaims>();
             services.AddTransient<AdminRepository>();
 
             services.AddAuthentication(x =>
@@ -103,7 +105,6 @@ namespace NaveenreddyAPI
             //services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication",null);
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -127,7 +128,7 @@ namespace NaveenreddyAPI
             {
                 app.UseSpaStaticFiles();
             }
-            
+
             app.UseRouting();
 
             app.UseAuthentication();
