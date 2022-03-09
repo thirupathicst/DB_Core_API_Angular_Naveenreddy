@@ -115,6 +115,10 @@ export class APIServiceService {
     return this.http.put(`${this.bseAPI}/Partner`, Partner);
   }
 
+  public searchTerm(query: string): Observable<any> {
+    return this.http.get(`${this.bseAPI}/Search?name=${query}`);
+  }
+
   public getBioData():Observable<any>{
     let personal=this.http.get(`${this.bseAPI}/Registration`);
     let education=this.http.get(`${this.bseAPI}/Education`);

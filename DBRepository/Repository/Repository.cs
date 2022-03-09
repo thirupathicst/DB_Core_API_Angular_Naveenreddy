@@ -39,12 +39,12 @@ namespace NaveenreddyAPI.DB
             return await dbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
         
-        public async Task<List<T>> SelectAllAsync()
+        public async Task<IEnumerable<T>> SelectAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<List<T>> SelectAllAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> SelectAllAsync(Expression<Func<T, bool>> predicate)
         {
             return await dbContext.Set<T>().Where(predicate).ToListAsync();
         }

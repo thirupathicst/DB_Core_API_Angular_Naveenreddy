@@ -343,3 +343,7 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NaveenreddyAPI/wwwroot/Images
+DBRepository/obj/*
+DBRepository/bin/*
+BusinesEntites/obj/*
+BusinesEntites/bin/*
