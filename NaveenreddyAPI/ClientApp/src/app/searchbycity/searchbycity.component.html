@@ -14,6 +14,26 @@
                     <button type="submit" mdbBtn color="primary" size="md" mdbWavesEffect>Search</button>
                 </div>
             </div>
+            <table mdbTable *ngIf="table?.length">
+                <thead >
+                    <tr>
+                        <th>Sl.No</th>
+                        <th [mdbTableSort]="table" sortBy="name" scope="col">Name <mdb-icon fas icon="sort"></mdb-icon></th>
+                        <th [mdbTableSort]="table" sortBy="age" scope="col">Age <mdb-icon fas icon="sort"></mdb-icon></th>
+                        <th [mdbTableSort]="table" sortBy="gender" scope="col">Gender <mdb-icon fas icon="sort"></mdb-icon></th>
+                        <th [mdbTableSort]="table" sortBy="dateofbirth" scope="col">Date Of Birth <mdb-icon fas icon="sort"></mdb-icon></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of table; let i = index">
+                        <td scope="row">{{i+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.age}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.dateofbirth}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
     </mdb-card-body>
 </mdb-card>

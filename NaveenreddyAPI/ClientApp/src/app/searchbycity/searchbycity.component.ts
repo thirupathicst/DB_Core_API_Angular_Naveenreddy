@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { APIServiceService } from '../Services/apiservice.service';
 
 @Component({
   selector: 'app-searchbycity',
@@ -10,8 +11,8 @@ export class SearchbycityComponent implements OnInit {
   validatingForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
-
+  constructor(private formBuilder: FormBuilder,private apiService: APIServiceService) { }
+  table:any= [];
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
       Cityname: ['', Validators.required],
@@ -26,8 +27,8 @@ export class SearchbycityComponent implements OnInit {
     if (this.validatingForm.invalid) {
       return;
     }
-
-    console.log(JSON.stringify(this.validatingForm.value, null, 2));
-    //this.validatingForm.controls.f.markAsTouched();
+    this.apiService.searchTerm('',this.validatingForm.controls.Cityname.value).subscribe(x => {
+      this.table=x;
+    })
   }
 }

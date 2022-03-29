@@ -12,18 +12,24 @@
                     <input id="Name" class="form-control" [ngClass]="{'invalid': submitted && f.Name.errors}"
                         formControlName="Name" type="text" mdbInput>
                     <mdb-error *ngIf="f.Name.invalid && submitted">Name is required</mdb-error>
-
                     <button type="submit" size="md" mdbBtn color="primary" mdbWavesEffect>Search</button>
                 </div>
             </div>
             <table mdbTable *ngIf="table?.length">
-                <thead >
+                <thead>
                     <tr>
                         <th>Sl.No</th>
-                        <th [mdbTableSort]="table" sortBy="name" scope="col">Name <mdb-icon fas icon="sort"></mdb-icon></th>
-                        <th [mdbTableSort]="table" sortBy="age" scope="col">Age <mdb-icon fas icon="sort"></mdb-icon></th>
-                        <th [mdbTableSort]="table" sortBy="gender" scope="col">Gender <mdb-icon fas icon="sort"></mdb-icon></th>
-                        <th [mdbTableSort]="table" sortBy="dateofbirth" scope="col">Date Of Birth <mdb-icon fas icon="sort"></mdb-icon></th>
+                        <th [mdbTableSort]="table" sortBy="name" scope="col">Name <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="table" sortBy="age" scope="col">Age <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="table" sortBy="gender" scope="col">Gender <mdb-icon fas icon="sort">
+                            </mdb-icon>
+                        </th>
+                        <th [mdbTableSort]="table" sortBy="dateofbirth" scope="col">Date Of Birth <mdb-icon fas
+                                icon="sort"></mdb-icon>
+                        </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,9 +39,31 @@
                         <td>{{item.age}}</td>
                         <td>{{item.gender}}</td>
                         <td>{{item.dateofbirth}}</td>
+                        <td><button type="button" size="sm" mdbBtn color="default" class="relative waves-light" (click)="childModel(item.name,item.personId)" mdbWavesEffect>Invitation</button></td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </mdb-card-body>
 </mdb-card>
+
+
+<!-- <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Invitation</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" size="md" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" size="md" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Sent</button>
+      </div>
+    </div>
+  </div>
+</div> -->

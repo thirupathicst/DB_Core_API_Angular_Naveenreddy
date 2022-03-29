@@ -76,6 +76,7 @@ namespace NaveenreddyAPI
             services.AddTransient<IStoryRepository, StoryRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IPartnerRepository, PartnerRepository>();
+            services.AddTransient<IInvitationRepository, InvitationRepository>();
             services.AddTransient<ITokenManager, UserClaims>();
             services.AddTransient<AdminRepository>();
 

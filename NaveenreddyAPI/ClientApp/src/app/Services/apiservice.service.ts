@@ -115,8 +115,25 @@ export class APIServiceService {
     return this.http.put(`${this.bseAPI}/Partner`, Partner);
   }
 
-  public searchTerm(query: string): Observable<any> {
-    return this.http.get(`${this.bseAPI}/Search?name=${query}`);
+  public searchTerm(query: string, query1: string): Observable<any> {
+    if (query != '') {
+      return this.http.get(`${this.bseAPI}/Search?name=${query}`);
+    }
+    if (query1 != '') {
+      return this.http.get(`${this.bseAPI}/Search?city=${query1}`);
+    }
+  }
+
+  public getInvitation(): Observable<any> {
+    return this.http.get(`${this.bseAPI}/Invitation`);
+  }
+
+  public createInvitation(Invitation: Object): Observable<any>{
+    return this.http.post(`${this.bseAPI}/Invitation`, Invitation);
+  }
+
+  public updateInvitation(Invitation: Object): Observable<any>{
+    return this.http.put(`${this.bseAPI}/Invitation`, Invitation);
   }
 
   public getBioData():Observable<any>{

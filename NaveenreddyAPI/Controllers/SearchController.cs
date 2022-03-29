@@ -17,10 +17,24 @@ namespace NaveenreddyAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string name)
+        public async Task<IActionResult> Get(string name, string city)
         {
-            var dd = await _repository.SelectAllAsync(x => x.Name.Contains(name));
-            return Ok(dd);
+            if (!string.IsNullOrEmpty(name))
+            {
+                return Ok(await _repository.SelectAllAsync(x => x.Name.Contains(name)));
+            }
+            else if (!string.IsNullOrEmpty(city))
+            {
+                return Ok(await _repository.SelectAllAsync(x => x.Placeofbirth.Contains(city)));
+            }
+            else if (!string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(name))
+            {
+                return Ok(await _repository.SelectAllAsync(x => x.Placeofbirth.Contains(city) && x.Name.Contains(name)));
+            }
+            else
+            {
+                return Ok(await _repository.SelectAllAsync());
+            }
         }
     }
 }

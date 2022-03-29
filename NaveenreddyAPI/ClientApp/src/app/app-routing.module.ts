@@ -16,6 +16,7 @@ import { SearchbycityComponent } from './searchbycity/searchbycity.component';
 import { SearchbynameComponent } from './searchbyname/searchbyname.component';
 import { SearchbyprofileComponent } from './searchbyprofile/searchbyprofile.component';
 import { SideLayoutComponent } from './side-layout/side-layout.component';
+import { InvitationComponent } from './invitation/invitation.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'searchbyprofile', component: SearchbyprofileComponent },
       { path: 'imageupload', component: ImageuploadComponent, canActivate: [AuthguardService]},
       { path: 'story', component: AddstoryComponent },
-      { path: 'contact', component: ContactusComponent }
+      { path: 'contact', component: ContactusComponent },
+      { path: 'invitation', component: InvitationComponent, canActivate: [AuthguardService] }
     ]
   },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }

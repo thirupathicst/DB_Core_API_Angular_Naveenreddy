@@ -34,6 +34,7 @@ namespace DBRepository
         public DbSet<Story> Tbl_Story { get; set; }
         public DbSet<PartnerInfo> Tbl_Partner { get; set; }
         public DbSet<Audit> Tbl_Audits { get; set; }
+        public DbSet<Invitation> Tbl_Invitation { get; set; }
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {

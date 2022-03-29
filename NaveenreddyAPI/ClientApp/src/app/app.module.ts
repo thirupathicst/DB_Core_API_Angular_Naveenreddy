@@ -26,8 +26,9 @@ import { APIServiceService } from './Services/apiservice.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthguardService } from './Services/authguard.service';
 import { ContactusComponent } from './contactus/contactus.component';
-import{NotificationService} from './Services/notification.service';
-
+import { NotificationService } from './Services/notification.service';
+import { InvitationComponent } from './invitation/invitation.component';
+import { DatashareService } from './Services/datashare.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import{NotificationService} from './Services/notification.service';
     AddstoryComponent,
     PagenotfoundComponent,
     ContactusComponent,
+    InvitationComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ import{NotificationService} from './Services/notification.service';
     APIServiceService,
     NotificationService,
     AuthguardService,
+    DatashareService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

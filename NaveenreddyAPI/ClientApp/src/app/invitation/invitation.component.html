@@ -1,0 +1,54 @@
+<mdb-card>
+    <mdb-card-body>
+        <mdb-card-title>
+            <h4>Invitations</h4>
+            <hr>
+        </mdb-card-title>
+        <div *ngIf="Name?.length">
+            <form (ngSubmit)="onSubmit()" class="col-6">
+                <input type="hidden" [(ngModel)]="Id" name="Id">
+                <label>{{Name}}</label>
+                <div class="md-form md-outline">
+                    <textarea type="text" rows="3" cols="6" id="Message" class="form-control md-textarea" name="Message"
+                        [(ngModel)]="Message" mdbInput></textarea>
+                    <label for="Message">Message</label>
+                </div>
+                <button type="submit" size="md" mdbBtn color="primary" mdbWavesEffect>Sent</button>
+            </form>
+        </div>
+        <table mdbTable *ngIf="grid?.length">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th [mdbTableSort]="grid" sortBy="message" scope="col">Message <mdb-icon fas icon="sort"></mdb-icon>
+                    </th>
+                    <th [mdbTableSort]="grid" sortBy="invitationdatetime" scope="col">Date <mdb-icon fas icon="sort">
+                        </mdb-icon>
+                    </th>
+                    <th [mdbTableSort]="grid" sortBy="acceptedstatus" scope="col">Status <mdb-icon fas icon="sort">
+                        </mdb-icon>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of grid; let i = index">
+                    <td scope="row">{{i+1}}</td>
+                    <!-- <td>{{item.acceptedstatus}}</td> -->
+                    <td>{{item.message}}</td>
+                    <td>{{item.invitationdatetime}}</td>
+                    <td>
+                        <div class="btn-group" role="group" *ngIf="item.acceptedstatus==0">
+                            <button mdbBtn type="button" color="success" (click)="accept('a',item.invitationId)"  class="waves-light" mdbWavesEffect size="sm">
+                                <mdb-icon fas icon="check" size="lg"></mdb-icon>
+                            </button>
+                            <button mdbBtn type="button" color="danger" (click)="accept('r',item.invitationId)"  class="waves-light" mdbWavesEffect size="sm">
+                                <mdb-icon fas icon="times" size="lg"></mdb-icon>
+                            </button>
+                          </div>
+                          <span *ngIf="item.acceptedstatus!=0">Accepted</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mdb-card-body>
+</mdb-card>
