@@ -1,9 +1,10 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { APIServiceService } from '../Services/apiservice.service';
-import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { MDBModalService, ModalOptions } from 'angular-bootstrap-md';
 import { InvitationComponent } from '../invitation/invitation.component';
 import { DatashareService } from '../Services/datashare.service';
+import { NotificationService } from '../Services/notification.service';
 
 @Component({
   selector: 'app-searchbyname',
@@ -13,11 +14,10 @@ import { DatashareService } from '../Services/datashare.service';
 export class SearchbynameComponent implements OnInit,OnDestroy {
   validatingForm: FormGroup;
   submitted = false;
-  modalRef: MDBModalRef | null = null;
-  
-  constructor(private formBuilder: FormBuilder,private apiService: APIServiceService,private modalService: MDBModalService,private datashare:DatashareService) { }
   table: any = [];
-  //name: string;
+  moldeloptions= ModalOptions;
+
+  constructor(private formBuilder: FormBuilder, private apiService: APIServiceService, private modalService: MDBModalService, private datashare: DatashareService, private notification: NotificationService) { }
   ngOnInit(): void {
     this.validatingForm = this.formBuilder.group({
       Name: ['', Validators.required],
@@ -33,7 +33,11 @@ export class SearchbynameComponent implements OnInit,OnDestroy {
     }
 
     this.apiService.searchTerm(this.validatingForm.controls.Name.value,'').subscribe(x => {
-      this.table=x;
+      if (x.length == 0) {
+        this.notification.showInfo("No search result found, try with different keys !");
+      }
+      else
+        this.table = x;
     })
   }
 
@@ -43,7 +47,7 @@ export class SearchbynameComponent implements OnInit,OnDestroy {
       "id": id
     }
     this.datashare.changeName(obj);
-    this.modalRef = this.modalService.show(InvitationComponent)
+    this.modalService.show(InvitationComponent);
   }
 
   ngOnDestroy(): void { 

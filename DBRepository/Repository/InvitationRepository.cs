@@ -28,7 +28,7 @@ namespace DBRepository.Repository
         public async Task<B_Invitation> UpdateAsync(B_Invitation invitation)
         {
             Invitation _invitation = await base.GetSingleAsync(x => x.PersonId == invitation.PersonId && x.InvitationId == invitation.InvitationId);
-            _invitation.Acceptedstatus = 1;
+            _invitation.Acceptedstatus = invitation.Acceptedstatus;
             await base.UpdateAsync(_invitation);
             return invitation;
         }

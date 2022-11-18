@@ -38,9 +38,9 @@ namespace DBRepository
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var temoraryAuditEntities = await AuditNonTemporaryProperties();
+            var temporaryAuditEntities = await AuditNonTemporaryProperties();
             var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-            await AuditTemporaryProperties(temoraryAuditEntities);
+            await AuditTemporaryProperties(temporaryAuditEntities);
             return result;
         }
 

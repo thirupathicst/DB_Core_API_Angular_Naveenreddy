@@ -96,7 +96,10 @@ namespace NaveenreddyAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("A1B2C3D4E5F6G7H8I9J0~!@#$%^&*()"))
                 };
             });
-
+            // services.AddControllers(option =>
+            // {
+            //     option.RespectBrowserAcceptHeader = true;
+            // });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

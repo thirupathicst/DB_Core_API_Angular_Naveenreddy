@@ -12,17 +12,22 @@ export class InvitationComponent implements OnInit {
   Message: string = "";
   Name: string = "";
   Id: Number;
-  constructor(private apiService: APIServiceService,private notification: NotificationService,private datashare:DatashareService) { }
+  showDiv: boolean = true;
   grid: any = [];
+  constructor(private apiService: APIServiceService, private notification: NotificationService, private datashare: DatashareService) { }
   ngOnInit(): void {
     this.datashare.name.pipe().subscribe(data => {
       this.Name = data.name;
       this.Id = data.id;
+      this.showDiv = false;
     });
 
     if (this.Name == "" || this.Name == undefined) {
       this.apiService.getInvitation().subscribe(resp => {
         this.grid = resp
+        if (this.grid.length > 0) {
+          this.showDiv = false;
+        }
       });
     }
   }

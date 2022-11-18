@@ -1,9 +1,9 @@
 <mdb-card>
     <mdb-card-body>
-        <mdb-card-title>
-            <h4>Invitations</h4>
-            <hr>
-        </mdb-card-title>
+      <mdb-card-title>
+        <h4>Invitations</h4>
+        <hr>
+      </mdb-card-title>
         <div *ngIf="Name?.length">
             <form (ngSubmit)="onSubmit()" class="col-6">
                 <input type="hidden" [(ngModel)]="Id" name="Id">
@@ -13,7 +13,7 @@
                         [(ngModel)]="Message" mdbInput></textarea>
                     <label for="Message">Message</label>
                 </div>
-                <button type="submit" size="md" mdbBtn color="primary" mdbWavesEffect>Sent</button>
+                <button type="submit" size="md" mdbBtn color="primary" mdbWavesEffect aria-label="Close">Sent</button>
             </form>
         </div>
         <table mdbTable *ngIf="grid?.length">
@@ -45,10 +45,14 @@
                                 <mdb-icon fas icon="times" size="lg"></mdb-icon>
                             </button>
                           </div>
-                          <span *ngIf="item.acceptedstatus!=0">Accepted</span>
+                          <span *ngIf="item.acceptedstatus==1">Accepted</span>
+                          <span *ngIf="item.acceptedstatus==2">Rejected</span>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="alert alert-primary col-6" *ngIf="showDiv">
+            No records found
+        </div>
     </mdb-card-body>
 </mdb-card>
