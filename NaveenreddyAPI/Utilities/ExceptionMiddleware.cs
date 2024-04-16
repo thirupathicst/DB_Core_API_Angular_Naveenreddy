@@ -14,14 +14,10 @@ namespace NaveenreddyAPI.Utilities
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
-        private readonly IMemoryCache _cache;
-        private readonly ITokenManager _tokenManager;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IMemoryCache cache, ITokenManager tokenManager)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _logger = logger;
-            _cache = cache;
-            _tokenManager = tokenManager;
             _next = next;
         }
 
@@ -29,13 +25,6 @@ namespace NaveenreddyAPI.Utilities
         {
             try
             {
-                if (httpContext.User.Identity.IsAuthenticated)
-                {
-                    if ((_cache.Get($"PersonId-{_tokenManager.GetUserId()}") == null))
-                    {
-                        throw new UnauthorizedAccessException("Token expired or invalid");
-                    }
-                }
                 await _next(httpContext);
             }
 
@@ -53,29 +42,17 @@ namespace NaveenreddyAPI.Utilities
             if (ex is MyCustomException||ex is NoDetailsFoundException)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                await context.Response.WriteAsync(new ErrorDetails()
-                {
-                    statuscode = context.Response.StatusCode,
-                    message = ex.Message
-                }.ToString());
+                await context.Response.WriteAsync(new ErrorDetails(context.Response.StatusCode, ex.Message).ToString());
             }
             else if (ex is UnauthorizedAccessException)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                await context.Response.WriteAsync(new ErrorDetails()
-                {
-                    statuscode = context.Response.StatusCode,
-                    message = ex.Message
-                }.ToString());
+                await context.Response.WriteAsync(new ErrorDetails(context.Response.StatusCode, ex.Message).ToString());
             }
             else
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                await context.Response.WriteAsync(new ErrorDetails()
-                {
-                    statuscode = context.Response.StatusCode,
-                    message = ex.Message
-                }.ToString());
+                await context.Response.WriteAsync(new ErrorDetails(context.Response.StatusCode, ex.Message).ToString());
             }
         }
 

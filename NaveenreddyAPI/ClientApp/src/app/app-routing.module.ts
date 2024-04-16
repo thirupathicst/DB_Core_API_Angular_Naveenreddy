@@ -36,10 +36,12 @@ const routes: Routes = [
       { path: 'imageupload', component: ImageuploadComponent, canActivate: [AuthguardService]},
       { path: 'story', component: AddstoryComponent },
       { path: 'contact', component: ContactusComponent },
-      { path: 'invitation', component: InvitationComponent, canActivate: [AuthguardService] }
+      { path: 'invitation', component: InvitationComponent, canActivate: [AuthguardService] },
+      { path: '', component: LoginComponent, pathMatch: 'full' }
     ]
   },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
+  
 ];
 
 @NgModule({

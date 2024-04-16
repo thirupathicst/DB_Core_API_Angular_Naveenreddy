@@ -17,6 +17,7 @@ using NaveenreddyAPI.Utilities;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace NaveenreddyAPI
 {
@@ -37,13 +38,14 @@ namespace NaveenreddyAPI
             services.AddHttpContextAccessor();
 
             //services.AddEndpointsApiExplorer();
+
             services.AddSwaggerGen(swager =>
             {
-                swager.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                swager.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme,new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
@@ -56,7 +58,7 @@ namespace NaveenreddyAPI
                                 Reference = new OpenApiReference
                                 {
                                     Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
+                                    Id = JwtBearerDefaults.AuthenticationScheme
                                 }
                             },
                             new string[] {}
@@ -106,6 +108,8 @@ namespace NaveenreddyAPI
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //services.AddCors();
+
             //services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication",null);
         }
 
@@ -122,7 +126,6 @@ namespace NaveenreddyAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseSwagger();
             app.UseSwaggerUI();
 
@@ -133,10 +136,11 @@ namespace NaveenreddyAPI
                 app.UseSpaStaticFiles();
             }
 
+            //app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<TokenMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseEndpoints(endpoints =>
             {

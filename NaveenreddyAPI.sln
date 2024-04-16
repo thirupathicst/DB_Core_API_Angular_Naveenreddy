@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NaveenreddyAPI", "NaveenreddyAPI.csproj", "{1551E722-4536-42DF-9E84-B8CACAAC3838}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NaveenreddyAPI", "NaveenreddyAPI\NaveenreddyAPI.csproj", "{1551E722-4536-42DF-9E84-B8CACAAC3838}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBRepository", "..\DBRepository\DBRepository.csproj", "{EA3C0BD6-348F-47A8-BF90-F650073550A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBRepository", "DBRepository\DBRepository.csproj", "{EA3C0BD6-348F-47A8-BF90-F650073550A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinesEntites", "..\BusinesEntites\BusinesEntites.csproj", "{E2710BAF-740C-4C78-9329-F6496C553FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinesEntites", "BusinesEntites\BusinesEntites.csproj", "{E2710BAF-740C-4C78-9329-F6496C553FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

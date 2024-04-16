@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'app-side-layout',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-layout.component.css']
 })
 export class SideLayoutComponent implements OnInit {
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
+  signOutvisible: boolean= false;
   ngOnInit(): void {
-    
+   this.signOutvisible=this.auth.checkToken();
   }
 
 }

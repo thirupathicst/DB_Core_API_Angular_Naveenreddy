@@ -33,9 +33,10 @@ namespace DBRepository.Tables
         [StringLength(10)]
         public string Profileid { get; set; }
         public int ProfileStage { get; set; }
-
         public DateTime Createddatetime { get; set; }
         public DateTime? Updateddatetime { get; set; }
+        [Timestamp]
+        public byte[] Version { get; set; }
     }
 
     public class EducationDetails

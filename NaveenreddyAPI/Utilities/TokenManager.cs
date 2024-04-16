@@ -21,7 +21,7 @@ namespace NaveenreddyAPI.Utilities
                 Subject = new ClaimsIdentity(new[] {
                       new Claim(ClaimTypes.Name, email),
                       new Claim(ClaimTypes.Sid,personid.ToString())}),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddMinutes(29),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };

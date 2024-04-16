@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NaveenreddyAPI.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -56,10 +57,16 @@ namespace NaveenreddyAPI.DB
 
         public async Task<T> UpdateAsync(T entity)
         {
-            dbContext.Update(entity);
-            await dbContext.SaveChangesAsync();
-
-            return entity;
+            try
+            {
+                dbContext.Update(entity);
+                await dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw ex;
+            }
         }
     }
 }

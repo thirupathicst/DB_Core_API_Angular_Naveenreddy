@@ -12,9 +12,9 @@ import { AuthService } from '../Services/auth.service';
 export class HeaderLayoutComponent implements OnInit {
 
   constructor(private router: Router, private auth: AuthService,private apiService:APIServiceService) { }
-
+  signOutvisible: boolean= false;
   ngOnInit(): void {
-    
+   this.signOutvisible=this.auth.checkToken();
   }
 
   logout() {
@@ -22,6 +22,7 @@ export class HeaderLayoutComponent implements OnInit {
 
     })
     this.auth.removeAuthentication();
+    this.signOutvisible=this.auth.checkToken();
     this.router.navigate(['/login']);
   }
 }

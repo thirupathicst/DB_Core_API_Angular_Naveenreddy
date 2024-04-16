@@ -47,5 +47,6 @@ namespace NaveenreddyAPI.Controllers
             story.PersonId = _tokenManager.GetUserId();
             return Ok(await _repository.UpdateAsync(story));
         }
+
     }
 }

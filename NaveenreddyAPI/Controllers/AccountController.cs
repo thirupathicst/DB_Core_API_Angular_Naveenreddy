@@ -63,6 +63,10 @@ namespace NaveenreddyAPI.Controllers
             else if (B_UserStatus.Active == status.Status)
             {
                 status.Message = TokenManager.GenerateToken(login.Emailid, status.PersonId);
+                //var cokopt = new CookieOptions();
+                //cokopt.Expires = DateTimeOffset.Now.Add(TimeSpan.FromSeconds(10000));
+                //cokopt.Secure = true;
+                //Response.Cookies.Append(".NaveenreddyAPI.Session", status.Message, cokopt);
                 _cache.Set<int>($"PersonId-{status.PersonId}", status.PersonId, TimeSpan.FromMinutes(30));
                 return Ok(status);
             }

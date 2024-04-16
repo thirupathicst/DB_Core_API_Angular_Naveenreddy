@@ -47,6 +47,7 @@ namespace DBRepository.Tables
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public PersonalInfo PersonalInfo { get; set; }
+        [ConcurrencyCheck]
         public DateTime Createddatetime { get; set; }
         public DateTime? Updateddatetime { get; set; }
     }

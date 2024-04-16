@@ -74,7 +74,6 @@ namespace DBRepository.Repository
             info.Placeofbirth= personalInfo.Placeofbirth;
             info.Age = new DateTime((DateTime.Now - info.Dateofbirth).Value.Ticks).Year - 1;
             info.ProfileStage = 1;
-
             await base.UpdateAsync(info);
             return personalInfo;
         }

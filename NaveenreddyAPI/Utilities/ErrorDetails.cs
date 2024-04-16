@@ -10,6 +10,12 @@ namespace NaveenreddyAPI.Utilities
     {
         public int statuscode { get; set; }
         public string message { get; set; }
+        public ErrorDetails(int statuscode, string message)
+        {
+            this.statuscode = statuscode;
+            this.message = message;
+        }
+
         public override string ToString()
         {
             return JsonSerializer.Serialize(this);

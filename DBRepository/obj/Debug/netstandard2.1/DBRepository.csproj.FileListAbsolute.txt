@@ -28,6 +28,7 @@ D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBReposit
 D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.AssemblyInfoInputs.cache
 D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.AssemblyInfo.cs
 D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.csproj.CoreCompileInputs.cache
-D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.csproj.CopyComplete
+D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.sourcelink.json
 D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.dll
 D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBRepository.pdb
+D:\thirupathi\VS2019\NaveenReddy\DBRepository\obj\Debug\netstandard2.1\DBReposi.D8B27049.Up2Date
