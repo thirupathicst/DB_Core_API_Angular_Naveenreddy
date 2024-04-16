@@ -1,8 +1,0 @@
-#**/ClientApp/
-**/node_modules
-**/e2e
-**/bin/
-/logs
-**/obj/
-.git
-.cache
