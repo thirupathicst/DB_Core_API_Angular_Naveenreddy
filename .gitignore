@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Ignore bin and obj folders for all projects
+**/bin/
+**/obj/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -343,7 +347,3 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NaveenreddyAPI/wwwroot/Images
-DBRepository/obj/*
-DBRepository/bin/*
-BusinesEntites/obj/*
-BusinesEntites/bin/*
