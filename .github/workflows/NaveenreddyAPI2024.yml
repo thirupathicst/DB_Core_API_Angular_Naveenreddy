@@ -31,6 +31,18 @@ jobs:
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+   
+  migrate-database:
+    runs-on: windows-latest
+    needs: build
+    steps:
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Run Entity Framework Core Migrations
+      run: dotnet ef database update --project "${{ env.WORKING_DIRECTORY }}" --startup-project "${{ env.WORKING_DIRECTORY }}" --context NaveenReddyDbContext
+  
   deploy:
     runs-on: windows-latest
     needs: build
