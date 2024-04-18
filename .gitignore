@@ -347,3 +347,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NaveenreddyAPI/wwwroot/Images
+DBRepository/obj/Debug/netstandard2.1/DBRepository.AssemblyInfo.cs
+DBRepository/obj/Debug/netstandard2.1/DBRepository.AssemblyInfoInputs.cache
