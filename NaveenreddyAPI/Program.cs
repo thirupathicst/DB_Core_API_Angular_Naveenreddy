@@ -1,5 +1,8 @@
+using DBRepository;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -15,12 +18,16 @@ namespace NaveenreddyAPI
     {
         public static void Main(string[] args)
         {
-            // Log.Logger = new LoggerConfiguration()
-            // .Enrich.FromLogContext()
-            // //.WriteTo.Console() 
-            // //.WriteTo.File("NaveenReddyLogger.log", rollingInterval: RollingInterval.Day)
-            // .CreateLogger();
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<NaveenReddyDbContext>();
+                if (db.Database.GetPendingMigrations().Any())
+                {
+                    db.Database.Migrate();
+                }
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
