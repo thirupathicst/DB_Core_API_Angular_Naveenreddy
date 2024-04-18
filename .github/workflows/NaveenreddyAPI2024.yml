@@ -43,7 +43,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
     - name: Run Entity Framework Core Migrations
-      run: dotnet ef database update --project "${{ env.WORKING_DIRECTORY }}\DBRepository\DBRepository.csproj" --startup-project "${{ env.WORKING_DIRECTORY }}.csproj" --context NaveenReddyDbContext
+      run: dotnet ef database update
   
   deploy:
     runs-on: windows-latest
