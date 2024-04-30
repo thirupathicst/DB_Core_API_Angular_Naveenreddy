@@ -41,7 +41,6 @@ namespace DBRepository
         public DbSet<PartnerInfo> Tbl_Partner { get; set; }
         public DbSet<Audit> Tbl_Audits { get; set; }
         public DbSet<Invitation> Tbl_Invitation { get; set; }
-        public DbSet<TestMigration> Tbl_TestMigration { get; set; }
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {

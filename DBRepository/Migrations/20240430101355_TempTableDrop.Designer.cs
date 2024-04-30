@@ -4,14 +4,16 @@ using DBRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(NaveenReddyDbContext))]
-    partial class NaveenReddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240430101355_TempTableDrop")]
+    partial class TempTableDrop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,8 +314,8 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("IPaddress")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("LoginId")
                         .HasColumnType("int");

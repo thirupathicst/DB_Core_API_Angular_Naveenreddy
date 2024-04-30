@@ -12,7 +12,7 @@ namespace DBRepository.Tables
         [Key]
         public int Id { get; set; }
         public DateTime Logindatetime { get; set; }
-        [StringLength(10)]
+        [StringLength(20)]
         public string IPaddress{get;set;}
         [StringLength(250)]
         public string Browsername { get; set; }
