@@ -1,23 +1,21 @@
 using DBRepository.Repository;
 using DBRepository.Repository.Interfaces;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NaveenreddyAPI.Utilities;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using System;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace NaveenreddyAPI
 {
@@ -81,6 +79,18 @@ namespace NaveenreddyAPI
             services.AddTransient<IInvitationRepository, InvitationRepository>();
             services.AddTransient<ITokenManager, UserClaims>();
             services.AddTransient<AdminRepository>();
+            
+            services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
+            {
+                tracerProviderBuilder
+                    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("OpenTelemetryJaegerDemo"))
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddOtlpExporter(options =>
+                {
+                    options.Endpoint = new Uri("http://localhost:4317"); // OTLP endpoint
+                });
+            });
 
             services.AddAuthentication(x =>
             {
