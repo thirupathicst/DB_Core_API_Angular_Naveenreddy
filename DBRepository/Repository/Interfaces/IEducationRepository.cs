@@ -11,7 +11,7 @@ namespace DBRepository.Repository.Interfaces
 {
    public  interface IEducationRepository : IRepository<EducationDetails>
     {
-        Task<B_Education> SelectByIdAsync(int PersonId);
+        new Task<B_Education> SelectByIdAsync(int PersonId);
         Task<B_Education> CreateAsync(B_Education educationdetails);
         Task<B_Education> UpdateAsync(B_Education educationdetails);
     }

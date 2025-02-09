@@ -29,6 +29,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { NotificationService } from './Services/notification.service';
 import { InvitationComponent } from './invitation/invitation.component';
 import { DatashareService } from './Services/datashare.service';
+import { ButtonDoubleClickDirective } from './customDirectives/button-double-click.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DatashareService } from './Services/datashare.service';
     PagenotfoundComponent,
     ContactusComponent,
     InvitationComponent,
+    ButtonDoubleClickDirective,
   ],
   imports: [
     BrowserModule,

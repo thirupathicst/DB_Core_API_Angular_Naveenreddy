@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Family> SelectByIdAsync(int PersonId)
+        public new async Task<B_Family> SelectByIdAsync(int PersonId)
         {
             FamilyDetails familydetails = await base.GetSingleAsync(x => x.PersonId == PersonId);
             B_Family family = new B_Family();

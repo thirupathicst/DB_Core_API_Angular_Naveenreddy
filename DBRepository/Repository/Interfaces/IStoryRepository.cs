@@ -11,7 +11,7 @@ namespace DBRepository.Repository.Interfaces
 {
     public interface IStoryRepository:IRepository<Story>
     {
-        Task<B_Story> SelectByIdAsync(int PersonId);
+        new Task<B_Story> SelectByIdAsync(int PersonId);
         Task<B_Story> CreateAsync(B_Story story);
         Task<B_Story> UpdateAsync(B_Story story);
     }

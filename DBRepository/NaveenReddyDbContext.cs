@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +12,8 @@ using System.Threading.Tasks;
 namespace DBRepository
 {
     /// <summary>
+    /// Server=np:\\.\pipe\LOCALDB#D911579A\tsql\query;Database=NaveenReddyDB;Trusted_Connection=True;
+    /// local db connection : Data Source=(localdb)\ProjectModels;Initial Catalog=NaveenReddyDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False
     /// Migration run cmd 
     /// dotnet ef migrations add TempTable --project ..\DBRepository\DBRepository.csproj --startup-project NaveenreddyAPI.csproj --output-dir .\Migrations   
     /// dotnet ef database update

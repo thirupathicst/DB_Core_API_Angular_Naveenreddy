@@ -64,7 +64,7 @@ namespace NaveenreddyAPI
                 });
             });
 
-            services.AddDbContext<DBRepository.NaveenReddyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlCon")));
+            services.AddDbContext<DBRepository.NaveenReddyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("localDbSqlConTemp")));
             services.AddTransient<IPersonalInfoRepository, PersonalInfoRepository>();
             services.AddTransient<IEducationRepository, EducationRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();

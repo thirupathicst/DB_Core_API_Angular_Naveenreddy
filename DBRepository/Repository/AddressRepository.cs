@@ -17,7 +17,7 @@ namespace DBRepository.Repository
             _personalInfo = personalInfo;
         }
 
-        public async Task<B_Address> SelectByIdAsync(int PersonId)
+        public new async Task<B_Address> SelectByIdAsync(int PersonId)
         {
             AddressDetails address = await base.GetSingleAsync(x => x.PersonId == PersonId);
             B_Address addressdetails = new B_Address();

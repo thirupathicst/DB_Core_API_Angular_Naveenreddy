@@ -16,7 +16,7 @@ namespace DBRepository.Repository
 
         }
 
-        public async Task<B_Story> SelectByIdAsync(int PersonId)
+        public new async Task<B_Story> SelectByIdAsync(int PersonId)
         {
             var story = await base.GetSingleAsync(x => x.PersonId == PersonId);
             B_Story _story = new B_Story();
